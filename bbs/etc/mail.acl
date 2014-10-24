@@ -1,0 +1,88 @@
+#########################################################
+# 在 mail.acl 不在 unmail.acl 中的 email 才可寄信至本站 #
+# mail.acl: 白名單是由站務手動維護的                    #
+# #######################################################
+
+# 整個 isp
+
+# ptt系列
+ptt.cc
+ptt2.cc
+new.ptt.cc
+.ptt.cc
+140.112.172.16
+
+
+# 極光
+210.60.107.251
+127.0.0.1
+tcirc.org
+tcirc.twbbs.org
+
+# 龍夢紀元
+210.60.107.212
+bbs.tcfsh.tc.edu.tw
+tcfsh.twbbs.org
+eod.twbbs.org
+
+# CIRC
+circ.cirx.org
+cirx.org
+circ.tcfsh.tc.edu.tw
+
+# 索尼小站
+sony.tfcis.org
+sony.twbbs.org
+
+# 楓資
+csisc.csghs.tp.edu.tw
+csisc.twbbs.org
+
+# 黃杉 (景美)
+cmgsh.twbbs.org
+
+# 小弗
+fgisc.twbbs.org
+xdbbs.twbbs.org
+
+# 風台灣
+windtw.twbbs.org
+
+# 叉滴小站
+xdbbs.twbbs.org
+xdbbs2.twbbs.org
+
+# 迷幻
+csc241.twbbs.org
+
+# BS2 (交大資工)
+bs2.twbbs.org
+bs2.to
+
+# 風城 (內中)
+nhsh.twbbs.org
+
+# 鳳翔天都 (附中網管小組)
+cnmc.twbbs.org
+
+# 彰中
+chsh.twbbs.org
+
+# 彰女
+chgsh.twbbs.org
+
+# 鳳馳電掣
+fhcrc.twbbs.org
+
+# 建資
+infor.org
+
+
+# 整個域名
+.com
+.edu
+.gov
+.idv
+.net
+.org
+.tw

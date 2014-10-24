@@ -1,0 +1,19 @@
+commit 1aa629cf3b60742435942597c343ad119c167641
+Author: bbs <bbs@tcirc.org>
+Date:   Mon Feb 1 03:57:23 2010 +0800
+
+    test
+
+diff --git a/util/gitpost/gitpost.sh b/util/gitpost/gitpost.sh
+index a283566..92232a7 100755
+--- a/util/gitpost/gitpost.sh
++++ b/util/gitpost/gitpost.sh
+@@ -8,7 +8,7 @@
+ # Setting : ~/src as a git res.
+ # Required:
+ #           - Git(廢話顆) + post-commit with executive perm
+-#           - 可運作的 Maple-itoc 相容版本
++#           - 可運作的 Maple-itoc 相容版本 科科
+ #           - add_post
+ #           (an api for post article, you can also just copy the function from source code)
+ 

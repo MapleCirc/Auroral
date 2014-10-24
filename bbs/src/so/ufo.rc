@@ -1,0 +1,1353 @@
+/*-------------------------------------------------------*/
+/* ufo.rc						 */
+/*-------------------------------------------------------*/
+/* target : Information of UFO flags			 */
+/* create : 10/02/28					 */
+/* update : 10/11/16					 */
+/*-------------------------------------------------------*/
+
+
+#if 0	/* this is a template for quickly building a new flag process */
+
+/* UFO_ */
+#define OPTSZ_ 2
+static char *ufopt_[] = {"", ""};
+
+static int
+ufpc_(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= ;
+    break;
+
+  case 1:
+    tuser->ufo &= ~;
+    break;
+
+  case -1:
+    if(tuser->ufo & )
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+#endif
+
+
+
+/* ------------------------------------- */
+/* page 1.外觀設定			 */
+/* ------------------------------------- */
+
+/* UFO_MOVIE */
+#define OPTSZ_MOVIE 2
+static char *ufopt_movie[OPTSZ_MOVIE] = {"顯示", "關閉"};
+
+static int
+ufpc_movie(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_MOVIE;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_MOVIE;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_MOVIE)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO_BRDNAME */
+#define OPTSZ_BRDNAME 2
+static char *ufopt_brdname[OPTSZ_BRDNAME] = {"看板名稱", "分類"};
+
+static int
+ufpc_brdname(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_BRDNAME;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_BRDNAME;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_BRDNAME)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO_BRDPOST */
+#define OPTSZ_BRDPOST 2
+static char *ufopt_brdpost[OPTSZ_BRDPOST] = {"篇數", "編號"};
+
+static int
+ufpc_brdpost(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_BRDPOST;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_BRDPOST;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_BRDPOST)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO_BRDNOTE  UFO2_BRDNOTE */
+#define OPTSZ_BRDNOTE 4
+static char *ufopt_brdnote[OPTSZ_BRDNOTE] = {"每次", "換看板時", "僅首次", "不顯示"};
+
+static int
+ufpc_brdnote(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_BRDNOTE;
+    tuser->ufo2 &= ~UFO2_BRDNOTE;
+    break;
+
+  case 1:
+    tuser->ufo |= UFO_BRDNOTE;
+    tuser->ufo2 |= UFO2_BRDNOTE;
+    break;
+
+  case 2:
+    tuser->ufo &= ~UFO_BRDNOTE;
+    tuser->ufo2 &= ~UFO2_BRDNOTE;
+    break;
+
+  case 3:
+    tuser->ufo &= ~UFO_BRDNOTE;
+    tuser->ufo2 |= UFO2_BRDNOTE;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_BRDNOTE)
+    {
+      if(tuser->ufo2 & UFO2_BRDNOTE)
+	return 1;
+      else
+	return 0;
+    }
+    else
+    {
+      if(tuser->ufo2 & UFO2_BRDNOTE)
+	return 3;
+      else
+	return 2;
+    }
+  }
+
+  return 0;
+}
+
+
+/* UFO_MOTD */
+#define OPTSZ_MOTD 2
+static char *ufopt_motd[OPTSZ_MOTD] = {"是", "否"};
+
+static int
+ufpc_motd(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_MOTD;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_MOTD;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_MOTD)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO_PAL */
+#define OPTSZ_PAL 2
+static char *ufopt_pal[OPTSZ_PAL] = {"好友", "所有人"};
+
+static int
+ufpc_pal(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_PAL;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_PAL;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_PAL)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO_IDLEONLY */
+#define OPTSZ_UFO_IDLEONLY 2
+static char *ufopt_idleonly[OPTSZ_UFO_IDLEONLY] = {"是", "否"};
+
+static int
+ufpc_idleonly(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_IDLEONLY;
+    break;
+
+  case 1:
+    tuser->ufo &= UFO_IDLEONLY;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_IDLEONLY)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+#ifdef BMW_DISPLAY
+
+/* UFO_BMWDISPLAY */
+#define OPTSZ_BMWDISPLAY 2
+static char *ufopt_bmwdisplay[OPTSZ_BMWDISPLAY] = {"完整", "上次"};
+
+static int
+ufpc_bmwdisplay(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_BMWDISPLAY;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_BMWDISPLAY;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_BMWDISPLAY)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+#endif
+
+
+/* UFO_MFMGCTD UFO_MFMCOMER UFO_MFMUCTD */
+#define OPTSZ_MENUFOOT 4
+static char *ufopt_menufoot[OPTSZ_MENUFOOT] = {"標準", "金融資訊", "極光倒數", "自訂倒數"};
+
+static int
+ufpc_menufoot(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo &= ~UFO_MFMCOMER;
+    tuser->ufo &= ~UFO_MFMGCTD;
+    tuser->ufo &= ~UFO_MFMUCTD;
+    break;
+
+  case 1:
+    tuser->ufo |= UFO_MFMCOMER;
+    tuser->ufo &= ~UFO_MFMGCTD;
+    tuser->ufo &= ~UFO_MFMUCTD;
+    break;
+
+  case 2:
+    tuser->ufo &= ~UFO_MFMCOMER;
+    tuser->ufo |= UFO_MFMGCTD;
+    tuser->ufo &= ~UFO_MFMUCTD;
+    break;
+
+  case 3:
+    tuser->ufo &= ~UFO_MFMCOMER;
+    tuser->ufo &= ~UFO_MFMGCTD;
+    tuser->ufo |= UFO_MFMUCTD;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_MFMCOMER)
+      return 1;
+    else if(tuser->ufo & UFO_MFMGCTD)
+      return 2;
+    else if(tuser->ufo & UFO_MFMUCTD)
+      return 3;
+    else
+      return 0;
+  }
+
+  return 0;
+}
+
+
+/* UFO_UNIUNREADM */
+#define OPTSZ_UNIUNREADM 2
+static char *ufopt_uniunreadm[OPTSZ_UNIUNREADM] = {"是", "否"};
+
+static int
+ufpc_uniunreadm(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_UNIUNREADM;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_UNIUNREADM;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_UNIUNREADM)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO_NODCBUM */
+#define OPTSZ_NODCBUM 2
+static char *ufopt_nodcbum[OPTSZ_NODCBUM] = {"是", "否"};
+
+static int
+ufpc_nodcbum(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 1:
+    tuser->ufo |= UFO_NODCBUM;
+    break;
+
+  case 0:
+    tuser->ufo &= ~UFO_NODCBUM;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_NODCBUM)
+      return 1;
+    else
+      return 0;
+  }
+
+  return 0;
+}
+
+
+/* UFO2_NOINTRESC */
+#define OPTSZ_NOINTRESC 2
+static char *ufopt_nointresc[OPTSZ_NOINTRESC] = {"是", "否"};
+
+static int
+ufpc_nointresc(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo2 |= UFO2_NOINTRESC;
+    break;
+
+  case 1:
+    tuser->ufo2 &= ~UFO2_NOINTRESC;
+    break;
+
+  case -1:
+    if(tuser->ufo2 & UFO2_NOINTRESC)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+
+static UFO_ItemInfo ui_appearance[] =
+{
+  "動態看板", NULL, ufopt_movie,
+  OPTSZ_MOVIE, 0, ufpc_movie,
+
+  "看板列表排序依", NULL, ufopt_brdname,
+  OPTSZ_BRDNAME, 0, ufpc_brdname,
+
+  "看板列表顯示", NULL, ufopt_brdpost,
+  OPTSZ_BRDPOST, 0, ufpc_brdpost,
+
+  "總是顯示進板畫面", NULL, ufopt_brdnote,
+  OPTSZ_BRDNOTE, 0, ufpc_brdnote,
+
+  "簡化進站時畫面", NULL, ufopt_motd,
+  OPTSZ_MOTD, PERM_BASIC, ufpc_motd,
+
+  "使用者名單顯示", NULL, ufopt_pal,
+  OPTSZ_PAL, PERM_BASIC, ufpc_pal,
+
+  "使用者名單標籤欄位總是顯示閒置時間", NULL, ufopt_idleonly,
+  OPTSZ_UFO_IDLEONLY, 0, ufpc_idleonly,
+
+#ifdef BMW_DISPLAY
+  "回水球時不顯示先前的水球", NULL, ufopt_bmwdisplay,
+  OPTSZ_BMWDISPLAY, PERM_BASIC, ufpc_bmwdisplay,
+#endif
+
+  "主選單狀態列模式", NULL, ufopt_menufoot,
+  OPTSZ_MENUFOOT, PERM_BASIC, ufpc_menufoot,
+
+  "文章未讀記號僅使用一種顏色", NULL, ufopt_uniunreadm,
+  OPTSZ_UNIUNREADM, 0, ufpc_uniunreadm,
+
+  "使用雙色看板未讀燈", NULL, ufopt_nodcbum,
+  OPTSZ_NODCBUM, 0, ufpc_nodcbum,
+
+  "去除一字雙色", NULL, ufopt_nointresc,
+  OPTSZ_NOINTRESC, 0, ufpc_nointresc,
+
+  NULL, NULL, NULL, 0, 0, NULL
+};
+
+
+
+
+/* ------------------------------------- */
+/* page 2.功能設定			 */
+/* ------------------------------------- */
+
+/* UFO_ZHC */
+#define OPTSZ_ZHC 2
+static char *ufopt_zhc[OPTSZ_ZHC] = {"開啟", "關閉"};
+
+static int
+ufpc_zhc(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_ZHC;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_ZHC;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_ZHC)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO2_SNRON */
+#define OPTSZ_SNRON 2
+static char *ufopt_snron[OPTSZ_SNRON] = {"是", "否"};
+
+static int
+ufpc_snron(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo2 |= UFO2_SNRON;
+    break;
+
+  case 1:
+    tuser->ufo2 &= ~UFO2_SNRON;
+    break;
+
+  case -1:
+    if(tuser->ufo2 & UFO2_SNRON)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+#ifdef AUTO_JUMPBRD
+
+/* UFO_JUMPBRD */
+#define OPTSZ_JUMPBRD 2
+static char *ufopt_jumpbrd[OPTSZ_JUMPBRD] = {"是", "否"};
+
+static int
+ufpc_jumpbrd(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_JUMPBRD;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_JUMPBRD;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_JUMPBRD)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+#endif
+
+
+/* UFO_NOSIGN */
+#define OPTSZ_NOSIGN 2
+static char *ufopt_nosign[OPTSZ_NOSIGN] = {"不使用", "使用"};
+
+static int
+ufpc_nosign(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_NOSIGN;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_NOSIGN;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_NOSIGN)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO_SHOWSIGN */
+#define OPTSZ_SHOWSIGN 2
+static char *ufopt_showsign[OPTSZ_SHOWSIGN] = {"是", "否"};
+
+static int
+ufpc_showsign(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_SHOWSIGN;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_SHOWSIGN;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_SHOWSIGN)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO_PAGER & UFO_QUIET */
+#define OPTSZ_BMWMODE 3
+static char *ufopt_bmwmode[OPTSZ_BMWMODE] = {"全開", "僅好友", "關閉"};
+
+static int
+ufpc_bmwmode(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo &= ~UFO_QUIET;
+    tuser->ufo &= ~UFO_PAGER;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_QUIET;
+    tuser->ufo |= UFO_PAGER;
+    break;
+
+  case 2:
+    tuser->ufo |= UFO_QUIET;
+    tuser->ufo &= ~UFO_PAGER;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_QUIET)
+      return 2;
+    else if(tuser->ufo & UFO_PAGER)
+      return 1;
+    else
+      return 0;
+  }
+
+  return 0;
+}
+
+
+#ifdef HAVE_NOBROAD
+
+/* UFO_RCVER */
+#define OPTSZ_RCVER 2
+static char *ufopt_rcver[OPTSZ_RCVER] = {"關閉", "接收"};
+
+static int
+ufpc_rcver(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_RCVER;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_RCVER;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_RCVER)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+#endif
+
+
+#ifdef HAVE_ALOHA
+
+/* UFO_ALOHA */
+#define OPTSZ_ALOHA 2
+static char *ufopt_aloha[OPTSZ_ALOHA] = {"是", "否"};
+
+static int
+ufpc_aloha(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_ALOHA;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_ALOHA;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_ALOHA)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+#endif
+
+
+#ifdef HAVE_NOALOHA
+
+/* UFO_NOALOHA */
+#define OPTSZ_NOALOHA 2
+static char *ufopt_noaloha[OPTSZ_NOALOHA] = {"是", "否"};
+
+static int
+ufpc_noaloha(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_NOALOHA;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_NOALOHA;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_NOALOHA)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+#endif
+
+
+/* UFO_NWLOG */
+#define OPTSZ_NWLOG 2
+static char *ufopt_nwlog[OPTSZ_NWLOG] = {"是", "否"};
+
+static int
+ufpc_nwlog(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_NWLOG;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_NWLOG;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_NWLOG)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO_NTLOG */
+#define OPTSZ_NTLOG 2
+static char *ufopt_ntlog[OPTSZ_NTLOG] = {"是", "否"};
+
+static int
+ufpc_ntlog(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_NTLOG;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_NTLOG;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_NTLOG)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO2_ENDJTNBP */
+#define OPTSZ_ENDJTNBP 2
+static char *ufopt_endjtnbp[] = {"最後一篇非置底文章", "末篇"};
+
+static int
+ufpc_endjtnbp(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo2 |= UFO2_ENDJTNBP;
+    break;
+
+  case 1:
+    tuser->ufo2 &= ~UFO2_ENDJTNBP;
+    break;
+
+  case -1:
+    if(tuser->ufo2 & UFO2_ENDJTNBP)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO2_LIMITVISIT */
+#define OPTSZ_LIMITVISIT 2
+static char *ufopt_limitvisit[OPTSZ_LIMITVISIT] = {"末篇", "全部"};
+
+static int
+ufpc_limitvisit(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo2 |= UFO2_LIMITVISIT;
+    break;
+
+  case 1:
+    tuser->ufo2 &= ~UFO2_LIMITVISIT;
+    break;
+
+  case -1:
+    if(tuser->ufo2 & UFO2_LIMITVISIT)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+/* davy.110926: UFO2_HIDEMYIP */
+/* davy.110927: 移動至第2頁 */
+#define OPTSZ_HIDEMYIP 2
+static char *ufopt_hidemyip[OPTSZ_HIDEMYIP] = {"隱藏", "顯現"};
+
+static int
+ufpc_hidemyip(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo2 |= UFO2_HIDEMYIP;
+    break;
+
+  case 1:
+    tuser->ufo2 &= ~UFO2_HIDEMYIP;
+    break;
+
+  case -1:
+    if(tuser->ufo2 & UFO2_HIDEMYIP)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+
+static UFO_ItemInfo ui_functionality[] =
+{
+  "全型字偵測", NULL, ufopt_zhc,
+  OPTSZ_ZHC, 0, ufpc_zhc,
+
+  "選擇簽名檔時不記住選項「不加」", NULL, ufopt_snron,
+  OPTSZ_SNRON, PERM_BASIC, ufpc_snron,
+
+#ifdef AUTO_JUMPBRD
+  "看板列表自動跳至未讀看板", NULL, ufopt_jumpbrd,
+  OPTSZ_JUMPBRD, PERM_BASIC, ufpc_jumpbrd,
+#endif
+
+  "使用簽名檔", NULL, ufopt_nosign,
+  OPTSZ_NOSIGN, PERM_BASIC, ufpc_nosign,
+
+  "選擇簽名檔時顯示簽名檔", NULL, ufopt_showsign,
+  OPTSZ_SHOWSIGN, PERM_BASIC, ufpc_showsign,
+
+  "水球接收模式", NULL, ufopt_bmwmode,
+  OPTSZ_BMWMODE, PERM_BASIC, ufpc_bmwmode,
+
+#ifdef HAVE_NOBROAD
+  "廣播接收模式", NULL, ufopt_rcver,
+  OPTSZ_RCVER, PERM_BASIC, ufpc_rcver,
+#endif
+
+#ifdef HAVE_ALOHA
+  "接收好友的上站通知", NULL, ufopt_aloha,
+  OPTSZ_ALOHA, PERM_BASIC, ufpc_aloha,
+#endif
+
+#ifdef HAVE_NOALOHA
+  "上站時不通知好友", NULL, ufopt_noaloha,
+  OPTSZ_NOALOHA, PERM_BASIC, ufpc_noaloha,
+#endif
+
+  "離站自動刪除水球紀錄", NULL, ufopt_nwlog,
+  OPTSZ_NWLOG, PERM_BASIC, ufpc_nwlog,
+
+  "聊天完自動刪除聊天紀錄", NULL, ufopt_ntlog,
+  OPTSZ_NTLOG, PERM_BASIC, ufpc_ntlog,
+
+  "文章列表End鍵跳至", NULL, ufopt_endjtnbp,
+  OPTSZ_ENDJTNBP, PERM_BASIC, ufpc_endjtnbp,	/* dust.100924: 這種方便的功能當然不能給guest用啦XD */
+
+  "設定看板為已讀功\能的作用範圍", NULL, ufopt_limitvisit,
+  OPTSZ_LIMITVISIT, PERM_BASIC, ufpc_limitvisit,
+
+  "隱藏IP    [[需要重新上站]]", /* davy.110927: 隱藏IP */
+  NULL, ufopt_hidemyip, OPTSZ_HIDEMYIP, PERM_VALID, ufpc_hidemyip,
+
+  NULL, NULL, NULL, 0, 0, NULL
+};
+
+
+
+
+/* ------------------------------------- */
+/* page 3.自訂道具			 */
+/* ------------------------------------- */
+
+/* UFO_CLOAK */
+#define OPTSZ_CLOAK 2
+static char *ufopt_cloak[OPTSZ_CLOAK] = {"隱形", "現身"};
+
+static int
+ufpc_cloak(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_CLOAK;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_CLOAK;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_CLOAK)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+static UFO_ItemInfo ui_equipment[] =
+{
+  "長視「赤月下（\307\176\307\357\307\321\307\350\307\174\307\305\307\334\306\343\307\357）」",
+  NULL, ufopt_cloak, OPTSZ_CLOAK, PERM_VALID, ufpc_cloak,
+
+  NULL, NULL, NULL, 0, 0, NULL
+};
+
+
+
+
+/* ------------------------------------- */
+/* page 4. 編輯器專用			 */
+/* ------------------------------------- */
+
+/* UFO_VEKCP */
+#define OPTSZ_VEKCP 2
+static char *ufopt_vekcp[OPTSZ_VEKCP] = {"開啟", "關閉"};
+
+static int
+ufpc_vekcp(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_VEKCP;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_VEKCP;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_VEKCP)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO_VEDIT */
+#define OPTSZ_VEDIT 2
+static char *ufopt_vedit[OPTSZ_VEDIT] = {"簡化", "一般"};
+
+static int
+ufpc_vedit(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_VEDIT;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_VEDIT;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_VEDIT)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO2_VEMONOESC  UFO2_MONOTONE */
+#define OPTSZ_MONOTONE 3
+static char *ufopt_monotone[OPTSZ_MONOTONE] = {"是", "ESC字元除外", "否"};
+
+static int
+ufpc_monotone(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo2 |= UFO2_MONOTONE;
+    tuser->ufo2 |= UFO2_VEMONOESC;
+    break;
+
+  case 1:
+    tuser->ufo2 |= UFO2_MONOTONE;
+    tuser->ufo2 &= ~UFO2_VEMONOESC;
+    break;
+
+  case 2:
+    tuser->ufo2 &= ~UFO2_MONOTONE;
+    tuser->ufo2 &= ~UFO2_VEMONOESC;
+    break;
+
+  case -1:
+    if(tuser->ufo2 & UFO2_VEMONOESC)
+      return 0;
+    else if(tuser->ufo2 & UFO2_MONOTONE)
+      return 1;
+    else
+      return 2;
+  }
+
+  return 0;
+}
+
+
+/* UFO2_CVMNOFIX */
+#define OPTSZ_CVMNOFIX 2
+static char *ufopt_cvmnofix[OPTSZ_CVMNOFIX] = {"是", "否"};
+
+static int
+ufpc_cvmnofix(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo2 |= UFO2_CVMNOFIX;
+    break;
+
+  case 1:
+    tuser->ufo2 &= ~UFO2_CVMNOFIX;
+    break;
+
+  case -1:
+    if(tuser->ufo2 & UFO2_CVMNOFIX)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO2_PSRENDER */
+#define OPTSZ_PSRENDER 2
+static char *ufopt_psrender[OPTSZ_PSRENDER] = {"啟用", "關閉"};
+
+static int
+ufpc_psrender(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo2 |= UFO2_PSRENDER;
+    break;
+
+  case 1:
+    tuser->ufo2 &= ~UFO2_PSRENDER;
+    break;
+
+  case -1:
+    if(tuser->ufo2 & UFO2_PSRENDER)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO2_QUOTEMOVE */
+#define OPTSZ_QUOTEMOVE 2
+static char *ufopt_quotemove[OPTSZ_QUOTEMOVE] = {"是", "否"};
+
+static int
+ufpc_quotemove(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo2 |= UFO2_QUOTEMOVE;
+    break;
+
+  case 1:
+    tuser->ufo2 &= ~UFO2_QUOTEMOVE;
+    break;
+
+  case -1:
+    if(tuser->ufo2 & UFO2_QUOTEMOVE)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+
+static UFO_ItemInfo ui_editor[] =
+{
+  "雙位字元偵測(DCD)", NULL, ufopt_zhc,
+  OPTSZ_ZHC, PERM_BASIC, ufpc_zhc,
+
+  "文章編輯器保持游標位置(KCP)", NULL, ufopt_vekcp,
+  OPTSZ_VEKCP, PERM_BASIC, ufpc_vekcp,
+
+  "文章編輯器狀態列", NULL, ufopt_vedit,
+  OPTSZ_VEDIT, PERM_BASIC, ufpc_vedit,
+
+  "單色顯示一般模式", NULL, ufopt_monotone,
+  OPTSZ_MONOTONE, PERM_BASIC, ufpc_monotone,
+
+  "游標垂直移動後不做雙位字位置修正", NULL, ufopt_cvmnofix,
+  OPTSZ_CVMNOFIX, PERM_BASIC, ufpc_cvmnofix,
+
+  "pmore動畫語法上色", NULL, ufopt_psrender,
+  OPTSZ_PSRENDER, PERM_BASIC, ufpc_psrender,
+
+  "回文時游標移動到引言結束點", NULL, ufopt_quotemove,
+  OPTSZ_QUOTEMOVE, PERM_BASIC, ufpc_quotemove,
+
+  NULL, NULL, NULL, 0, 0, NULL
+};
+
+
+
+
+/* ------------------------------------- */
+/* page X.站長御用			 */
+/* ------------------------------------- */
+
+/* UFO_SUPERCLOAK */
+#define OPTSZ_SUPERCLOAK 2
+static char *ufopt_supercloak[OPTSZ_SUPERCLOAK] = {"開啟", "關閉"};
+
+static int
+ufpc_supercloak(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_SUPERCLOAK;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_SUPERCLOAK;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_SUPERCLOAK)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+/* UFO_ACL */
+#define OPTSZ_ACL 2
+static char *ufopt_acl[OPTSZ_ACL] = {"開啟", "關閉"};
+
+static int
+ufpc_acl(pos, tuser)
+  int pos;
+  ACCT *tuser;
+{
+  switch(pos)
+  {
+  case 0:
+    tuser->ufo |= UFO_ACL;
+    break;
+
+  case 1:
+    tuser->ufo &= ~UFO_ACL;
+    break;
+
+  case -1:
+    if(tuser->ufo & UFO_ACL)
+      return 0;
+    else
+      return 1;
+  }
+
+  return 0;
+}
+
+
+
+static UFO_ItemInfo ui_admin[] =
+{
+  "超級隱身(紫隱)", NULL, ufopt_supercloak,
+  OPTSZ_SUPERCLOAK, PERM_ALLADMIN, ufpc_supercloak,
+
+  "站長上站來源限制(ACL)功\能", NULL, ufopt_acl,
+  OPTSZ_ACL, PERM_ALLADMIN, ufpc_acl,
+
+  NULL, NULL, NULL, 0, 0, NULL
+};
+
+

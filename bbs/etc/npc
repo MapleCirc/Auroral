@@ -1,0 +1,12 @@
+# NPC 1 's Dictionary File
+# 注意：這檔案編碼必須是big5
+# (vim, set fenc=big5, wq!)
+# 單數行為判斷用的input
+# 雙數行為對應的output
+# 另外他沒有註解功能 = =
+你好
+你好我是NPC
+NPC
+你在說我嗎 @@?
+floatJ
+那是我的主人 >////<
