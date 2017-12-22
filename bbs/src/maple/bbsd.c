@@ -42,6 +42,8 @@ extern UCACHE *ushm;
 /* static int mport; */ /* Thor.990325: ぃ惠璶:P */
 static u_long tn_addr;
 
+/* Davy.171001: Connection sockaddr infos (used by proxy mode) */
+struct sockaddr_in connection_sin;
 
 #ifdef CHAT_SECURE
 char passbuf[PSWDLEN + 5];
@@ -1550,6 +1552,7 @@ term_init()
 static void
 start_daemon(port)
   int port; /* Thor.981206:  0  *⊿Τ把计* , -1  -i (inetd) */
+  /* Davy.171001:  -2  -p (proxy mode) */
 {
   int n;
   struct linger ld;
@@ -1559,6 +1562,7 @@ start_daemon(port)
 #endif
   char buf[80], data[80];
   time_t val;
+  proxy_connection_info_t proxy_connection_info;
 
   /*
    * More idiot speed-hacking --- the first time conversion makes the C
@@ -1614,6 +1618,21 @@ start_daemon(port)
 
   close(1);
   close(2);
+
+  if (port == -2) /* Davy.171001: proxy mode */
+  {
+    /* Give up root privileges: no way back from here */
+    setgid(BBSGID);
+    setuid(BBSUID);
+    n = sizeof(proxy_connection_info);
+    recv(0, &proxy_connection_info, n, 0); /* Read remote infos */
+    connection_sin.sin_family = AF_INET;
+    connection_sin.sin_port = proxy_connection_info.connect_port;
+    connection_sin.sin_addr.s_addr = proxy_connection_info.source_addr;
+    port = ntohs(connection_sin.sin_port);
+
+    return;
+  }
 
   if (port == -1) /* Thor.981206: inetd -i */
   {
@@ -1821,8 +1840,8 @@ main(argc, argv)
 {
   int csock;			/* socket for Master and Child */
   int value;
+  int proxy_mode;
   int *totaluser;
-  struct sockaddr_in sin;
   pthread_t rslv_trd;
 
   /* --------------------------------------------------- */
@@ -1831,8 +1850,14 @@ main(argc, argv)
 
   /* Thor.990325: usage, bbsd, or bbsd -i, or bbsd 1234 */
   /* Thor.981206:  0  *⊿Τ把计*, -1  -i */
-  start_daemon(argc > 1 ? strcmp("-i", argv[1]) ? atoi(argv[1]) : -1 : 0);
-
+  /* Davy.171001: bbsd -p  proxy 家Αぃ穦 accept 硈絬ㄏノ -2 */
+  value = argc > 1 ? \
+    strcmp("-i", argv[1]) ? \
+      strcmp("-p", argv[1]) ? atoi(argv[1]) : \
+        -2 : \
+      -1 : \
+    0;
+  start_daemon(value);
 
   main_signals();
 
@@ -1856,18 +1881,28 @@ main(argc, argv)
   totaluser = &ushm->count;
   /* avgload = &ushm->avgload; */
 
-  for (;;)
-  {
-    value = 1;
-    if (select(1, (fd_set *) & value, NULL, NULL, NULL) < 0)
-      continue;
+  proxy_mode = argc > 1 && !strcmp("-p", argv[1]); /* 0: no, 1: yes, 2: stop loop */
 
-    value = sizeof(sin);
-    csock = accept(0, (struct sockaddr *) &sin, &value);
-    if (csock < 0)
+  for (; proxy_mode < 2;)
+  {
+    if (proxy_mode)
     {
-      reaper();
-      continue;
+      proxy_mode = 2; /* We are not going to run twice loop. */
+      csock = 0;
+    }
+    else /* normal mode */
+    {
+      value = 1;
+      if (select(1, (fd_set *) & value, NULL, NULL, NULL) < 0)
+        continue;
+
+      value = sizeof(connection_sin);
+      csock = accept(0, (struct sockaddr *) &connection_sin, &value);
+      if (csock < 0)
+      {
+        reaper();
+        continue;
+      }
     }
 
     ap_start++;
@@ -1881,20 +1916,23 @@ main(argc, argv)
       continue;
     }
 
-    if (fork())
+    if (!proxy_mode)
     {
-      close(csock);
-      continue;
-    }
+      if (fork())
+      {
+        close(csock);
+        continue;
+      }
 
-    dup2(csock, 0);
-    close(csock);
+      dup2(csock, 0);
+      close(csock);
+    }
 
     /* ------------------------------------------------- */
     /* ident remote host / user name via RFC931		 */
     /* ------------------------------------------------- */
 
-    tn_addr = sin.sin_addr.s_addr;
+    tn_addr = connection_sin.sin_addr.s_addr;
 
     /* dust.101004: paralell DNS query by Pthread */
     {
@@ -1902,7 +1940,7 @@ main(argc, argv)
       sprintf(fromhost, "%u.%u.%u.%u", addr[0], addr[1], addr[2], addr[3]);
     }
     cutmp = NULL;
-    pthread_create(&rslv_trd, NULL, thread_QueryDNS, &sin.sin_addr);
+    pthread_create(&rslv_trd, NULL, thread_QueryDNS, &connection_sin.sin_addr);
 
     telnet_init();
     term_init();

@@ -811,5 +811,16 @@ typedef struct
   char title[50];
 } HLP;
 
+/* ----------------------------------------------------- */
+/* Proxy mode 連線時所用的來源位置資料結構 () */
+/* ----------------------------------------------------- */
+
+typedef struct
+{
+  unsigned short int connect_port;
+  unsigned short int __reserved;
+  unsigned long int source_addr;
+} proxy_connection_info_t;
+
 #endif				/* _STRUCT_H_ */
 
