@@ -33,6 +33,7 @@ extern char radix32[];
 #include "hdr.h"			/* prototype */
 #include "dns.h"			/* dns type */
 #include "splay.h"			/* splay type */
+#include "mcd.h"			/* menu countdown type */
 #include "../lib/dao.p"			/* prototype */
 
 

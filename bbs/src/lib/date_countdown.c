@@ -10,16 +10,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include "mcd.h"
 #define BASE_YEAR 2000
 
 #define leap_year(y) (y%4==0 && y%100!=0 || y%400==0 && y%4000!=0)
-
-typedef struct
-{
-  char name[12];
-  int year, mon, day, hr, min;
-  int warning;
-} MCD_info;
 
 /* timeCounting */
 typedef struct
