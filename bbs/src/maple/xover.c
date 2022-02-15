@@ -25,8 +25,7 @@ static XO *xo_root;		/* root of overview list */
 
 
 XO *
-xo_new(path)
-  char *path;
+xo_new (char *path)
 {
   XO *xo;
   int len;
@@ -42,8 +41,7 @@ xo_new(path)
 
 
 XO *
-xo_get(path)
-  char *path;
+xo_get (char *path)
 {
   XO *xo;
 
@@ -64,9 +62,10 @@ xo_get(path)
 
 
 XO *
-xo_get_post(path, brd)		/* itoc.010910: °Ñ¦Ò xover.c xo_get()¡A¬° XoPost ¶q¨­¥´³y */
-  char *path;
-  BRD *brd;
+xo_get_post (		/* itoc.010910: °Ñ¦Ò xover.c xo_get()¡A¬° XoPost ¶q¨­¥´³y */
+    char *path,
+    BRD *brd
+)
 {
   XO *xo;
 #ifdef AUTO_JUMPPOST
@@ -185,9 +184,8 @@ xo_get_post(path, brd)		/* itoc.010910: °Ñ¦Ò xover.c xo_get()¡A¬° XoPost ¶q¨­¥´³
 
 
 #if 0
-void
-xo_free(xo)
-  XO *xo;
+void 
+xo_free (XO *xo)
 {
   char *ptr;
 
@@ -206,10 +204,8 @@ xo_free(xo)
 char xo_pool[(T_LINES - 4) * XO_RSIZ];	/* XO's data I/O pool */
 
 
-void
-xo_load(xo, recsiz)
-  XO *xo;
-  int recsiz;
+void 
+xo_load (XO *xo, int recsiz)
 {
   int fd, max;
 
@@ -248,12 +244,13 @@ xo_load(xo, recsiz)
 }
 
 
-int					/* XO_LOAD:§R°£  XO_FOOT:¨ú®ø */
-xo_rangedel(xo, size, fchk, fdel)	/* itoc.031001: °Ï¬q§R°£ */
-  XO *xo;
-  int size;
-  int (*fchk) ();			/* ÀË¬d°Ï¬q¤¤¬O§_¦³³Q«OÅ@ªº°O¿ý  0:§R°£ 1:«OÅ@ */
-  void (*fdel) ();			/* °£¤F§R°£°O¿ý¥H¥~¡AÁÙ­n°µ¨Ç¤°»ò¨Æ */
+int 
+xo_rangedel (	/* itoc.031001: °Ï¬q§R°£ */
+    XO *xo,
+    int size,
+    int (*fchk)(char *),			/* ÀË¬d°Ï¬q¤¤¬O§_¦³³Q«OÅ@ªº°O¿ý  0:§R°£ 1:«OÅ@ */
+    void (*fdel)(XO *, char *)			/* °£¤F§R°£°O¿ý¥H¥~¡AÁÙ­n°µ¨Ç¤°»ò¨Æ */
+)
 {
   char ans[8];
   int head, tail;
@@ -345,16 +342,17 @@ int TagNum;			/* tag's number */
 TagItem TagList[TAG_MAX];	/* ascending list */
 
 
-int
-Tagger(chrono, recno, op)
-  time_t chrono;
-  int recno;
-  int op;			/* op : TAG_NIN / TOGGLE / INSERT */
 /* ----------------------------------------------------- */
 /* return 0 : not found	/ full				 */
 /* 1 : add						 */
 /* -1 : remove						 */
 /* ----------------------------------------------------- */
+int
+Tagger(
+  time_t chrono,
+  int recno,
+  int op			/* op : TAG_NIN / TOGGLE / INSERT */
+)
 {
   int head, tail, pos, cmp;
   TagItem *tagp;
@@ -417,20 +415,15 @@ Tagger(chrono, recno, op)
 }
 
 
-void
-EnumTag(data, dir, locus, size)
-  void *data;
-  char *dir;
-  int locus;
-  int size;
+void 
+EnumTag (void *data, char *dir, int locus, int size)
 {
   rec_get(dir, data, size, TagList[locus].recno);
 }
 
 
-int
-AskTag(msg)
-  char *msg;
+int 
+AskTag (char *msg)
 /* ----------------------------------------------------- */
 /* return value :					 */
 /* -1	: ¨ú®ø						 */
@@ -464,10 +457,8 @@ AskTag(msg)
 /* ----------------------------------------------------- */
 
 
-static int
-xo_tag(xo, op)
-  XO *xo;
-  int op;
+static int 
+xo_tag (XO *xo, int op)
 {
   int fsize, count;
   char *token, *fimage;
@@ -509,12 +500,13 @@ xo_tag(xo, op)
 }
 
 
-int					/* XO_LOAD:§R°£  XO_FOOT/XO_NONE:¨ú®ø */
-xo_prune(xo, size, fvfy, fdel)		/* itoc.031003: ¼ÐÅÒ§R°£ */
-  XO *xo;
-  int size;
-  int (*fvfy) ();			/* ÀË¬d°Ï¬q¤¤¬O§_¦³³Q«OÅ@ªº°O¿ý  0:§R°£ 1:«OÅ@ */
-  void (*fdel) ();			/* °£¤F§R°£°O¿ý¥H¥~¡AÁÙ­n°µ¨Ç¤°»ò¨Æ */
+int 
+xo_prune (		/* itoc.031003: ¼ÐÅÒ§R°£ */
+    XO *xo,
+    int size,
+    int (*fvfy)(char *, int),			/* ÀË¬d°Ï¬q¤¤¬O§_¦³³Q«OÅ@ªº°O¿ý  0:§R°£ 1:«OÅ@ */
+    void (*fdel)(XO *, char *)			/* °£¤F§R°£°O¿ý¥H¥~¡AÁÙ­n°µ¨Ç¤°»ò¨Æ */
+)
 {
   int fd, total, pos;
   char *data, *phead, *ptail, *ptr;
@@ -578,10 +570,11 @@ xo_prune(xo, size, fvfy, fdel)		/* itoc.031003: ¼ÐÅÒ§R°£ */
 extern BCACHE *bshm;    /* lkchu.981229 */
 
 
-int
-xo_tbf(xo, chk_readable)
-  XO *xo;
-  int (*chk_readable)(HDR*);	/* ¶Ç¤JNULL¥Nªí¤£»ÝÀË¬d */
+int 
+xo_tbf (
+    XO *xo,
+    int (*chk_readable)(HDR *)	/* ¶Ç¤JNULL¥Nªí¤£»ÝÀË¬d */
+)
 {
   char fpath[128], *dir;
   HDR *hdr, xhdr;
@@ -639,9 +632,8 @@ xo_tbf(xo, chk_readable)
 }
 
 
-static int
-xo_forward(xo)
-  XO *xo;
+static int 
+xo_forward (XO *xo)
 {
   static char rcpt[64];
   char fpath[64], folder[64], *dir, *title, *userid;
@@ -777,9 +769,8 @@ xo_forward(xo)
 /* ----------------------------------------------------- */
 
 
-int
-xo_uquery(xo)
-  XO *xo;
+int 
+xo_uquery (XO *xo)
 {
   HDR *hdr;
   char *userid;
@@ -796,9 +787,8 @@ xo_uquery(xo)
 }
 
 
-int
-xo_usetup(xo)
-  XO *xo;
+int 
+xo_usetup (XO *xo)
 {
   HDR *hdr;
   char *userid;
@@ -905,9 +895,8 @@ static KeyMap keymap[] =
 };
 
 
-static int
-xo_keymap(key)
-  int key;
+static int 
+xo_keymap (int key)
 {
   KeyMap *km;
   int ch;
@@ -931,10 +920,8 @@ xo_keymap(key)
 /* -XO_FOOT: §ä¨ì¤F¡A´N¦b¥»­¶¡A»Ý­n²M b_lines     */
 
 
-static int
-xo_thread(xo, op)
-  XO *xo;
-  int op;
+static int 
+xo_thread (XO *xo, int op)
 {
   static char s_author[16], s_title[32], s_unread[3] = "0q";
   char buf[80];
@@ -1192,10 +1179,8 @@ xo_thread(xo, op)
 
 /* Thor.990204: ¬°¦Ò¼{more ¶Ç¦^­È, ¥H«K¬Ý¤@¥b¥i¥H¥Î []... 
                 ch ¬°¥ý«emore()¤¤©Ò«öªºkey */   
-int
-xo_getch(xo, ch)
-  XO *xo;
-  int ch;
+int 
+xo_getch (XO *xo, int ch)
 {
   int op;
 
@@ -1243,10 +1228,11 @@ XZ xz[] =
 };
 
 
-static int
-xo_jump(pos, zone)
-  int pos;			/* ²¾°Ê´å¼Ð¨ì number ©Ò¦bªº¯S©w¦ì¸m */
-  int zone;			/* itoc.010403: §â zone ¤]¶Ç¶i¨Ó */
+static int 
+xo_jump (
+    int pos,			/* ²¾°Ê´å¼Ð¨ì number ©Ò¦bªº¯S©w¦ì¸m */
+    int zone			/* itoc.010403: §â zone ¤]¶Ç¶i¨Ó */
+)
 {
   char buf[6];
 
@@ -1274,9 +1260,8 @@ xo_jump(pos, zone)
 /* ----------------------------------------------------- */
 
 
-void
-xover(cmd)
-  int cmd;
+void 
+xover (int cmd)
 {
   int pos, num, zone, sysmode;
   XO *xo;
@@ -1582,9 +1567,10 @@ xover(cmd)
 #ifdef EVERY_Z
 int z_status = 0;	/* ¶i¤J´X¼h */
 
-int
-every_Z(zone)
-  int zone;				/* ¶Ç¤J©Ò¦b XZ_ZONE¡A­Y¶Ç¤J 0¡Aªí¥Ü¤£¦b xover() ¤¤ */
+int 
+every_Z (
+    int zone				/* ¶Ç¤J©Ò¦b XZ_ZONE¡A­Y¶Ç¤J 0¡Aªí¥Ü¤£¦b xover() ¤¤ */
+)
 {
   int cmd, tmpbno, tmpmode;
 
@@ -1670,9 +1656,10 @@ every_Z(zone)
 }
 
 
-int
-every_U(zone)
-  int zone;			/* ¶Ç¤J©Ò¦b XZ_ZONE¡A­Y¶Ç¤J 0¡Aªí¥Ü¤£¦b xover() ¤¤ */
+int 
+every_U (
+    int zone			/* ¶Ç¤J©Ò¦b XZ_ZONE¡A­Y¶Ç¤J 0¡Aªí¥Ü¤£¦b xover() ¤¤ */
+)
 {
   /* itoc.000319: ³Ì¦h every_Z ¤@¼h */
   if (z_status >= 1)
@@ -1700,10 +1687,8 @@ every_U(zone)
 
 /* ¶Ç¤J: ch, pagemax, num, pageno, cur, redraw */
 /* ¶Ç¥X: ch, pageno, cur, redraw */
-int
-xo_cursor(ch, pagemax, num, pageno, cur, redraw)
-  int ch, pagemax, num;
-  int *pageno, *cur, *redraw;
+int 
+xo_cursor (int ch, int pagemax, int num, int *pageno, int *cur, int *redraw)
 {
   switch (ch)
   {
@@ -1827,9 +1812,10 @@ xo_cursor(ch, pagemax, num, pageno, cur, redraw)
 /* ----------------------------------------------------- */
 
 
-void
-xo_help(path)			/* itoc.021122: »¡©ú¤å¥ó */
-  char *path;
+void 
+xo_help (			/* itoc.021122: »¡©ú¤å¥ó */
+    char *path
+)
 {
   /* itoc.030510: ©ñ¨ì so ¸Ì­± */
   DL_func("bin/help.so:vaHelp", path);

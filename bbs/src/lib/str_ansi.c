@@ -3,10 +3,12 @@
 /* ----------------------------------------------------- */
 
 
-void
-str_ansi(dst, str, max)		/* strip ANSI code */
-  char *dst, *str;
-  int max;
+void 
+str_ansi (		/* strip ANSI code */
+    char *dst,
+    char *str,
+    int max
+)
 {
   int ch, ansi;
   char *tail;

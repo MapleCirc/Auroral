@@ -39,9 +39,8 @@ time_t mode_lastchange;
 static int ap_semid;
 
 
-static void
-attach_err(shmkey)
-  int shmkey;
+static void 
+attach_err (int shmkey)
 {
   char buf[20];
 
@@ -51,8 +50,8 @@ attach_err(shmkey)
 }
 
 
-void
-sem_init()
+void 
+sem_init (void)
 {
   int semid;
 
@@ -78,9 +77,10 @@ sem_init()
 }
 
 
-void
-sem_lock(op)
-  int op;			/* op is BSEM_ENTER or BSEM_LEAVE */
+void 
+sem_lock (
+    int op			/* op is BSEM_ENTER or BSEM_LEAVE */
+)
 {
   struct sembuf sops;
 
@@ -102,16 +102,15 @@ sem_lock(op)
 UCACHE *ushm;
 
 
-void
-ushm_init()
+void 
+ushm_init (void)
 {
   ushm = shm_new(UTMPSHM_KEY, sizeof(UCACHE));
 }
 
 
-void
-utmp_mode(mode)
-  int mode;
+void 
+utmp_mode (int mode)
 {
   if (bbsmode != mode)
   {
@@ -128,9 +127,8 @@ utmp_mode(mode)
 }
 
 
-int
-utmp_new(up)
-  UTMP *up;
+int 
+utmp_new (UTMP *up)
 {
   UCACHE *xshm;
   UTMP *uentp, *utail;
@@ -180,9 +178,8 @@ utmp_new(up)
 }
 
 
-void
-utmp_free(up)
-  UTMP *up;
+void 
+utmp_free (UTMP *up)
 {
   if (!up || !up->pid)
     return;
@@ -201,8 +198,7 @@ utmp_free(up)
 
 
 UTMP *
-utmp_find(userno)
-  int userno;
+utmp_find (int userno)
 {
   UTMP *uentp, *uceil;
 
@@ -219,9 +215,10 @@ utmp_find(userno)
 
 
 UTMP *
-utmp_get(userno, userid)	/* itoc.010306: 檢查使用者是否在站上 */
-  int userno;
-  char *userid;
+utmp_get (	/* itoc.010306: 檢查使用者是否在站上 */
+    int userno,
+    char *userid
+)
 {
   UTMP *uentp, *uceil;
   int seecloak;
@@ -265,8 +262,9 @@ utmp_get(userno, userid)	/* itoc.010306: 檢查使用者是否在站上 */
 
 
 UTMP *
-utmp_seek(hdr)		/* itoc.010306: 檢查使用者是否在站上 */
-  HDR *hdr;
+utmp_seek (		/* itoc.010306: 檢查使用者是否在站上 */
+    HDR *hdr
+)
 {
   if (hdr->xmode & POST_INCOME)	/* POST_INCOME 和 MAIL_INCOME 是相同的 */
     return NULL;
@@ -275,10 +273,11 @@ utmp_seek(hdr)		/* itoc.010306: 檢查使用者是否在站上 */
 }
 
 
-void  
-utmp_admset(userno, status)	/* itoc.010811: 動態設定線上使用者 */
-  int userno;
-  usint status;
+void 
+utmp_admset (	/* itoc.010811: 動態設定線上使用者 */
+    int userno,
+    usint status
+)
 {
   UTMP *uentp, *uceil;
   extern int ulist_userno[];
@@ -299,10 +298,8 @@ utmp_admset(userno, status)	/* itoc.010811: 動態設定線上使用者 */
 }
 
 
-int
-utmp_count(userno, show)
-  int userno;
-  int show;
+int 
+utmp_count (int userno, int show)
 {
   UTMP *uentp, *uceil;
   int count;
@@ -327,9 +324,10 @@ utmp_count(userno, show)
 
 
 UTMP *
-utmp_search(userno, order)
-  int userno;
-  int order;			/* 第幾個 */
+utmp_search (
+    int userno,
+    int order			/* 第幾個 */
+)
 {
   UTMP *uentp, *uceil;
 
@@ -348,9 +346,8 @@ utmp_search(userno, order)
 
 
 #if 0
-int
-apply_ulist(fptr)
-  int (*fptr) ();
+int 
+apply_ulist (int (*fptr)(void))
 {
   UTMP *uentp;
   int i, state;
@@ -375,8 +372,8 @@ apply_ulist(fptr)
 BCACHE *bshm;
 
 
-void
-bshm_init()
+void 
+bshm_init (void)
 {
   int i;
 
@@ -395,8 +392,8 @@ bshm_init()
 }
 
 
-void
-bshm_reload()		/* 開板以後，重新載入 bshm */
+void 
+bshm_reload (void)		/* 開板以後，重新載入 bshm */
 {
   time_t *uptime;
   int fd;
@@ -436,9 +433,8 @@ bshm_reload()		/* 開板以後，重新載入 bshm */
 
 
 #if 0
-int
-apply_boards(func)
-  int (*func) ();
+int 
+apply_boards (int (*func)(void))
 {
   extern char brd_bits[];
   BRD *bhdr;
@@ -457,17 +453,15 @@ apply_boards(func)
 #endif
 
 
-static int
-brdname_cmp(a, b)
-  BRD *a, *b;
+static int 
+brdname_cmp (BRD *a, BRD *b)
 {
   return str_cmp(a->brdname, b->brdname);
 }
 
 
-int
-brd_bno(bname)
-  char *bname;
+int 
+brd_bno (char *bname)
 {
   BRD xbrd, *bcache, *brdp, *bend;
 
@@ -505,8 +499,8 @@ brd_bno(bname)
 FCACHE *fshm;
 
 
-void
-fshm_init()
+void 
+fshm_init (void)
 {
   fshm = shm_new(FILMSHM_KEY, sizeof(FCACHE));
 }
@@ -530,22 +524,20 @@ fshm_init()
 /* floatJ: 利用呼叫note_reverse的方法避免全域變數的使用 */
 /* dust.091009: 再改造 */
 /* n = 0 初始化  1 向後換note  -1 向前換note */
-void
-note_direction(n)
-  int n;
+void 
+note_direction (int n)
 {
   note_direct = n;	/* 這麼做的話一次跳兩張都不成問題XD */
 }
 
-void
-note_setrand()
+void 
+note_setrand (void)
 {
   note_rand_flag = 1;
 }
 
-static int
-note_random(size)
-  int size;
+static int 
+note_random (int size)
 {
   if(size <= 0)         /* 不必跳了，一定是自己 */
     return 0;
@@ -554,10 +546,11 @@ note_random(size)
 }
 
 
-void
-film_out(tag, row)
-  int tag;
-  int row;			/* -1 : help */
+void 
+film_out (
+    int tag,
+    int row			/* -1 : help */
+)
 {
   int fmax, len, *shot;
   char *film, buf[FILM_SIZ + 1];

@@ -3,9 +3,7 @@
 
 
 void
-f_cat(fpath, msg)
-  char *fpath;
-  char *msg;
+f_cat(char *fpath, char *msg)
 {
   int fd;
 

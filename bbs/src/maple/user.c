@@ -18,10 +18,11 @@ extern char *ufo_tbl[];
 /* ----------------------------------------------------- */
 
 
-void
-justify_log(userid, justify)	/* itoc.010822: ®³±¼ .ACCT ¤¤ justify ³oÄæ¦ì¡A§ï°O¿ý¦b FN_JUSTIFY */
-  char *userid;
-  char *justify;	/* »{ÃÒ¸ê®Æ RPY:email-reply  KEY:»{ÃÒ½X  POP:pop3»{ÃÒ  REG:µù¥U³æ */
+void 
+justify_log (	/* itoc.010822: ®³±¼ .ACCT ¤¤ justify ³oÄæ¦ì¡A§ï°O¿ý¦b FN_JUSTIFY */
+    char *userid,
+    char *justify	/* »{ÃÒ¸ê®Æ RPY:email-reply  KEY:»{ÃÒ½X  POP:pop3»{ÃÒ  REG:µù¥U³æ */
+)
 {
   char fpath[64];
   FILE *fp;
@@ -35,9 +36,8 @@ justify_log(userid, justify)	/* itoc.010822: ®³±¼ .ACCT ¤¤ justify ³oÄæ¦ì¡A§ï°O¿
 }
 
 
-static int
-ban_addr(addr)
-  char *addr;
+static int 
+ban_addr (char *addr)
 {
   char *host;
   char foo[128];	/* SoC: ©ñ¸m«ÝÀË¬dªº email address */
@@ -71,9 +71,10 @@ ban_addr(addr)
 
 #ifdef HAVE_POP3_CHECK
 
-static int		/* >=0:socket -1:³s½u¥¢±Ñ */
-Get_Socket(site)	/* site for hostname */
-  char *site;
+static int 
+Get_Socket (	/* site for hostname */
+    char *site
+)
 {
   int sock;
   struct sockaddr_in sin;
@@ -111,10 +112,8 @@ Get_Socket(site)	/* site for hostname */
 }
 
 
-static int		/* 0:¦¨¥\ */
-POP3_Check(sock, account, passwd)
-  int sock;
-  char *account, *passwd;
+static int 
+POP3_Check (int sock, char *account, char *passwd)
 {
   FILE *fsock;
   char buf[512];
@@ -168,9 +167,10 @@ POP3_Check(sock, account, passwd)
 }
 
 
-static int		/* -1:¤£¤ä´© 0:±K½X¿ù»~ 1:¦¨¥\ */
-do_pop3(addr)		/* itoc.010821: §ï¼g¤@¤U :) */
-  char *addr;
+static int 
+do_pop3 (		/* itoc.010821: §ï¼g¤@¤U :) */
+    char *addr
+)
 {
   int sock, i;
   char *ptr, *str, buf[80], username[80];
@@ -241,8 +241,8 @@ do_pop3(addr)		/* itoc.010821: §ï¼g¤@¤U :) */
 /* ----------------------------------------------------- */
 
 
-int
-u_addr()
+int 
+u_addr (void)
 {
   char *msg, addr[64];
 
@@ -327,10 +327,8 @@ u_addr()
 
 #ifdef HAVE_REGISTER_FORM
 
-static void
-getfield(line, len, buf, desc, hint, ex)
-  int line, len;
-  char *buf, *desc, *hint, *ex;
+static void 
+getfield (int line, int len, char *buf, char *desc, char *hint, char *ex)
 {
   move(line - 1, 0);
   if(ex)
@@ -344,8 +342,8 @@ getfield(line, len, buf, desc, hint, ex)
 }
 
 
-int
-u_register()
+int 
+u_register (void)
 {
   FILE *fn;
   int ans;
@@ -466,8 +464,8 @@ u_register()
 
 
 #ifdef HAVE_REGKEY_CHECK
-int
-u_verify()
+int 
+u_verify (void)
 {
   char buf[80], key[10];
   ACCT acct;
@@ -515,8 +513,8 @@ u_verify()
 /* ----------------------------------------------------- */
 
 
-int
-u_deny()
+int 
+u_deny (void)
 {
   ACCT acct;
   time_t diff;
@@ -562,8 +560,8 @@ u_deny()
 /* ----------------------------------------------------- */
 
 
-int
-u_info()
+int 
+u_info (void)
 {
   char *str, username[UNLEN + 1];
 
@@ -582,8 +580,8 @@ u_info()
 }
 
 
-int
-u_setup()
+int 
+u_setup (void)
 {
 #if 0
   usint ulevel;
@@ -618,8 +616,8 @@ u_setup()
 }
 
 
-int
-u_lock()
+int 
+u_lock (void)
 {
   char buf[PSWDLEN + 1];
   char *menu[] = {"yÂê©w¿Ã¹õ", "cÂê©w¿Ã¹õ-¦Û­qª¬ºA", "n¨ú®ø", NULL};
@@ -659,8 +657,8 @@ u_lock()
 }
 
 
-int
-u_log()
+int 
+u_log (void)
 {
   char fpath[64];
 
@@ -680,12 +678,13 @@ u_log()
 #define MAXITEM 18
 #define XFILE_FEET "\033[1;33m¡¹ \033[m½Ð«ö \033[1;33m¤è¦VÁä \033[m²¾°Ê´å¼Ð¡A \033[1;33mEnter \033[m½s¿è¡A \033[1;33mdelete \033[m§R°£ÀÉ®×©Î \033[1;33mQ \033[mÂ÷¶}¡C\n"
 
-void
-x_file(echo_path, xlist, flist, fpath)
-  int echo_path;
-  char *xlist[];		/* description list */
-  char *flist[];		/* filename list */
-  char *fpath;
+void 
+x_file (
+    int echo_path,
+    char *xlist[],		/* description list */
+    char *flist[],		/* filename list */
+    char *fpath
+)
 {
   int n, oc, row, col, key, redraw_foot;
   screen_backup_t old_screen;
@@ -858,8 +857,8 @@ x_file(echo_path, xlist, flist, fpath)
 
 
 
-int
-u_xfile()
+int 
+u_xfile (void)
 {
   int i;
   char fpath[64];

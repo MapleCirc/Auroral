@@ -5,9 +5,7 @@
 
 
 void
-f_suck(fp, fpath)
-  FILE *fp;
-  char *fpath;
+f_suck(FILE *fp, char *fpath)
 {
   int fd;
 

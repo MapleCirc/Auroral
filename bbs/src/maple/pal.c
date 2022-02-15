@@ -23,11 +23,8 @@ static int *pal_pool = NULL;	/* §Y cutmp->pal_spool¡A¦]¬°¤Ó±`ÀË¬dªB¤Í¦W³æ¡A©Ò¥H°
 /* ----------------------------------------------------- */
 
 
-static int			/* 1: userno ¦b pool ¦W³æ¤W */
-belong_pal(pool, max, userno)
-  int *pool;
-  int max;
-  int userno;
+static int 
+belong_pal (int *pool, int max, int userno)
 {
   int *up, datum, mid;
 
@@ -54,25 +51,28 @@ belong_pal(pool, max, userno)
 
 /*-------------------------------------------------------*/
 
-int
-is_mymate(userno)                /*  1: §Ú³]¹ï¤è¬°³Â¦N */
-  int userno;
+int 
+is_mymate (                /*  1: §Ú³]¹ï¤è¬°³Â¦N */
+    int userno
+)
 {
   return belong_pal(pal_pool, pal_max, userno | MATE_MASK);
 }
 
 
-int
-is_mygood(userno)		/*  1: §Ú³]¹ï¤è¬°¦n¤Í */
-  int userno;
+int 
+is_mygood (		/*  1: §Ú³]¹ï¤è¬°¦n¤Í */
+    int userno
+)
 {
   return belong_pal(pal_pool, pal_max, userno) || is_mymate(userno);
 }
 
 
-int
-is_mybad(userno)		/*  1: §Ú³]¹ï¤è¬°Ãa¤H */
-  int userno;
+int 
+is_mybad (		/*  1: §Ú³]¹ï¤è¬°Ãa¤H */
+    int userno
+)
 {
 #ifdef HAVE_BADPAL
   return belong_pal(pal_pool, pal_max, -userno);
@@ -83,25 +83,28 @@ is_mybad(userno)		/*  1: §Ú³]¹ï¤è¬°Ãa¤H */
 
 /*-------------------------------------------------------*/
 
-int
-is_omate(up)                     /*  1: ¹ï¤è³]§Ú¬°³Â¦N */
-  UTMP *up;
+int 
+is_omate (                     /*  1: ¹ï¤è³]§Ú¬°³Â¦N */
+    UTMP *up
+)
 {
   return belong_pal(up->pal_spool, up->pal_max, cuser.userno | MATE_MASK);
 }
 
 
-int
-is_ogood(up)			/* 1: ¹ï¤è³]§Ú¬°¦n¤Í */
-  UTMP *up;
+int 
+is_ogood (			/* 1: ¹ï¤è³]§Ú¬°¦n¤Í */
+    UTMP *up
+)
 {
   return belong_pal(up->pal_spool, up->pal_max, cuser.userno) || is_omate(up);
 }
 
 
-int
-is_obad(up)			/* 1: ¹ï¤è³]§Ú¬°Ãa¤H */
-  UTMP *up;
+int 
+is_obad (			/* 1: ¹ï¤è³]§Ú¬°Ãa¤H */
+    UTMP *up
+)
 {
 #ifdef HAVE_BADPAL
   return belong_pal(up->pal_spool, up->pal_max, -cuser.userno);
@@ -113,17 +116,19 @@ is_obad(up)			/* 1: ¹ï¤è³]§Ú¬°Ãa¤H */
 /*-------------------------------------------------------*/
 
 #ifdef HAVE_MODERATED_BOARD
-int
-is_bgood(bpal)			/* 1: §Ú¬O¸ÓªOªº¬ÝªO¦n¤Í */
-  BPAL *bpal;
+int 
+is_bgood (			/* 1: §Ú¬O¸ÓªOªº¬ÝªO¦n¤Í */
+    BPAL *bpal
+)
 {
   return belong_pal(bpal->pal_spool, bpal->pal_max, cuser.userno);
 }
 
 
-int
-is_bbad(bpal)			/* 1: §Ú¬O¸ÓªOªº¬ÝªOÃa¤H */
-  BPAL *bpal;
+int 
+is_bbad (			/* 1: §Ú¬O¸ÓªOªº¬ÝªOÃa¤H */
+    BPAL *bpal
+)
 {
 #  ifdef HAVE_BADPAL
   return belong_pal(bpal->pal_spool, bpal->pal_max, -cuser.userno);
@@ -133,18 +138,20 @@ is_bbad(bpal)			/* 1: §Ú¬O¸ÓªOªº¬ÝªOÃa¤H */
 }
 
 
-int
-is_bwater(bpal)			/* 1: §Ú³Q¸ÓªO®û¤ô±í */
-  BPAL *bpal;
+int 
+is_bwater (			/* 1: §Ú³Q¸ÓªO®û¤ô±í */
+    BPAL *bpal
+)
 {
   return belong_pal(bpal->bwlist_pool, bpal->bwlist_max, cuser.userno);
 }
 
 
 /* floatJ.091017: ªO§U¥\¯à */
-int
-is_bv(bpal)                   /* 1: §Ú¬OªO§U§Ú¶W±j!! */
-  BPAL *bpal;
+int 
+is_bv (                   /* 1: §Ú¬OªO§U§Ú¶W±j!! */
+    BPAL *bpal
+)
 {
   return belong_pal(bpal->bvlist_pool, bpal->bvlist_max, cuser.userno);
 }
@@ -159,19 +166,15 @@ is_bv(bpal)                   /* 1: §Ú¬OªO§U§Ú¶W±j!! */
 /* ----------------------------------------------------- */
 
 
-static int
-int_cmp(a, b)
-  int *a;
-  int *b;
+static int 
+int_cmp (int *a, int *b)
 {
   return *a - *b;
 }
 
 
-int
-image_pal(fpath, pool)
-  char *fpath;
-  int *pool;
+int 
+image_pal (char *fpath, int *pool)
 {
   int fsize;
   int *plist;
@@ -215,8 +218,8 @@ image_pal(fpath, pool)
 }
 
 
-void
-pal_cache()
+void 
+pal_cache (void)
 {
   char fpath[64];
 
@@ -230,9 +233,8 @@ pal_cache()
 }
 
 
-static int
-chkpal(pal)
-  PAL *pal;
+static int 
+chkpal (PAL *pal)
 {
   int userno;
 
@@ -241,9 +243,8 @@ chkpal(pal)
 }
 
 
-void
-pal_sync(fpath)
-  char *fpath;
+void 
+pal_sync (char *fpath)
 {
   int fsize;
 
@@ -254,9 +255,8 @@ pal_sync(fpath)
 }
 
 
-int
-pal_list(reciper)
-  int reciper;
+int 
+pal_list (int reciper)
 {
   int userno, fd;
   char buf[32], fpath[64];
@@ -361,10 +361,8 @@ pal_list(reciper)
 static int pal_add();
 
 
-static void
-pal_item(num, pal)
-  int num;
-  PAL *pal;
+static void 
+pal_item (int num, PAL *pal)
 {
 #ifdef CHECK_ONLINE
   UTMP *online = utmp_get(pal->userno, NULL);
@@ -384,9 +382,8 @@ pal_item(num, pal)
 }
 
 
-static int
-pal_body(xo)
-  XO *xo;
+static int 
+pal_body (XO *xo)
 {
   PAL *pal;
   int num, max, tail;
@@ -417,9 +414,8 @@ pal_body(xo)
 }
 
 
-static int
-pal_head(xo)
-  XO *xo;
+static int 
+pal_head (XO *xo)
 {
   char *head[] = {"ªB¤Í¦W³æ", "¸s²Õ¦W³æ", "ªO¤Í¦W³æ", "­­¨î§ë²¼¦W³æ", "¤ô±í¦W³æ","ªO§U¦W³æ"};
 
@@ -432,18 +428,16 @@ pal_head(xo)
 }
 
 
-static int
-pal_load(xo)
-  XO *xo;
+static int 
+pal_load (XO *xo)
 {
   xo_load(xo, sizeof(PAL));
   return pal_body(xo);
 }
 
 
-static int
-pal_init(xo)
-  XO *xo;
+static int 
+pal_init (XO *xo)
 {
   xo_load(xo, sizeof(PAL));
   return pal_head(xo);
@@ -452,11 +446,8 @@ pal_init(xo)
 
 /* dust.090315: §ï¨}ª©pal_edit()¡A
    ¤ä´©¦n¤Í¦W³æ¼W¥[³Â¦N(¶W¯Å¦n¤Í)¡B¤ô±í¦W³æ¥\¯à */
-void
-pal_edit(key, pal, echo)
-  int key;
-  PAL *pal;
-  int echo;
+void 
+pal_edit (int key, PAL *pal, int echo)
 {
   char *option[] = {"1¦n¤Í", "2Ãa¤H", "3³Â¦N(¶W¯Å¦n¤Í)", NULL};
 
@@ -511,10 +502,11 @@ pal_edit(key, pal, echo)
 
 
 /* static */ 			/* itoc.020117: µ¹ vote.c ¥Î */
-int
-pal_find(fpath, userno)		/* itoc.010923: ªB¤Í¦W³æ¤¤¬O§_¤w¦³¦¹¤H */
-  char *fpath;
-  int userno;
+int 
+pal_find (		/* itoc.010923: ªB¤Í¦W³æ¤¤¬O§_¤w¦³¦¹¤H */
+    char *fpath,
+    int userno
+)
 {
   PAL old;
   int fd;
@@ -536,9 +528,8 @@ pal_find(fpath, userno)		/* itoc.010923: ªB¤Í¦W³æ¤¤¬O§_¤w¦³¦¹¤H */
 }
 
 
-static int
-pal_add(xo)
-  XO *xo;
+static int 
+pal_add (XO *xo)
 {
   ACCT acct;
   int userno;
@@ -606,9 +597,8 @@ pal_add(xo)
 }
 
 
-static int
-pal_delete(xo)
-  XO *xo;
+static int 
+pal_delete (XO *xo)
 {
   if (vans(msg_del_ny) == 'y')
   {
@@ -628,44 +618,37 @@ pal_delete(xo)
 }
 
 
-static void
-changestatus(xo, pal)
-  XO *xo;
-  PAL *pal;
+static void 
+changestatus (XO *xo, PAL *pal)
 {
   if (xo->key == PALTYPE_PAL)
     utmp_admset(pal->userno, STATUS_PALDIRTY);
 }
 
 
-static int
-pal_rangedel(xo)
-  XO *xo;
+static int 
+pal_rangedel (XO *xo)
 {
   return xo_rangedel(xo, sizeof(PAL), NULL, changestatus);
 }
 
 
-static int
-vfypal(pal, pos)
-  PAL *pal;
-  int pos;
+static int 
+vfypal (PAL *pal, int pos)
 {
   return Tagger(pal->userno, pos, TAG_NIN);
 }
 
 
-static int
-pal_prune(xo)
-  XO *xo;
+static int 
+pal_prune (XO *xo)
 {
   return xo_prune(xo, sizeof(PAL), vfypal, changestatus);
 }
 
 
-static int
-pal_change(xo)
-  XO *xo;
+static int 
+pal_change (XO *xo)
 {
   PAL *pal, oldpal;
   int pos, cur;
@@ -690,9 +673,8 @@ pal_change(xo)
 }
 
 
-static int
-pal_mail(xo)
-  XO *xo;
+static int 
+pal_mail (XO *xo)
 {
   PAL *pal;
 
@@ -701,9 +683,8 @@ pal_mail(xo)
 }
 
 
-static int
-pal_write(xo)
-  XO *xo;
+static int 
+pal_write (XO *xo)
 {
   if (HAS_PERM(PERM_PAGE))
   {
@@ -719,9 +700,8 @@ pal_write(xo)
 }
 
 
-static int
-pal_broadcast(xo)
-  XO *xo;
+static int 
+pal_broadcast (XO *xo)
 {
   int fd;
   BMW bmw;
@@ -770,9 +750,8 @@ pal_broadcast(xo)
 
 
 #if (defined(HAVE_MODERATED_BOARD) || defined(HAVE_LIST))
-static int
-pal_cite(xo)
-  XO *xo;
+static int 
+pal_cite (XO *xo)
 {
   int fd, num;
   char fpath[64], *dir;
@@ -846,18 +825,16 @@ pal_cite(xo)
 #endif
 
 
-static int
-pal_sort(xo)
-  XO *xo;
+static int 
+pal_sort (XO *xo)
 {
   pal_sync(xo->dir);
   return pal_load(xo);
 }
 
 
-static int
-pal_query(xo)
-  XO *xo;
+static int 
+pal_query (XO *xo)
 {
   PAL *pal;
 
@@ -869,9 +846,8 @@ pal_query(xo)
 }
 
 
-static int
-pal_tag(xo)
-  XO *xo;
+static int 
+pal_tag (XO *xo)
 {
   PAL *pal;
   int tag, pos, cur;
@@ -891,9 +867,8 @@ pal_tag(xo)
 }
 
 
-static int
-pal_help(xo)
-  XO *xo;
+static int 
+pal_help (XO *xo)
 {
   xo_help("pal");
   return pal_head(xo);
@@ -928,8 +903,8 @@ KeyFunc pal_cb[] =
 };
 
 
-int
-t_pal()
+int 
+t_pal (void)
 {
   XO *xo;
   char fpath[64];
@@ -956,8 +931,8 @@ t_pal()
 
 
 #ifdef HAVE_LIST
-int
-t_list()
+int 
+t_list (void)
 {
   int n;
   char fpath[64], buf[8];

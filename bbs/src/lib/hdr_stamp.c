@@ -52,12 +52,13 @@
 
 /* dust.100406: 追加可預設chrono的版本 */
 int
-hdr_stamp_time(folder, token, hdr, fpath, chrono)
-  char *folder;
-  int token;
-  HDR *hdr;
-  char *fpath;
-  time_t chrono;
+hdr_stamp_time(
+  char *folder,
+  int token,
+  HDR *hdr,
+  char *fpath,
+  time_t chrono
+)
 {
   char *fname, *family;
   int rc;
@@ -136,12 +137,8 @@ hdr_stamp_time(folder, token, hdr, fpath, chrono)
 
 
 
-int
-hdr_stamp(folder, token, hdr, fpath)
-  char *folder;
-  int token;
-  HDR *hdr;
-  char *fpath;
+int 
+hdr_stamp (char *folder, int token, HDR *hdr, char *fpath)
 {
   return hdr_stamp_time(folder, token, hdr, fpath, time(NULL));
 }

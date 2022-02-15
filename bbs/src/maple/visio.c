@@ -27,10 +27,11 @@
 /* 漢字 (zh-char) 判斷					 */
 /* ----------------------------------------------------- */
 
-int			/* 1:是 0:不是 */
-is_zhc_low(str, n)	/* hightman.060504: 判斷字串中的第 n 個字符是否為漢字的後半字 */
-  char *str;
-  int n;
+int 
+is_zhc_low (	/* hightman.060504: 判斷字串中的第 n 個字符是否為漢字的後半字 */
+    char *str,
+    int n
+)
 {
   char *end;
 
@@ -58,10 +59,8 @@ static int vo_size;
 
 
 #ifdef VERBOSE		/* dust.090909: VERBOSE沒開... */
-static void
-telnet_flush(data, size)
-  char *data;
-  int size;
+static void 
+telnet_flush (char *data, int size)
 {
   int oset;
 
@@ -80,8 +79,8 @@ telnet_flush(data, size)
 #endif
 
 
-void
-oflush()
+void 
+oflush (void)
 {
   int size;
 
@@ -98,8 +97,8 @@ oflush()
 }
 
 
-void
-vo_init()
+void 
+vo_init (void)
 {
   if(!(vo_pool = malloc(VOSZ_NORMAL)))
     abort_bbs();
@@ -108,9 +107,8 @@ vo_init()
 }
 
 
-void
-ochar(ch)
-  int ch;
+void 
+ochar (int ch)
 {
   int size;
 
@@ -134,8 +132,8 @@ ochar(ch)
 }
 
 
-void
-bell()
+void 
+bell (void)
 {
   static char sound[1] = {Ctrl('G')};
 
@@ -151,15 +149,15 @@ bell()
 static int save_y, save_x;
 
 
-void
-cursor_save()
+void 
+cursor_save (void)
 {
   getyx(&save_y, &save_x);
 }
 
 
-void
-cursor_restore()
+void 
+cursor_restore (void)
 {
   move(save_y, save_x);
 }
@@ -171,12 +169,8 @@ cursor_restore()
 /* 注意：如果要修改控碼格式時，請注意該控碼的長度是否會超過 ESCODE_MAXLEN */
 /*       若 ESCODE_MAXLEN 所定義的長度不足可能會無法正常顯示 */
 
-int		/* 回傳ESC-Star控制碼的長度 */
-EScode(buf, src, szbuf, submsg)
-  char *buf;
-  const char *src;
-  int szbuf;
-  int *submsg;
+int 
+EScode (char *buf, const char *src, int szbuf, int *submsg)
 {
   int year, mon, day, left, warn, base, short_fmt = 0, XDBBS_fmt = 0;
   const char *itr;
@@ -323,8 +317,7 @@ DateCountdown_CommonRoutine:
 
 
 void
-outx(str)
-  uschar *str;
+outx(uschar *str)
 {
   int ch, submsg;
   char buf[80];
@@ -352,9 +345,8 @@ outx(str)
 /* clear the bottom line and show the message		 */
 /* ----------------------------------------------------- */
 
-void
-outz(str)
-  uschar *str;
+void 
+outz (uschar *str)
 {
   move(b_lines, 0);
   clrtoeol();
@@ -362,9 +354,8 @@ outz(str)
 }
 
 
-void
-outf(str)
-  uschar *str;
+void 
+outf (uschar *str)
 {
   outz(str);
   prints("%*s\033[m", d_cols, "");
@@ -387,9 +378,10 @@ prints(char *fmt, ...)
 
 #ifdef POPUP_MESSAGE
 
-int
-vmsg(msg)
-  char *msg;			/* length <= 54 */
+int 
+vmsg (
+    char *msg			/* length <= 54 */
+)
 {
   if (msg)
     return pmsg(msg);
@@ -401,9 +393,10 @@ vmsg(msg)
 }
 
 
-int
-vmsg_bar(msg)		/* dust.091210: 強制顯示在底端的vmsg() */
-  char *msg;
+int 
+vmsg_bar (		/* dust.091210: 強制顯示在底端的vmsg() */
+    char *msg
+)
 {
   if (msg)
   {
@@ -422,9 +415,10 @@ vmsg_bar(msg)		/* dust.091210: 強制顯示在底端的vmsg() */
 
 #else
 
-int
-vmsg(msg)
-  char *msg;			/* length <= 54 */
+int 
+vmsg (
+    char *msg			/* length <= 54 */
+)
 {
   if (msg)
   {
@@ -442,9 +436,8 @@ vmsg(msg)
 }
 
 
-int
-vmsg_bar(msg)
-  char *msg;
+int 
+vmsg_bar (char *msg)
 {
   return vmsg(msg);
 }
@@ -452,8 +445,8 @@ vmsg_bar(msg)
 #endif
 
 
-static inline void
-zkey()				/* press any key or timeout (1 sec) */
+static inline void 
+zkey (void)				/* press any key or timeout (1 sec) */
 {
   struct timeval tv = {1, 100};
   int rset;
@@ -463,9 +456,10 @@ zkey()				/* press any key or timeout (1 sec) */
 }
 
 
-void
-zmsg(msg)			/* easy message */
-  char *msg;
+void 
+zmsg (			/* easy message */
+    char *msg
+)
 {
   outz(msg);
   move(b_lines, 0);	/* itoc.031029: 修正在偵測左右鍵全形下，按左鍵會跳離二層選單的問題 */
@@ -475,18 +469,16 @@ zmsg(msg)			/* easy message */
 }
 
 
-void
-vs_bar(title)
-  char *title;
+void 
+vs_bar (char *title)
 {
   clear();
   prints("\033[1;33;44m【 %s 】\033[m\n", title);
 }
 
 
-static void
-vs_line(msg)
-  char *msg;
+static void 
+vs_line (char *msg)
 {
   int head, tail;
 
@@ -530,24 +522,24 @@ static int vio_fd;
 static int holdon_fd;		 /* Thor.980727: 跳出chat&talk暫存vio_fd用 */
 
 
-void
-vio_save()
+void 
+vio_save (void)
 {
   holdon_fd = vio_fd;
   vio_fd = 0;
 }
 
 
-void
-vio_restore()
+void 
+vio_restore (void)
 {
   vio_fd = holdon_fd;
   holdon_fd = 0;
 }
 
 
-int
-vio_holdon()
+int 
+vio_holdon (void)
 {
   return holdon_fd;
 }
@@ -557,10 +549,8 @@ vio_holdon()
 
 static struct timeval vio_to = {60, 0};
 
-void
-add_io(fd, timeout)
-  int fd;
-  int timeout;
+void 
+add_io (int fd, int timeout)
 {
   vio_fd = fd;
   vio_to.tv_sec = timeout;
@@ -568,9 +558,8 @@ add_io(fd, timeout)
 
 
 
-static inline int
-iac_count(current)
-  uschar *current;
+static inline int 
+iac_count (uschar *current)
 {
   switch (*(current + 1))
   {
@@ -624,8 +613,8 @@ iac_count(current)
 
 static int imode = 0;
 
-static int
-igetch()
+static int 
+igetch (void)
 {
   static int idle = 0;
 
@@ -855,8 +844,8 @@ typedef enum
 #define VKRAW_BS    0x08	// \b = Ctrl('H')
 #define VKRAW_ERASE 0x7F	// <X]
 
-static int
-vtkbd()
+static int 
+vtkbd (void)
 {
   int cc, esc_arg;
   VKSTATES state = VKSTATE_NORMAL;
@@ -1083,8 +1072,8 @@ vtkbd()
 }
 
 
-int
-vkey()
+int 
+vkey (void)
 {
   int key;
 
@@ -1125,8 +1114,8 @@ vkey()
 
 
 
-int
-num_in_buf()	/* dust.100815: for new VE and pmore */
+int 
+num_in_buf (void)	/* dust.100815: for new VE and pmore */
 {
   return vi_size - vi_head;
 }
@@ -1140,8 +1129,8 @@ num_in_buf()	/* dust.100815: for new VE and pmore */
 #define	MATCH_END	0x8000
 /* Thor.990204.註解: 代表MATCH完結, 要嘛就補足, 要嘛就維持原狀, 不秀出可能的值了 */
 
-static void
-match_title()
+static void 
+match_title (void)
 {
   move(2, 0);
   clrtobot();
@@ -1149,8 +1138,8 @@ match_title()
 }
 
 
-static int
-match_getch()
+static int 
+match_getch (void)
 {
   int ch;
 
@@ -1170,10 +1159,7 @@ static BRD *xbrd;
 
 
 BRD *
-ask_board(board, perm, msg)
-  char *board;
-  int perm;
-  char *msg;
+ask_board (char *board, int perm, char *msg)
 {
   if (msg)
   {
@@ -1188,11 +1174,8 @@ ask_board(board, perm, msg)
 }
 
 
-static int
-vget_match(prefix, len, op)
-  char *prefix;
-  int len;
-  int op;
+static int 
+vget_match (char *prefix, int len, int op)
 {
   char *data, *hit;
   char newprefix[BNLEN + 1];	/* 繼續補完的板名 */
@@ -1405,11 +1388,8 @@ int vget_BottomMode = 0;	/* dust.100324: 解決水球蓋掉vget(b_lines, ...)的問題 */
   currline = 0; \
 }
 
-int
-vget(line, col, prompt, data, max, echo)
-  int line, col;
-  uschar *prompt, *data;
-  int max, echo;
+int 
+vget (int line, int col, uschar *prompt, uschar *data, int max, int echo)
 {
   int ch, len, ox, cx, i, n, currline, quit;
   int InvalidateArea[2];	/* {起始點座標, 結束點座標} (皆以ox為原點) */
@@ -1804,9 +1784,8 @@ VisualGetsScrollCommon:
 
 
 
-int
-vans(prompt)
-  char *prompt;
+int 
+vans (char *prompt)
 {
   char ans[3];
 
@@ -1816,12 +1795,13 @@ vans(prompt)
 
 
 
-int
-krans(row, def, desc, prompt)
-  int row;	/* 顯示的位置 */
-  char *def;	/* def[0]:一開始停在哪(要是小寫)  def[1]:按Ctrl+Q跳出時回傳的值 */
-  char *desc[];	/* 選項。每個選項第一個字為hotkey，會自動變大寫。最後一項必須為NULL */
-  char *prompt;	/* 顯示在最前面的字串，沒有想顯示的字的話可以為NULL */
+int 
+krans (
+    int row,	/* 顯示的位置 */
+    char *def,	/* def[0]:一開始停在哪(要是小寫)  def[1]:按Ctrl+Q跳出時回傳的值 */
+    char *desc[],	/* 選項。每個選項第一個字為hotkey，會自動變大寫。最後一項必須為NULL */
+    char *prompt	/* 顯示在最前面的字串，沒有想顯示的字的話可以為NULL */
+)
 {
   int cc, oc, ch, i, n;
   int *col;

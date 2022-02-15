@@ -15,8 +15,7 @@
 
 
 int
-str_from(from, addr, nick)
-  char *from, *addr, *nick;
+str_from(char *from, char *addr, char *nick)
 {
   char *str, *ptr, *langle;
   int cc;

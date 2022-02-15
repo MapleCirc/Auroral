@@ -4,9 +4,7 @@
 
 
 char *
-f_img(fpath, fsize)
-  char *fpath;
-  int *fsize;
+f_img(char *fpath, int *fsize)
 {
   int fd, size;
   struct stat st;

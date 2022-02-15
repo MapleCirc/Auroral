@@ -1,9 +1,8 @@
 #include <sys/stat.h>
 
 
-int
-f_mode(fpath)
-  char *fpath;
+int 
+f_mode (char *fpath)
 {
   struct stat st;
 

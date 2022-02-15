@@ -1,6 +1,5 @@
 char *
-str_ttl(title)
-  char *title;
+str_ttl (char *title)
 {
   if ((title[2] == ':') && 
     ((title[0] == 'R' && title[1] == 'e') || (title[0] == 'F' && title[1] == 'w')))

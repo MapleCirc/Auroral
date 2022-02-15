@@ -1,9 +1,8 @@
 #define	STRICT_FQDN_EMAIL
 
 
-int
-not_addr(addr)
-  char *addr;
+int 
+not_addr (char *addr)
 {
   int ch, mode;
 

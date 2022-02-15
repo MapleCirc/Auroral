@@ -14,8 +14,7 @@
 #include <string.h>
 
 static int
-qp_code(x)
-  register int x;
+qp_code(register int x)
 {
   if (x >= '0' && x <= '9')
     return x - '0';
@@ -33,9 +32,8 @@ qp_code(x)
 /* ------------------------------------------------------------------ */
 
 
-static int
-base64_code(x)
-  register int x;
+static int 
+base64_code (register int x)
 {
   if (x >= 'A' && x <= 'Z')
     return x - 'A';
@@ -56,17 +54,15 @@ base64_code(x)
 /* ----------------------------------------------------- */
 
 
-static inline int
-isreturn(c)
-  unsigned char c;
+static inline int 
+isreturn (int c)
 {
   return c == '\r' || c == '\n';
 }
 
 
 static inline int 
-isspace(c)
-  unsigned char c;
+isspace (int c)
 {
   return c == ' ' || c == '\t' || isreturn(c);
 }
@@ -74,9 +70,7 @@ isspace(c)
 
 /* 取Content-Transfer-Encode 的第一個字元, 依照標準只可能是 q,b,7,8 這四個 */
 char *
-mm_getencode(str, code)
-  unsigned char *str;
-  char *code;
+mm_getencode (unsigned char *str, char *code)
 {
   if (str)
   {
@@ -102,11 +96,12 @@ mm_getencode(str, code)
 
 
 /* 取 charset */
-void
-mm_getcharset(str, charset, size)
-  const char *str;
-  char *charset;
-  int size;		/* charset size */
+void 
+mm_getcharset (
+    const char *str,
+    char *charset,
+    int size		/* charset size */
+)
 {
   char *src, *dst, *end;
   char delim;
@@ -163,11 +158,12 @@ mm_getcharset(str, charset, size)
    所以在此 mmdecode 分二隻寫
 */
 
-static int
-mmdecode_header(src, encode, dst)	/* 解 Header 的 mmdecode */
-  unsigned char *src;		/* Thor.980901: src和dst可相同, 但src一定有?或\0結束 */
-  unsigned char encode;		/* Thor.980901: 注意, decode出的結果不會自己加上 \0 */
-  unsigned char *dst;
+static int 
+mmdecode_header (	/* 解 Header 的 mmdecode */
+    unsigned char *src,		/* Thor.980901: src和dst可相同, 但src一定有?或\0結束 */
+    int encode,		/* Thor.980901: 注意, decode出的結果不會自己加上 \0 */
+    unsigned char *dst
+)
 {
   unsigned char *t;
   int pattern, bits;
@@ -237,11 +233,12 @@ mmdecode_header(src, encode, dst)	/* 解 Header 的 mmdecode */
 }
 
 
-int
-mmdecode(src, encode, dst)	/* 解 Header 的 mmdecode */
-  unsigned char *src;		/* Thor.980901: src和dst可相同, 但src一定有?或\0結束 */
-  unsigned char encode;		/* Thor.980901: 注意, decode出的結果不會自己加上 \0 */
-  unsigned char *dst;
+int 
+mmdecode (	/* 解 Header 的 mmdecode */
+    unsigned char *src,		/* Thor.980901: src和dst可相同, 但src一定有?或\0結束 */
+    int encode,		/* Thor.980901: 注意, decode出的結果不會自己加上 \0 */
+    unsigned char *dst
+)
 {
   unsigned char *t;
   int pattern, bits;
@@ -307,9 +304,8 @@ mmdecode(src, encode, dst)	/* 解 Header 的 mmdecode */
 }
 
 
-void
-str_decode(str)
-  unsigned char *str;
+void 
+str_decode (unsigned char *str)
 {
   int adj;
   unsigned char *src, *dst;
@@ -370,8 +366,8 @@ str_decode(str)
 
 
 #if 0
-int
-main()
+int 
+main (void)
 {
   char buf[1024] = "=?Big5?B?pl7C0CA6IFtNYXBsZUJCU11UbyB5dW5sdW5nKDE4SzRGTE0pIFtWQUxJ?=\n\t=?Big5?B?RF0=?=";
 

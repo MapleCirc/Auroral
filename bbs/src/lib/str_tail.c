@@ -1,6 +1,5 @@
 char *
-str_tail(str)
-  char *str;
+str_tail (char *str)
 {
   while (*str)
   {

@@ -8,8 +8,7 @@
 
 
 int
-f_ln(src, dst)
-  char *src, *dst;
+f_ln(char *src, char *dst)
 {
   int ret;
 

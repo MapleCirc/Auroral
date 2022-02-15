@@ -1,7 +1,5 @@
-int
-str_ncmp(s1, s2, n)
-  char *s1, *s2;
-  int n;
+int 
+str_ncmp (char *s1, char *s2, int n)
 {
   int c1, c2;
 

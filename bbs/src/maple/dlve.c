@@ -16,8 +16,8 @@
 
 
 
-static void
-out_of_memory()	/* exception handling of memory allocation */
+static void 
+out_of_memory (void)	/* exception handling of memory allocation */
 {
   vmsg("系統記憶體不足");
   abort();
@@ -441,9 +441,8 @@ static int allocated_space;
 }
 
 
-static txspce*
-newtsp(prev, next)
-  txspce *prev, *next;
+static txspce *
+newtsp (txspce *prev, txspce *next)
 {
   txspce *this;
 
@@ -487,10 +486,8 @@ freetsp(txspce *this)
 }
 
 
-static txspce*
-vx_locate(line, pos)
-  linebs *line;
-  int *pos;
+static txspce *
+vx_locate (linebs *line, int *pos)
 {
   txspce *spc = line->space;
 
@@ -510,9 +507,8 @@ vx_locate(line, pos)
 }
 
 
-static void
-vx_remove(node)
-  txspce *node;
+static void 
+vx_remove (txspce *node)
 {
   txspce *prev = node->prev;
   txspce *next = node->next;
@@ -524,10 +520,11 @@ vx_remove(node)
 }
 
 
-static int
-vx_strcmp(line, s)	/* simliar to strcmp() */
-  linebs *line;
-  const uschar *s;
+static int 
+vx_strcmp (	/* simliar to strcmp() */
+    linebs *line,
+    const uschar *s
+)
 {
   txspce *spc = line->space;
   int i = 0;
@@ -550,9 +547,8 @@ vx_strcmp(line, s)	/* simliar to strcmp() */
 /* line base operations					 */
 /* ----------------------------------------------------- */
 
-static linebs*
-newlbs(prev, next)
-  linebs *prev, *next;
+static linebs *
+newlbs (linebs *prev, linebs *next)
 {
   linebs *this;
 
@@ -579,9 +575,8 @@ newlbs(prev, next)
 }
 
 
-static void
-freelbs(this)
-  linebs *this;
+static void 
+freelbs (linebs *this)
 {
   txspce *tmp, *curr;
 
@@ -605,8 +600,8 @@ freelbs(this)
 /* VTM operation					 */
 /* ----------------------------------------------------- */
 
-static void
-vtm_init()	/* constructor */
+static void 
+vtm_init (void)	/* constructor */
 {
   int i;
 
@@ -623,8 +618,8 @@ vtm_init()	/* constructor */
 }
 
 
-static void
-vtm_release()	/* destructor */
+static void 
+vtm_release (void)	/* destructor */
 {
   int i, size;
 
@@ -636,9 +631,8 @@ vtm_release()	/* destructor */
 }
 
 
-static void
-vtm_resize(old_len, old_wid)
-  int old_len, old_wid;
+static void 
+vtm_resize (int old_len, int old_wid)
 {
   int i;
 
@@ -683,9 +677,8 @@ vtm_resize(old_len, old_wid)
 /* Auto Merge System Operation				 */
 /* ----------------------------------------------------- */
 
-static void
-ams_init(fpath)
-  char *fpath;
+static void 
+ams_init (char *fpath)
 {
   FILE *fp;
   struct stat st;
@@ -714,17 +707,16 @@ ams_init(fpath)
 }
 
 
-static void
-ams_release()
+static void 
+ams_release (void)
 {
   if(amsys)
     free(amsys);
 }
 
 
-static void
-ams_read(fpath)
-  char *fpath;
+static void 
+ams_read (char *fpath)
 {
   struct stat st;
   uschar compare[AMS_CHECKMAXLEN];
@@ -791,8 +783,7 @@ ams_read(fpath)
 
 
 static void
-ams_merge(fp)
-  FILE *fp;
+ams_merge(FILE *fp)
 {
   if(amsys->space)
   {
@@ -906,8 +897,8 @@ static int vekfn_cmp(const void *a, const void *b){
 }
 
 
-static void
-vekfn_init()
+static void 
+vekfn_init (void)
 {
   /* 避免不必要的排序動作 */
   if(!(ve_msgr & VEX_KEYSORTED))
@@ -917,9 +908,8 @@ vekfn_init()
 }
 
 
-static VEKFN*
-vekfn_findfunc(ch)
-  int ch;
+static VEKFN *
+vekfn_findfunc (int ch)
 {
   if(isprint2(ch))
   {
@@ -967,10 +957,11 @@ vekfn_findfunc(ch)
 
 
 
-static int	/* 1:分割失敗(line-locked或overlimit) */
-ve_split(line, pos)	/* 將line從(pos-1)與pos之間分成兩行 */
-  linebs *line;
-  int pos;
+static int 
+ve_split (	/* 將line從(pos-1)與pos之間分成兩行 */
+    linebs *line,
+    int pos
+)
 {
   txspce *break_point, *newline_head;
   linebs *next;
@@ -1027,8 +1018,8 @@ ve_split(line, pos)	/* 將line從(pos-1)與pos之間分成兩行 */
 
 
 
-static int	/* 1:到行尾了  0:還沒到底 */
-skip_ansi_code()
+static int 
+skip_ansi_code (void)
 {
   int ftcmd_len = 1, hit_bottom = 0;
   txspce *spc = vx_fcs;
@@ -1083,9 +1074,8 @@ skip_ansi_code()
 
 
 
-static int	/* 1:有換行(因為超過COL_LIMIT的緣故) */
-add_char(ch)
-  uschar ch;
+static int 
+add_char (int ch)
 {
   int increase_mode = 1;
   int multiline = 0;
@@ -1237,9 +1227,10 @@ add_char(ch)
 
 
 
-static void
-delete_char(n)	/* 從游標所在處開始，刪除後面n個字元 */
-  int n;
+static void 
+delete_char (	/* 從游標所在處開始，刪除後面n個字元 */
+    int n
+)
 {
   int rest;
 
@@ -1293,9 +1284,10 @@ delete_char(n)	/* 從游標所在處開始，刪除後面n個字元 */
   }while(n > 0);
 }
 
-static void
-delete_char_ARM(n)	/* delete_char()的ARM版本，會跳過ANSI色碼 */
-  int n;
+static void 
+delete_char_ARM (	/* delete_char()的ARM版本，會跳過ANSI色碼 */
+    int n
+)
 {
   do
   {
@@ -1343,9 +1335,10 @@ delete_char_ARM(n)	/* delete_char()的ARM版本，會跳過ANSI色碼 */
 
 
 
-static void
-cutlistoff(spc)		/* 移除掉spc後的所有node */
-  txspce *spc;
+static void 
+cutlistoff (		/* 移除掉spc後的所有node */
+    txspce *spc
+)
 {
   txspce *tmp = spc;
 
@@ -1360,9 +1353,10 @@ cutlistoff(spc)		/* 移除掉spc後的所有node */
 }
 
 
-static void
-delete_line(line)	/* delete a line and maintain all global pointer */
-  linebs *line;
+static void 
+delete_line (	/* delete a line and maintain all global pointer */
+    linebs *line
+)
 {
   linebs *prev = line->prev;
   linebs *next = line->next;
@@ -1399,9 +1393,10 @@ delete_line(line)	/* delete a line and maintain all global pointer */
 }
 
 
-static int 	/* 1:長度超過COL_LIMIT，無法只結合為一行 */
-ve_connect(line)	/* connect line with its next. the next line MUST exist */
-  linebs *line;	/* the next line will be delete */
+static int 
+ve_connect (	/* connect line with its next. the next line MUST exist */
+    linebs *line	/* the next line will be delete */
+)
 {
   linebs *next = line->next;
   txspce *ptail, *nhead;
@@ -1475,8 +1470,8 @@ ve_connect(line)	/* connect line with its next. the next line MUST exist */
 
 
 
-static void
-add_tab()
+static void 
+add_tab (void)
 {
   int n = TAB_STOP - ((ve_msgr & VEM_ARM)? ve_col : ve_csx) % TAB_STOP;
 
@@ -1491,9 +1486,8 @@ add_tab()
 
 
 
-static int
-add_str(s)
-  uschar *s;
+static int 
+add_str (uschar *s)
 {
   int multi_line = 0;
 
@@ -1523,8 +1517,8 @@ add_str(s)
 
 
 
-void
-ve_sendrdrft()
+void 
+ve_sendrdrft (void)
 {
   ve_msgr |= VES_RDRFOOT;
 }
@@ -1542,10 +1536,11 @@ ve_sendrdrft()
 unsigned char *mf_movieFrameHeader(unsigned char *, unsigned char *);
 #endif
 
-static int
-pmore_syntax_render(line, x)	/* 回傳現在游標所在處 */
-  linebs *line;
-  int x;
+static int 
+pmore_syntax_render (	/* 回傳現在游標所在處 */
+    linebs *line,
+    int x
+)
 {
   txspce *spc;
   int idx = x, k = 0, width, ch;
@@ -1700,11 +1695,8 @@ pmore_syntax_render(line, x)	/* 回傳現在游標所在處 */
 
 
 /* normal mode display */
-static void
-ve_outs(line, row, shift_window)
-  linebs *line;
-  int row;
-  int shift_window;
+static void 
+ve_outs (linebs *line, int row, int shift_window)
 {
   txspce *spc;
   uschar ch, dbclead_ch;
@@ -1941,10 +1933,8 @@ phase2_fake_continue:
 
 
 /* ARM display, no shift window */
-static int	//1: inherit attr changed
-ve_ansioutx(line, row)
-  linebs *line;
-  int row;
+static int 
+ve_ansioutx (linebs *line, int row)
 {
   txspce *spc;
   uschar ch, buf[64], queue[32];
@@ -2091,8 +2081,8 @@ flush_EScode:
 
 
 
-static void
-vertical_position()	/* 調整畫面位置到vl_cur剛好位於ve_row的地方 */
+static void 
+vertical_position (void)	/* 調整畫面位置到vl_cur剛好位於ve_row的地方 */
 {
   int i;
   linebs *line = vl_cur;
@@ -2118,10 +2108,11 @@ vertical_position()	/* 調整畫面位置到vl_cur剛好位於ve_row的地方 */
 
 /* ve_load(): 將檔案載入到指定的行之後 */
 static linebs*	/* 回傳插入區的最後一行 */
-ve_load(line, fp, locked)
-  linebs *line;	/* 若傳NULL進來代表加在vl_init上 */
-  FILE *fp;
-  int locked;	/* 載進來的是否都要設為鎖定 */
+ve_load(
+  linebs *line,	/* 若傳NULL進來代表加在vl_init上 */
+  FILE *fp,
+  int locked	/* 載進來的是否都要設為鎖定 */
+)
 {
   int tlen = 0, idx = 0, in_tab = 0, newline = 0;
   uschar ch;
@@ -2250,10 +2241,8 @@ InsertNewline:
 
 
 /* IPTB模式下的按鍵處理程序 */
-static int	/* 回傳1代表是能由本routine捕捉到的按鍵 */
-InputToolbar_routine(ch, pvkfn)
-  int ch;
-  VEKFN **pvkfn;
+static int 
+InputToolbar_routine (int ch, VEKFN **pvkfn)
 {
   char *s;
   int i;
@@ -2400,8 +2389,7 @@ cancel_IPTB_mode:
 
 /* 將編輯器內的文字輸出到檔案(不釋放記憶體) */
 static void
-ve_dump(fp)
-  FILE *fp;
+ve_dump(FILE *fp)
 {
   linebs *line;
   txspce *spc;
@@ -2426,9 +2414,8 @@ ve_dump(fp)
 
 
 /* 搜尋文字 */
-static void
-ve_search(hunt)
-  uschar *hunt;
+static void 
+ve_search (uschar *hunt)
 {
   int i, j, len, row, csx, lno, in_dbc;
   int fail[VESEARCH_MAXLEN];
@@ -2532,8 +2519,8 @@ search_fake_continue:
 
 
 /* 斷線編輯器自動備份 */
-void
-ve_backup()
+void 
+ve_backup (void)
 {
   FILE *fp;
   char bakfile[64];
@@ -2560,9 +2547,8 @@ ve_backup()
 /* 文章引用與簽名檔處理					 */
 /* ----------------------------------------------------- */
 
-static inline int
-is_quotebreakmark(str)
-  char *str;
+static inline int 
+is_quotebreakmark (char *str)
 {
   if(str[0] == '-' && str[1] == '-')	/* "--\n", "-- \n", "--", "-- " */
   {
@@ -2577,10 +2563,8 @@ is_quotebreakmark(str)
 }
 
 
-static int	/* 0:不引用  1:引用 */
-quote_type(str, qlimit)
-  char *str;
-  int qlimit;
+static int 
+quote_type (char *str, int qlimit)
 {
   int qlevel = 0;
 
@@ -2616,11 +2600,7 @@ quote_type(str, qlimit)
 
 
 static int
-quote_line(buf, szbuf, fp, quote_char)
-  char *buf;
-  int szbuf;
-  FILE *fp;
-  int quote_char;
+quote_line(char *buf, int szbuf, FILE *fp, int quote_char)
 {
   int len, total, overlimit = 0, linefeed = 0;
 
@@ -2668,9 +2648,8 @@ quote_line(buf, szbuf, fp, quote_char)
 
 
 
-static int
-ve_quote(line)
-  linebs *line;
+static int 
+ve_quote (linebs *line)
 {
   int i, lno = 1, overlimit = 0;
   char buf[128];
@@ -2827,8 +2806,8 @@ ve_quote(line)
 
 
 
-static int	/* 0:通過引用量審查 */
-quote_check()
+static int 
+quote_check (void)
 {
   linebs *vln;
   txspce *spc;
@@ -2882,8 +2861,8 @@ quote_check()
 /* 文章發表相關						 */
 /* ----------------------------------------------------- */
 
-static void
-words_check()	/* 字數統計 */
+static void 
+words_check (void)	/* 字數統計 */
 {
   linebs *vln;
   const char quote_sym[] = {QUOTE_CHAR1, ' ', '\0'};
@@ -2908,9 +2887,10 @@ words_check()	/* 字數統計 */
 
 
 #ifdef HAVE_TEMPLATE
-static linebs*
-ve_template(tp_no)	/* 文章範本功能 */
-  int tp_no;
+static linebs *
+ve_template (	/* 文章範本功能 */
+    int tp_no
+)
 {
   char fpath[64], tpName[32];
   FILE *fp;
@@ -2935,9 +2915,8 @@ ve_template(tp_no)	/* 文章範本功能 */
 /* 各個 list editor 按鍵的函數				 */
 /* ----------------------------------------------------- */
 
-static int
-vkfn_isprint(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_isprint (VEKFN *pvkfn)
 {
   VTMCR = ve_row;
   if(add_char(pvkfn->key_value))
@@ -2954,9 +2933,8 @@ vkfn_isprint(pvkfn)
 }
 
 
-static int
-vkfn_symouts(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_symouts (VEKFN *pvkfn)
 {
   uschar buf[4];
   const char *s;
@@ -2984,9 +2962,8 @@ vkfn_symouts(pvkfn)
 }
 
 
-static int
-vkfn_enter(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_enter (VEKFN *pvkfn)
 {
   if(ve_msgr & VEM_ARM)
   {
@@ -3008,9 +2985,8 @@ vkfn_enter(pvkfn)
 }
 
 
-static int
-vkfn_left(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_left (VEKFN *pvkfn)
 {
   if(ve_msgr & VEM_ARM)
   {
@@ -3067,9 +3043,8 @@ vkfn_left(pvkfn)
 }
 
 
-static int
-vkfn_right(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_right (VEKFN *pvkfn)
 {
   if(ve_msgr & VEM_ARM)
   {
@@ -3126,9 +3101,8 @@ vkfn_right(pvkfn)
 }
 
 
-static int
-vkfn_up(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_up (VEKFN *pvkfn)
 {
   if(!vl_cur->prev)
     return VKFN_NONE;
@@ -3139,9 +3113,8 @@ vkfn_up(pvkfn)
 }
 
 
-static int
-vkfn_down(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_down (VEKFN *pvkfn)
 {
   if(!vl_cur->next)
     return VKFN_NONE;
@@ -3152,9 +3125,8 @@ vkfn_down(pvkfn)
 }
 
 
-static int
-vkfn_del(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_del (VEKFN *pvkfn)
 {
   int n = 1;
 
@@ -3222,9 +3194,8 @@ vkfn_del(pvkfn)
 }
 
 
-static int
-vkfn_bksp(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_bksp (VEKFN *pvkfn)
 {
   int n = 1;
 
@@ -3330,9 +3301,8 @@ vkfn_bksp(pvkfn)
 }
 
 
-static int
-vkfn_tabk(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_tabk (VEKFN *pvkfn)
 {
   add_tab();
 
@@ -3342,9 +3312,8 @@ vkfn_tabk(pvkfn)
 }
 
 
-static int
-vkfn_pgup(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_pgup (VEKFN *pvkfn)
 {
   int i;
 
@@ -3364,9 +3333,8 @@ vkfn_pgup(pvkfn)
 }
 
 
-static int
-vkfn_pgdn(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_pgdn (VEKFN *pvkfn)
 {
   int i;
 
@@ -3386,9 +3354,8 @@ vkfn_pgdn(pvkfn)
 }
 
 
-static int
-vkfn_home(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_home (VEKFN *pvkfn)
 {
   if(ve_msgr & VEM_ARM)
   {
@@ -3411,9 +3378,8 @@ vkfn_home(pvkfn)
 }
 
 
-static int
-vkfn_end(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_end (VEKFN *pvkfn)
 {
   /* 為了讓大於tlen的ve_csx回歸, 在此使用 ==, 而不是 >= */
   if(ve_msgr & VEM_ARM)
@@ -3438,9 +3404,8 @@ vkfn_end(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_s(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_s (VEKFN *pvkfn)
 {
   if(!vl_cur->prev)
     return VKFN_NONE;
@@ -3461,9 +3426,8 @@ vkfn_ctrl_s(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_t(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_t (VEKFN *pvkfn)
 {
   if(!vl_cur->next)
     return VKFN_NONE;
@@ -3488,9 +3452,8 @@ vkfn_ctrl_t(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_n(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_n (VEKFN *pvkfn)
 {
   if(!vl_top->next)
     return VKFN_NONE;
@@ -3505,9 +3468,8 @@ vkfn_ctrl_n(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_b(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_b (VEKFN *pvkfn)
 {
   if(!vl_top->prev)
     return VKFN_NONE;
@@ -3522,9 +3484,8 @@ vkfn_ctrl_b(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_k(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_k (VEKFN *pvkfn)
 {
   if(ve_csx >= vl_cur->tlen)
     return VKFN_NONE;
@@ -3550,9 +3511,8 @@ vkfn_ctrl_k(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_y(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_y (VEKFN *pvkfn)
 {
   linebs *vln = vl_cur;
 
@@ -3585,9 +3545,8 @@ vkfn_ctrl_y(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_o(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_o (VEKFN *pvkfn)
 {
   linebs *vln = vl_cur->next, *tmp;
 
@@ -3610,9 +3569,8 @@ vkfn_ctrl_o(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_c(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_c (VEKFN *pvkfn)
 {
 #define CTRLC_PROMPT "請輸入 亮度/前景/背景  \033[1;33mB\033[41mR\033[42mG\033[43mY\033[44mL\033[45mP\033[46mC\033[47mW\033[m [0wb]："
   char cbuf[16] = "\033[m";
@@ -3688,9 +3646,8 @@ vkfn_ctrl_c(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_u(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_u (VEKFN *pvkfn)
 {
   VTMCR = ve_row;
 
@@ -3707,9 +3664,8 @@ vkfn_ctrl_u(pvkfn)
 }
 
 
-static int
-vkfn_ins(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ins (VEKFN *pvkfn)
 {
   ve_msgr ^= VEM_OVR;
   ve_msgr |= VES_RDRFOOT;
@@ -3717,9 +3673,8 @@ vkfn_ins(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_d(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_d (VEKFN *pvkfn)
 {
   ve_msgr ^= VEM_DCD;
 
@@ -3728,9 +3683,8 @@ vkfn_ctrl_d(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_e(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_e (VEKFN *pvkfn)
 {
   ve_msgr ^= VEM_KCP;
 
@@ -3739,9 +3693,8 @@ vkfn_ctrl_e(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_v(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_v (VEKFN *pvkfn)
 {
   ve_msgr ^= VEM_ARM;
 
@@ -3760,9 +3713,8 @@ vkfn_ctrl_v(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_q(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_q (VEKFN *pvkfn)
 {
   char *menu[] = {"10",
     "1  ＩＤ      (**s)", "2  暱稱      (**n)",
@@ -3840,9 +3792,8 @@ vkfn_ctrl_q(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_w(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_w (VEKFN *pvkfn)
 {
   ve_pglen--;
   ve_msgr |= VEM_IPTB | VES_RDRFOOT;
@@ -3850,9 +3801,8 @@ vkfn_ctrl_w(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_g(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_g (VEKFN *pvkfn)
 {
   int lno, direct;
   char buf[8];
@@ -3903,9 +3853,8 @@ vkfn_ctrl_g(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_f(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_f (VEKFN *pvkfn)
 {
   ve_msgr |= VES_RDRFOOT;
   if(!vget(b_lines, 0, "(向下)搜尋：", dive->hunt, VESEARCH_MAXLEN + 1, GCARRY))
@@ -3917,9 +3866,8 @@ vkfn_ctrl_f(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_z(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_z (VEKFN *pvkfn)
 {
   more(FN_EDITOR_HELP, EDITOR_HELP_FOOT);
 
@@ -3928,9 +3876,8 @@ vkfn_ctrl_z(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_p(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_p (VEKFN *pvkfn)
 {
   screen_backup_t oldscr;
   int limit;
@@ -3984,9 +3931,8 @@ vkfn_ctrl_p(pvkfn)
 }
 
 
-static int
-vkfn_ctrl_x(pvkfn)
-  VEKFN *pvkfn;
+static int 
+vkfn_ctrl_x (VEKFN *pvkfn)
 {
   FILE *fp;
   linebs *vln, *tmp;
@@ -4212,8 +4158,8 @@ force_output:
 /* DLVE主程式						 */
 /* ----------------------------------------------------- */
 
-static void
-load_config()
+static void 
+load_config (void)
 {
   if(cuser.ufo & UFO_ZHC)
     ve_msgr |= VEM_DCD;
@@ -4230,8 +4176,8 @@ load_config()
 
 
 #ifdef SAVE_CONFIG
-static void
-save_config()
+static void 
+save_config (void)
 {
   if(ve_msgr & VEM_DCD)
     cuser.ufo |= UFO_ZHC;
@@ -4251,10 +4197,8 @@ save_config()
 #endif
 
 
-static void
-print_warning(flag, msg)
-  usint flag;
-  const char *msg;
+static void 
+print_warning (usint flag, const char *msg)
 {
   move(b_lines, 23);
 
@@ -4270,10 +4214,11 @@ print_warning(flag, msg)
 
 
 
-int
-dledit(fpath, ve_op)	/* 參數、回傳值的意義和vedit()完全一樣 */
-  char *fpath;
-  int ve_op;
+int 
+dledit (	/* 參數、回傳值的意義和vedit()完全一樣 */
+    char *fpath,
+    int ve_op
+)
 {
   linebs *vln = NULL;
   VEKFN *pvkfn;

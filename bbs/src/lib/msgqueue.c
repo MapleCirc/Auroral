@@ -11,8 +11,7 @@ static LL *head, *tail;
 
 
 static LL*
-NewNode(data)
-  int data;
+NewNode(int data)
 {
   LL *p = (LL*) malloc(sizeof(LL));
   if(!p)
@@ -24,9 +23,8 @@ NewNode(data)
 }
 
 
-void
-MQ_SendMessage(msg)
-  int msg;
+void 
+MQ_SendMessage (int msg)
 {
   if(tail)
   {
@@ -40,8 +38,8 @@ MQ_SendMessage(msg)
 }
 
 
-int
-MQ_GetMessage()
+int 
+MQ_GetMessage (void)
 {
   int msg;
   LL *p;

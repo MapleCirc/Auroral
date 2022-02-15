@@ -2,8 +2,7 @@
 
 
 int
-f_mv(src, dst)
-  char *src, *dst;
+f_mv(char *src, char *dst)
 {
   int ret;
 

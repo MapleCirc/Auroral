@@ -5,11 +5,12 @@
 
 
 int
-rec_mov(fpath, size, from, to)
-  char *fpath;
-  int size;
-  int from;
-  int to;
+rec_mov(
+  char *fpath,
+  int size,
+  int from,
+  int to
+)
 {
   int fd, backward;
   off_t off, len;

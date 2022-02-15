@@ -9,9 +9,8 @@ static struct flock fl =
 };
 
 
-int
-f_exlock(fd)
-  int fd;
+int 
+f_exlock (int fd)
 {
 #if 0
   return flock(fd, LOCK_EX); 
@@ -23,9 +22,8 @@ f_exlock(fd)
 }
 
 
-int
-f_unlock(fd)
-  int fd;
+int 
+f_unlock (int fd)
 {
 #if 0
   return flock(fd, LOCK_UN); 

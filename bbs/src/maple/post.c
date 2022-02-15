@@ -30,18 +30,15 @@ static char *title_type[6] = {"Re", "Fw", "◇", "\033[1;33m=>", "\033[1;33m=>", 
 /* dust.100922: 改成全域變數供post_title()預覽使用 */
 
 
-int
-cmpchrono(hdr)
-  HDR *hdr;
+int 
+cmpchrono (HDR *hdr)
 {
   return hdr->chrono == currchrono;
 }
 
 
-static void
-change_stamp(folder, hdr)
-  char *folder;
-  HDR *hdr;
+static void 
+change_stamp (char *folder, HDR *hdr)
 {
   HDR tmp;
   char fpath[64];
@@ -60,9 +57,8 @@ change_stamp(folder, hdr)
 /* ----------------------------------------------------- */
 
 
-void
-btime_update(bno)
-  int bno;
+void 
+btime_update (int bno)
 {
   if (bno >= 0)
     (bshm->bcache + bno)->btime = -1;	/* 讓 class_item() 更新用 */
@@ -70,12 +66,10 @@ btime_update(bno)
 
 
 #ifndef HAVE_NETTOOL
-static 			/* 給 enews.c 用 */
+static
 #endif
-void
-outgo_post(hdr, board)
-  HDR *hdr;
-  char *board;
+void 
+outgo_post (HDR *hdr, char *board)
 {
   bntp_t bntp;
 
@@ -99,9 +93,8 @@ outgo_post(hdr, board)
 }
 
 
-void
-cancel_post(hdr)
-  HDR *hdr;
+void 
+cancel_post (HDR *hdr)
 {
   if ((hdr->xmode & POST_OUTGO) &&		/* 外轉信件 */
     (hdr->chrono > ap_start - 7 * 86400))	/* 7 天之內有效 */
@@ -111,11 +104,12 @@ cancel_post(hdr)
 }
 
 
-static inline int		/* 回傳文章 size 去扣錢 */
-move_post(hdr, folder, by_bm)	/* 將 hdr 從 folder 搬到別的板 */
-  HDR *hdr;
-  char *folder;
-  int by_bm;
+static inline int 
+move_post (	/* 將 hdr 從 folder 搬到別的板 */
+    HDR *hdr,
+    char *folder,
+    int by_bm
+)
 {
   HDR post;
   int xmode;
@@ -178,9 +172,10 @@ static CHECKSUM checksum[MAX_CHECKSUM_POST];
 static int checknum = 0;
 
 
-static inline int
-checksum_add(str)		/* 回傳本列文字的 checksum */
-  char *str;
+static inline int 
+checksum_add (		/* 回傳本列文字的 checksum */
+    char *str
+)
 {
   int i, len, sum;
 
@@ -194,9 +189,8 @@ checksum_add(str)		/* 回傳本列文字的 checksum */
 }
 
 
-static inline int		/* 1:是cross-post 0:不是cross-post */
-checksum_put(sum)
-  int sum;
+static inline int 
+checksum_put (int sum)
 {
   int i;
 
@@ -223,9 +217,8 @@ checksum_put(sum)
 }
 
 
-static int			/* 1:是cross-post 0:不是cross-post */
-checksum_find(fpath)
-  char *fpath;
+static int 
+checksum_find (char *fpath)
 {
   int i, sum;
   char buf[ANSILINELEN];
@@ -260,10 +253,11 @@ checksum_find(fpath)
 }
 
 
-static int
-check_crosspost(fpath, bno)
-  char *fpath;
-  int bno;			/* 要轉去的看板 */
+static int 
+check_crosspost (
+    char *fpath,
+    int bno			/* 要轉去的看板 */
+)
 {
   char *blist, folder[64];
   ACCT acct;
@@ -311,9 +305,8 @@ check_crosspost(fpath, bno)
 /* ----------------------------------------------------- */
 
 
-int
-is_author(hdr)
-  HDR *hdr;
+int 
+is_author (HDR *hdr)
 {
   /* 這裡沒有檢查是不是 guest，注意使用此函式時要特別考慮 guest 情況 */
 
@@ -323,9 +316,8 @@ is_author(hdr)
 
 
 #ifdef HAVE_REFUSEMARK
-int		/* 1:可以閱讀  0:不能閱讀 */
-chkrestrict(hdr)
-  HDR *hdr;
+int 
+chkrestrict (HDR *hdr)
 {
   return !(hdr->xmode & POST_RESTRICT) || is_author(hdr) || (bbstate & STAT_BM);
 }
@@ -333,10 +325,8 @@ chkrestrict(hdr)
 
 
 #ifdef HAVE_UNANONYMOUS_BOARD
-static void
-do_unanonymous(shdr, is_anonymous)
-  HDR *shdr;
-  int is_anonymous;
+static void 
+do_unanonymous (HDR *shdr, int is_anonymous)
 {
   HDR hdr;
   char fpath[64], folder[64], title[80], *ttl, aid[16];
@@ -382,12 +372,13 @@ do_unanonymous(shdr, is_anonymous)
 
 
 static void
-unanony_score(hdr, anid, pnow, verb, reason)
-  HDR *hdr;
-  char *anid;
-  time_t *pnow;
-  char *verb;
-  char *reason;
+unanony_score(
+  HDR *hdr,
+  char *anid,
+  time_t *pnow,
+  char *verb,
+  char *reason
+)
 {
   FILE *fp;
   char fpath[64], fname[32], buf[256], *str;
@@ -445,14 +436,15 @@ unanony_score(hdr, anid, pnow, verb, reason)
 
 
 
-void
-add_post(brdname, fpath, title, authurid, authurnick, xmode)  /* 發文到看板 */
-  char *brdname;        /* 欲 post 的看板 */
-  char *fpath;          /* 檔案路徑 */
-  char *title;          /* 文章標題 */
-  char *authurid;       /* 作者帳號 */
-  char *authurnick;     /* 作者暱稱 */
-  int xmode;
+void 
+add_post (  /* 發文到看板 */
+    char *brdname,        /* 欲 post 的看板 */
+    char *fpath,          /* 檔案路徑 */
+    char *title,          /* 文章標題 */
+    char *authurid,       /* 作者帳號 */
+    char *authurnick,     /* 作者暱稱 */
+    int xmode
+)
 {
   HDR hdr;
   char folder[64];
@@ -483,10 +475,8 @@ add_post(brdname, fpath, title, authurid, authurnick, xmode)  /* 發文到看板 */
 
 
 
-static int
-do_post(xo, title)
-  XO *xo;
-  char *title;
+static int 
+do_post (XO *xo, char *title)
 {
   /* Thor.981105: 進入前需設好 curredit 及 quote_file */
   HDR hdr, buf;
@@ -760,10 +750,8 @@ char *ptr1, *ptr2;
 
 
 
-int
-do_reply(xo, hdr)
-  XO *xo;
-  HDR *hdr;
+int 
+do_reply (XO *xo, HDR *hdr)
 {
   curredit = EDIT_POSTREPLY;
 
@@ -794,9 +782,8 @@ do_reply(xo, hdr)
 }
 
 
-static int
-post_reply(xo)
-  XO *xo;
+static int 
+post_reply (XO *xo)
 {
   if (bbstate & STAT_POST)
   {
@@ -821,9 +808,8 @@ post_reply(xo)
 }
 
 
-static int
-post_add(xo)
-  XO *xo;
+static int 
+post_add (XO *xo)
 {
   curredit = EDIT_OUTGO;
   *quote_file = '\0';
@@ -836,18 +822,18 @@ post_add(xo)
 /* ----------------------------------------------------- */
 
 
-int
-tag_char(chrono)
-  int chrono;
+int 
+tag_char (int chrono)
 {
   return TagNum && !Tagger(chrono, 0, TAG_NIN) ? '*' : ' ';
 }
 
 
 #ifdef HAVE_DECLARE
-static inline int
-cal_day(date)		/* itoc.010217: 計算星期幾 */
-  char *date;
+static inline int 
+cal_day (		/* itoc.010217: 計算星期幾 */
+    char *date
+)
 {
 #if 0
    蔡勒公式是一個推算哪一天是星期幾的公式.
@@ -887,10 +873,11 @@ cal_day(date)		/* itoc.010217: 計算星期幾 */
 
 /* dust.100920: 改成pfterm base，加入截斷符號 */
 /* 不再考慮是否有定義 HAVE_DECLARE */
-void
-hdr_outs(hdr, lim)		/* print HDR's subject */
-  HDR *hdr;
-  int lim;			/* 印出最多 lim 字的標題 */
+void 
+hdr_outs (		/* print HDR's subject */
+    HDR *hdr,
+    int lim			/* 印出最多 lim 字的標題 */
+)
 {
   uschar *title, *mark;
   int ch, len;
@@ -1037,18 +1024,16 @@ static int post_body();
 static int post_head();
 
 
-static int
-post_init(xo)
-  XO *xo;
+static int 
+post_init (XO *xo)
 {
   xo_load(xo, sizeof(HDR));
   return post_head(xo);
 }
 
 
-static int
-post_load(xo)
-  XO *xo;
+static int 
+post_load (XO *xo)
 {
   xo_load(xo, sizeof(HDR));
   return post_body(xo);
@@ -1059,10 +1044,8 @@ post_load(xo)
 /* dust.100401: 把 post_attr() 移回 post_item() */
 /* 註: 以下程式碼無視HAVE_REFUSEMARK、HAVE_LABELMARK undefine的狀況 */
 /*     也不管HAVE_SCORE undefine的狀況 */
-static void
-post_item(num, hdr)
-  int num;
-  HDR *hdr;
+static void 
+post_item (int num, HDR *hdr)
 {
   int attr, bottom;
   uschar color;
@@ -1192,9 +1175,8 @@ post_item(num, hdr)
 
 
 
-static int
-post_body(xo)
-  XO *xo;
+static int 
+post_body (XO *xo)
 {
   HDR *hdr;
   int num, max, tail;
@@ -1233,10 +1215,8 @@ post_body(xo)
 
 
 
-static int		/* 回傳 0:沒有雙位字被省略  1:有雙位字被省略 */
-limit_outs(str, lim)
-  char *str;
-  int lim;
+static int 
+limit_outs (char *str, int lim)
 {
   int dword = 0, reduce = 0;
   char *buf, *end, *c_pool;
@@ -1281,9 +1261,8 @@ limit_outs(str, lim)
 
 #define out_space(x) prints("%*s", x, "");
 
-static int
-post_head(xo)
-  XO *xo;
+static int 
+post_head (XO *xo)
 {
   char *btitle;
   int title_start, title_end, title_len;
@@ -1342,9 +1321,8 @@ post_head(xo)
 /* ----------------------------------------------------- */
 
 
-static int
-post_visit(xo)
-  XO *xo;
+static int 
+post_visit (XO *xo)
 {
   int ans, row, max;
   HDR *hdr;
@@ -1368,10 +1346,11 @@ post_visit(xo)
 }
 
 
-static void
-post_history(xo, hdr)		/* 將 hdr 這篇加入 brh */
-  XO *xo;
-  HDR *hdr;
+static void 
+post_history (		/* 將 hdr 這篇加入 brh */
+    XO *xo,
+    HDR *hdr
+)
 {
   time_t prev, chrono, next, stamp;
   int pos, top;
@@ -1433,9 +1412,8 @@ post_history(xo, hdr)		/* 將 hdr 這篇加入 brh */
 static int post_switch(XO*);
 static int post_aidjump(XO*);
 
-static int
-post_browse(xo)
-  XO *xo;
+static int 
+post_browse (XO *xo)
 {
   HDR *hdr;
   int xmode, pos, key;
@@ -1545,9 +1523,8 @@ post_browse(xo)
 /* ----------------------------------------------------- */
 
 
-static int
-post_gem(xo)
-  XO *xo;
+static int 
+post_gem (XO *xo)
 {
   int level;
   char fpath[64];
@@ -1573,9 +1550,8 @@ post_gem(xo)
 /* ----------------------------------------------------- */
 
 
-static int
-post_memo(xo)
-  XO *xo;
+static int 
+post_memo (XO *xo)
 {
   char fpath[64];
 
@@ -1596,9 +1572,8 @@ post_memo(xo)
 /* ----------------------------------------------------- */
 
 
-static int
-post_tag(xo)
-  XO *xo;
+static int 
+post_tag (XO *xo)
 {
   HDR *hdr;
   int tag, pos, cur;
@@ -1621,9 +1596,8 @@ post_tag(xo)
 }
 
 
-static int
-post_switch(xo)
-  XO *xo;
+static int 
+post_switch (XO *xo)
 {
   int bno;
   BRD *brd;
@@ -1646,9 +1620,8 @@ post_switch(xo)
 }
 
 
-int
-post_cross(xo)
-  XO *xo;
+int 
+post_cross (XO *xo)
 {
   /* 來源看板 */
   char *dir, *ptr;

@@ -1,8 +1,9 @@
-int			/* >=1:在名單的哪一個 0:不在名單內 */
-str_has(list, tag, len)
-  char *list;
-  char *tag;
-  int len;		/* strlen(tag) */
+int 
+str_has (
+    char *list,
+    char *tag,
+    int len		/* strlen(tag) */
+)
 {
   int cc, priority;
   char *str;

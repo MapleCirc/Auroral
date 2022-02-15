@@ -6,8 +6,7 @@ static char datemsg[40];
 
 
 char *
-Atime(clock)	/* Thor.990125: 假裝 ARPANET 時間格式 */
-  time_t *clock;
+Atime(time_t *clock)	/* Thor.990125: 假裝 ARPANET 時間格式 */
 {
   /* ARPANET format: Thu, 11 Feb 1999 06:00:37 +0800 (CST) */
   /* strftime(datemsg, 40, "%a, %d %b %Y %T %Z", localtime(clock)); */
@@ -18,8 +17,7 @@ Atime(clock)	/* Thor.990125: 假裝 ARPANET 時間格式 */
 
 
 char *
-Btime(clock)	/* BBS 時間格式 */
-  time_t *clock;
+Btime(time_t *clock)	/* BBS 時間格式 */
 {
   struct tm *t = localtime(clock);
 
@@ -32,7 +30,7 @@ Btime(clock)	/* BBS 時間格式 */
 
 
 char *
-Now()
+Now (void)
 {
   time_t now;
 

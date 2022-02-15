@@ -22,7 +22,7 @@ int wordsnum;
 /* ----------------------------------------------------- */
 
 char *
-tbf_ask()
+tbf_ask (void)
 {
   static char fn_tbf[] = "buf.1";
   int ch, prev;
@@ -92,8 +92,7 @@ char anonymousid[IDLEN + 1];	/* itoc.010717: 自定匿名 ID */
 
 
 void
-ve_header(fp)
-  FILE *fp;
+ve_header(FILE *fp)
 {
   time_t now;
   char *title;
@@ -167,11 +166,8 @@ ve_header(fp)
 }
 
 
-int
-ve_subject(row, topic, dft)
-  int row;
-  char *topic;
-  char *dft;
+int 
+ve_subject (int row, char *topic, char *dft)
 {
   char *title;
 
@@ -195,9 +191,8 @@ ve_subject(row, topic, dft)
 
 
 
-static void
-ve_fromhost(buf)
-  char *buf;
+static void 
+ve_fromhost (char *buf)
 {
   unsigned long ip32;
   int i;
@@ -246,9 +241,10 @@ ve_fromhost(buf)
 char *ebs[EDIT_BANNER_NUM] = EDIT_BANNERS;	/* 放在全域中跟vote.c共用 */
 
 void
-ve_banner(fp, modify)		/* 加上來源等訊息 */
-  FILE *fp;
-  int modify;			/* 1:修改 0:非發文 */
+ve_banner(		/* 加上來源等訊息 */
+  FILE *fp,
+  int modify			/* 1:修改 0:非發文 */
+)
 {
   int i = time(NULL) % EDIT_BANNER_NUM;
   char buf[80];
@@ -280,8 +276,8 @@ ve_banner(fp, modify)		/* 加上來源等訊息 */
 /* 編輯器自動備份					 */
 /* ----------------------------------------------------- */
 
-void
-ve_recover()
+void 
+ve_recover (void)
 {
   char fpbak[80], fpath[80];
   int ch;
@@ -314,9 +310,8 @@ ve_recover()
 /* 顯示簽名檔						 */
 /* ----------------------------------------------------- */
 
-static void
-show_sign(cur_page)
-  int cur_page;
+static void 
+show_sign (int cur_page)
 {
   int len, sig_no, lim;
   char fpath[64];
@@ -350,8 +345,8 @@ show_sign(cur_page)
 }
 
 
-int
-select_sign()
+int 
+select_sign (void)
 {
   static char msg[] = "請選擇簽名檔 (1~6, 0=不加 r=亂數 n=換頁) [0] ";
   int ans, cur_sig, sig_page;
@@ -426,10 +421,8 @@ select_sign()
 /* ve_op 是 1, 2, 時，使用前還得指定 curredit 和 quote_file		 */
 /* --------------------------------------------------------------------- */
 
-int
-vedit(fpath, ve_op)
-  char *fpath;
-  int ve_op;
+int 
+vedit (char *fpath, int ve_op)
 {
   return dledit(fpath, ve_op);
 }

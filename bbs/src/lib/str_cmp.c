@@ -1,6 +1,5 @@
-int
-str_cmp(s1, s2)
-  char *s1, *s2;
+int 
+str_cmp (char *s1, char *s2)
 {
   int c1, c2, diff;
 

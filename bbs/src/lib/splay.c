@@ -14,10 +14,11 @@
 
 
 SplayNode *
-splay_in(top, data, compare)
-  SplayNode *top;
-  void *data;
-  int (*compare)();
+splay_in(
+  SplayNode *top,
+  void *data,
+  int (*compare)()
+)
 {
   int splay_cmp;
   SplayNode *node, *l, *r, *x, N;
@@ -123,25 +124,22 @@ typedef struct
 }      intnode;
 
 
-static void
-printint(a)
-  intnode *a;
+static void 
+printint (intnode *a)
 {
   printf("%d\n", a->i);
 }
 
 
-static int
-compareint(a, b)
-  intnode *a, *b;
+static int 
+compareint (intnode *a, intnode *b)
 {
   return a->i - b->i;
 }
 
 
 static void
-splay_out(top)
-  SplayNode *top;
+splay_out(SplayNode *top)
 {
   if (top == NULL)
     return;
@@ -152,10 +150,8 @@ splay_out(top)
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   int i;
   intnode *I;

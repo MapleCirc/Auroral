@@ -4,8 +4,7 @@
 
 
 static int
-rm_dir(fpath)
-  char *fpath;
+rm_dir(char *fpath)
 {
   struct stat st;
   DIR *dirp;
@@ -44,9 +43,8 @@ rm_dir(fpath)
 }
 
 
-int
-f_rm(fpath)
-  char *fpath;
+int 
+f_rm (char *fpath)
 {
   struct stat st;
 

@@ -1,6 +1,5 @@
-void
-str_lowest(dst, src)
-  char *dst, *src;
+void 
+str_lowest (char *dst, char *src)
 {
   int ch;
   int in_chi = 0;	/* 1: 前一碼是中文字 */

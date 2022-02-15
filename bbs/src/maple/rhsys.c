@@ -814,8 +814,8 @@ dump_rhlist(FILE *fp, int bnum, time_t blist[][2], int cnum, time_t clist[][2])
 }
 
 
-void
-rhs_dump()
+void 
+rhs_dump (void)
 {
   screen_backup_t old_scr;
   FILE *fp;

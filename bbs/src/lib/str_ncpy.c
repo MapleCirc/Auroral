@@ -4,11 +4,8 @@
  */
 
 
-void
-str_ncpy(dst, src, n)
-  char *dst;
-  char *src;
-  int n;
+void 
+str_ncpy (char *dst, char *src, int n)
 {
   char *end;
 

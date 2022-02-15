@@ -13,12 +13,13 @@
 
 #if 0	/* itoc.030411: 沒有經 RFC 2047 encode */
 void
-output_str(fp, prefix, str, charset, suffix)
-  FILE *fp;
-  char *prefix;
-  char *str;
-  char *charset;
-  char *suffix;
+output_str(
+  FILE *fp,
+  char *prefix,
+  char *str,
+  char *charset,
+  char *suffix
+)
 {
   fprintf(fp, "%s%s%s", prefix, str, suffix);
 }
@@ -31,12 +32,13 @@ output_str(fp, prefix, str, charset, suffix)
 
 
 void
-output_rfc2047_qp(fp, prefix, str, charset, suffix)
-  FILE *fp;
-  char *prefix;
-  char *str;
-  char *charset;
-  char *suffix;
+output_rfc2047_qp(
+  FILE *fp,
+  char *prefix,
+  char *str,
+  char *charset,
+  char *suffix
+)
 {
   int i, ch;
   int blank = 1;	/* 1:全由空白組成 */
@@ -95,9 +97,10 @@ output_rfc2047_qp(fp, prefix, str, charset, suffix)
 
 
 static int 
-output_rfc2047_prefix(fp, str)
-  FILE *fp;
-  const unsigned char *str;
+output_rfc2047_prefix(
+  FILE *fp,
+  const unsigned char *str
+)
 {
   int i, lastspace;
 
@@ -125,9 +128,7 @@ output_rfc2047_prefix(fp, str)
 
 
 static void 
-output_rfc2047_base64_3to4(a, b, c, oa, ob, oc, od)
-  unsigned char a, b, c;
-  char *oa, *ob, *oc, *od;
+output_rfc2047_base64_3to4 (int a, int b, int c, char *oa, char *ob, char *oc, char *od)
 {
   static char tbl[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
   int i;
@@ -153,12 +154,13 @@ output_rfc2047_base64_3to4(a, b, c, oa, ob, oc, od)
 
 
 void 
-output_rfc2047_base64(fp, prefix, str, charset, suffix)
-  FILE *fp;
-  char *prefix;
-  const unsigned char *str;
-  const unsigned char *charset;
-  char *suffix;
+output_rfc2047_base64(
+  FILE *fp,
+  char *prefix,
+  const unsigned char *str,
+  const unsigned char *charset,
+  char *suffix
+)
 {
   int i, j;
   char a[3], oa[5];

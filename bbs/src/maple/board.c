@@ -35,18 +35,20 @@ char **brd_levelbar = levelbar[0];	/* dust:給新版vs_head()用的 */
 
 
 
-int			/* >=1:第幾個板主  0:不是板主 */
-is_bm(list, userid)
-  char *list;		/* 板主：BM list */
-  char *userid;
+int 
+is_bm (
+    char *list,		/* 板主：BM list */
+    char *userid
+)
 {
   return str_has(list, userid, strlen(userid));
 }
 
 
 int
-bstamp2bno(stamp)	/* 找出對應某 board stamp 的 board number */
-  time_t stamp;
+bstamp2bno(
+	time_t stamp	/* 找出對應某 board stamp 的 board number */
+)
 {
   BRD *brd;
   int bno, max;
@@ -66,10 +68,11 @@ bstamp2bno(stamp)	/* 找出對應某 board stamp 的 board number */
 
 
 
-static inline char
-Ben_Perm(bno, ulevel)	/* 決定對各看板的權限 */
-  int bno;
-  usint ulevel;
+static inline char 
+Ben_Perm (	/* 決定對各看板的權限 */
+    int bno,
+    usint ulevel
+)
 {
   usint readlevel, battr;
   uschar bits;
@@ -168,10 +171,8 @@ Ben_Perm(bno, ulevel)	/* 決定對各看板的權限 */
 
 
 
-void
-mantime_add(outbno, inbno)
-  int outbno;
-  int inbno;
+void 
+mantime_add (int outbno, int inbno)
 {
   /* itoc.050613.註解: 人氣的減少不是在離開看板時，而是在進入新的看板或是離站時，
      這是為了避免 switch 跳看板會算錯人氣 */
@@ -182,8 +183,8 @@ mantime_add(outbno, inbno)
 }
 
 
-static void
-brd_usies()
+static void 
+brd_usies (void)
 {
   char fpath[64], buf[256];
 
@@ -196,9 +197,8 @@ brd_usies()
 }
 
 
-int
-XoPost(bno)
-  int bno;
+int 
+XoPost (int bno)
 {
   XO *xo;
   BRD *brd;
@@ -308,8 +308,8 @@ add_visit_bit:
 
 
 #ifdef HAVE_FORCE_BOARD
-void
-brd_force()			/* itoc.010407: 強制閱讀公告板，且強迫讀最後一篇 */
+void 
+brd_force (void)			/* itoc.010407: 強制閱讀公告板，且強迫讀最後一篇 */
 {
   if (cuser.userlevel)		/* guest 跳過 */
   {
@@ -355,9 +355,8 @@ static int class_jumpnext = 0;	/* itoc.010910: 是否跳去下一個未讀板 1:要 0:不要 
 
 static int class_flag2 = 0;  /* 1:列出好友/秘密板，且自己又有閱讀權限的 */
 
-static int
-class_load(xo)
-  XO *xo;
+static int 
+class_load (XO *xo)
 {
   short *cbase, *chead, *ctail;
   int chn;			/* ClassHeader number */
@@ -422,9 +421,8 @@ class_load(xo)
 }
 
 
-static int
-XoClass(chn)
-  int chn;
+static int 
+XoClass (int chn)
 {
   XO xo, *xt;
 
@@ -457,9 +455,8 @@ XoClass(chn)
 }
 
 
-void
-class_item(num, bno, brdpost)
-  int num, bno, brdpost;
+void 
+class_item (int num, int bno, int brdpost)
 {
   char *str1;
   BRD *brd = bshm->bcache + bno;
@@ -594,9 +591,8 @@ class_item(num, bno, brdpost)
 }
 
 
-static int
-class_body(xo)
-  XO *xo;
+static int 
+class_body (XO *xo)
 {
   short *chp;
   BRD *bcache;
@@ -689,9 +685,8 @@ class_body(xo)
 }
 
 
-static int
-class_neck(xo)
-  XO *xo;
+static int 
+class_neck (XO *xo)
 {
   move(1, 0);
   prints(NECKER_CLASS, 
@@ -701,27 +696,26 @@ class_neck(xo)
 }
 
 
-static int
-class_head(xo)
-  XO *xo;
+static int 
+class_head (XO *xo)
 {
   vs_head("分類看板", str_site);
   return class_neck(xo);
 }
 
 
-static int
-class_init(xo)			/* re-init */
-  XO *xo;
+static int 
+class_init (			/* re-init */
+    XO *xo
+)
 {
   class_load(xo);
   return class_head(xo);
 }
 
 
-static int
-class_postmode(xo)
-  XO *xo;
+static int 
+class_postmode (XO *xo)
 {
   cuser.ufo ^= UFO_BRDPOST;
   cutmp->ufo = cuser.ufo;
@@ -730,9 +724,10 @@ class_postmode(xo)
 }
 
 
-static int
-class_namemode(xo)		/* itoc.010413: 看板依照字母/分類排列 */
-  XO *xo;
+static int 
+class_namemode (		/* itoc.010413: 看板依照字母/分類排列 */
+    XO *xo
+)
 {
   static time_t last = 0;
   time_t now;
@@ -754,18 +749,16 @@ class_namemode(xo)		/* itoc.010413: 看板依照字母/分類排列 */
 }
 
 
-static int
-class_help(xo)
-  XO *xo;
+static int 
+class_help (XO *xo)
 {
   xo_help("class");
   return class_head(xo);
 }
 
 
-static int
-class_search(xo)
-  XO *xo;
+static int 
+class_search (XO *xo)
 {
   int num, pos, max;
   char buf[BNLEN + 1];
@@ -803,9 +796,8 @@ class_search(xo)
 }
 
 
-static int
-class_searchBM(xo)
-  XO *xo;
+static int 
+class_searchBM (XO *xo)
 {
   int num, pos, max;
   char buf[IDLEN + 1];
@@ -844,9 +836,8 @@ class_searchBM(xo)
 
 
 
-static int
-class_yank(xo)
-  XO *xo;
+static int 
+class_yank (XO *xo)
 {
   if (xo->key >= 0)
     return XO_NONE;
@@ -857,9 +848,10 @@ class_yank(xo)
 
 
 
-static int
-class_visit(xo)		/* itoc.010128: 看板列表設定看板已讀 */
-  XO *xo;
+static int 
+class_visit (		/* itoc.010128: 看板列表設定看板已讀 */
+    XO *xo
+)
 {
   short *chp;
   int chn;
@@ -891,9 +883,10 @@ class_visit(xo)		/* itoc.010128: 看板列表設定看板已讀 */
 }
 
 
-static int
-class_unvisit(xo)		/* itoc.010129: 看板列表設定看板未讀 */
-  XO *xo;
+static int 
+class_unvisit (		/* itoc.010129: 看板列表設定看板未讀 */
+    XO *xo
+)
 {
   short *chp;
   int chn;
@@ -911,9 +904,8 @@ class_unvisit(xo)		/* itoc.010129: 看板列表設定看板未讀 */
 }
 
 
-static int
-class_nextunread(xo)
-  XO *xo;
+static int 
+class_nextunread (XO *xo)
 {
   int max, pos, chn;
   short *chp;
@@ -941,9 +933,8 @@ class_nextunread(xo)
 }
 
 
-static int
-class_edit(xo)
-  XO *xo;
+static int 
+class_edit (XO *xo)
 {
   if (HAS_PERM(PERM_ALLBOARD | PERM_BM))
   {
@@ -965,10 +956,8 @@ class_edit(xo)
 }
 
 
-static int
-hdr_cmp(a, b)
-  HDR *a;
-  HDR *b;
+static int 
+hdr_cmp (HDR *a, HDR *b)
 {
   /* 先比對分類，再比對板名 */
   int k = strncmp(a->title + BNLEN + 1, b->title + BNLEN + 1, BCLEN);
@@ -976,9 +965,8 @@ hdr_cmp(a, b)
 }
 
 
-static int
-class_newbrd(xo)
-  XO *xo;
+static int 
+class_newbrd (XO *xo)
 {
   BRD newboard;
 
@@ -1025,9 +1013,8 @@ class_newbrd(xo)
 }
 
 
-static int
-class_browse(xo)
-  XO *xo;
+static int 
+class_browse (XO *xo)
 {
   short *chp;
   int chn;
@@ -1055,8 +1042,8 @@ class_browse(xo)
 }
 
 
-int
-Select()
+int 
+Select (void)
 {
   int bno;
   BRD *brd;
@@ -1078,9 +1065,8 @@ Select()
 }
 
 
-static int
-class_switch(xo)
-  XO *xo;
+static int 
+class_switch (XO *xo)
 {
   Select();
   return class_head(xo);
@@ -1094,9 +1080,8 @@ class_switch(xo)
 /* ----------------------------------------------------- */
 
 
-static inline int
-in_favor(brdname)
-  char *brdname;
+static inline int 
+in_favor (char *brdname)
 {
   MF mf;
   int fd;
@@ -1125,8 +1110,7 @@ in_favor(brdname)
 
 
 static int 
-class_addMF(xo)
-  XO *xo;  
+class_addMF (XO *xo)  
 {    
   short *chp;
   int chn;
@@ -1187,9 +1171,8 @@ class_addMF(xo)
 }
 
 
-int
-MFclass_browse(name)
-  char *name;
+int 
+MFclass_browse (char *name)
 {
   int chn, min_chn, len;
   short *chx;
@@ -1224,9 +1207,8 @@ MFclass_browse(name)
 /* opus.1127 : 計畫重寫, 可 extract author/title */
 
 
-static int
-XoAuthor(xo)
-  XO *xo;
+static int 
+XoAuthor (XO *xo)
 {
   int chn, len, max, tag, value;
   short *chp, *chead, *ctail;
@@ -1334,9 +1316,8 @@ XoAuthor(xo)
 
 
 
-void
-query_bstate(bno)
-  int bno;
+void 
+query_bstate (int bno)
 {
   BST *bst = bshm->bstate + bno;
 
@@ -1373,9 +1354,8 @@ class_boardquery(XO *xo)
 }
 
 
-int
-class_savebrh(xo)
-  XO *xo;
+int 
+class_savebrh (XO *xo)
 {
   static time_t save_time;
 
@@ -1443,8 +1423,8 @@ static KeyFunc class_cb[] =
 };
 
 
-int
-Class()
+int 
+Class (void)
 {
   /* XoClass(CH_END - 1); */
   /* Thor.980804: 防止 未用 account 造出 class.img 或沒有 class 的情況 */
@@ -1457,8 +1437,8 @@ Class()
 }
 
 
-void
-board_main()
+void 
+board_main (void)
 {
   int fsize, bno, brd_max;
 
@@ -1501,8 +1481,8 @@ board_main()
 }
 
 
-int
-Boards()
+int 
+Boards (void)
 {
   /* class_xo = &board_xo; *//* Thor: 已有 default, 不需作此 */
 

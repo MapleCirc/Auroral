@@ -1,8 +1,7 @@
 #include <string.h>
 
 void
-setdirpath(fpath, direct, fname)
-  char *fpath, *direct, *fname;
+setdirpath(char *fpath, char *direct, char *fname)
 {
   int ch;
   char *target;
@@ -19,9 +18,8 @@ setdirpath(fpath, direct, fname)
 }
 
 #if 0
-int
-is_fname(str)
-  char *str;
+int 
+is_fname (char *str)
 {
   int ch;
 
@@ -43,9 +41,8 @@ is_fname(str)
 /* ----------------------------------------------------- */
 
 
-int
-is_fpath(path)
-  char *path;
+int 
+is_fpath (char *path)
 {
   int ch, level;
   char *source, *target;

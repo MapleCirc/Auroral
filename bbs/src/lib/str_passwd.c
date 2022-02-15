@@ -12,8 +12,7 @@ static char pwbuf[PASSLEN + 1];
 
 
 char *
-genpasswd(pw)
-  char *pw;
+genpasswd (char *pw)
 {
   char saltc[2];
   int i, c;
@@ -40,9 +39,8 @@ genpasswd(pw)
 
 
 /* Thor.990214: 註解: 合密碼時, 傳回0 */
-int
-chkpasswd(passwd, test)
-  char *passwd, *test;
+int 
+chkpasswd (char *passwd, char *test)
 {
   char *pw;
   

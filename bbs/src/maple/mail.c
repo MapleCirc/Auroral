@@ -29,8 +29,8 @@ LinkList *ll_head;		/* head of link list */
 static LinkList *ll_tail;	/* tail of link list */
 
 
-void
-ll_new()
+void 
+ll_new (void)
 {
   LinkList *list, *next;
 
@@ -47,9 +47,8 @@ ll_new()
 }
 
 
-void
-ll_add(name)
-  char *name;
+void 
+ll_add (char *name)
 {
   LinkList *node;
   int len;
@@ -67,9 +66,8 @@ ll_add(name)
 }
 
 
-int
-ll_del(name)
-  char *name;
+int 
+ll_del (char *name)
 {
   LinkList *list, *prev, *next;
 
@@ -96,9 +94,8 @@ ll_del(name)
 }
 
 
-int
-ll_has(name)
-  char *name;
+int 
+ll_has (char *name)
 {
   LinkList *list;
 
@@ -111,10 +108,8 @@ ll_has(name)
 }
 
 
-void
-ll_out(row, column, msg)
-  int row, column;
-  char *msg;
+void 
+ll_out (int row, int column, char *msg)
 {
   int len;
   LinkList *list;
@@ -169,10 +164,8 @@ catch_utility_terminate(int status)
 }
 
 
-int	/* -1: sendmail 未能正常啟動 */
-bsmtp(fpath, title, rcpt, method)
-  char *fpath, *title, *rcpt;
-  int method;
+int 
+bsmtp (char *fpath, char *title, char *rcpt, int method)
 {
   time_t stamp;
   FILE *fp;
@@ -311,10 +304,8 @@ start_sendmail_failed:
 /* ----------------------------------------------------- */
 
 
-static void
-do_forward(title, mode)
-  char *title;
-  int mode;
+static void 
+do_forward (char *title, int mode)
 {
   int sock;
   char *userid;
@@ -374,8 +365,8 @@ do_forward(title, mode)
 }
 
 
-int
-m_zip()			/* itoc.010228: 打包資料 */
+int 
+m_zip (void)			/* itoc.010228: 打包資料 */
 {
   int ans;
   char *name, *item, buf[80];
@@ -425,8 +416,8 @@ m_zip()			/* itoc.010228: 打包資料 */
 
 
 #ifdef HAVE_SIGNED_MAIL		/* Thor.990413: 提供驗證功能 */
-int
-m_verify()
+int 
+m_verify (void)
 {
   time_t prichro;	/* 系統的 private chrono */
   time_t chrono;
@@ -489,8 +480,8 @@ static struct
 
 
 #ifdef OVERDUE_MAILDEL
-usint
-m_quota()
+usint 
+m_quota (void)
 {
   usint status;
   int fd, count, fsize, limit, xmode;
@@ -594,9 +585,8 @@ m_quota()
 #endif
 
 
-usint
-m_query(userid)
-  char *userid;
+usint 
+m_query (char *userid)
 {
   usint status;
   int fsize, limit;
@@ -629,9 +619,8 @@ m_query(userid)
 }
 
 
-void
-m_biff(userno)
-  int userno;
+void 
+m_biff (int userno)
 {
   UTMP *utmp, *uceil;
 
@@ -651,12 +640,13 @@ m_biff(userno)
 }
 
 
-void
-mail_hold(fpath, rcpt, title, hold)
-  char *fpath;
-  char *rcpt;
-  char *title;
-  int hold;		/* -1:當寄信失敗時可以強迫保留 */
+void 
+mail_hold (
+    char *fpath,
+    char *rcpt,
+    char *title,
+    int hold		/* -1:當寄信失敗時可以強迫保留 */
+)
 {
   if (cuser.userlevel && (hold < 0 || vans("是否自存底稿(Y/N)？[N] ") == 'y'))
   {
@@ -675,9 +665,8 @@ mail_hold(fpath, rcpt, title, hold)
 /* ----------------------------------------------------- */
 
 
-static inline int
-is_host_alias(addr)
-  char *addr;
+static inline int 
+is_host_alias (char *addr)
 {
   int i;
   char *str;
@@ -695,9 +684,8 @@ is_host_alias(addr)
 
 
 /* static inline */
-int				/* 1:internet mail   0:站內寄信(傳回addr為userid) */
-mail_external(addr)
-  char *addr;
+int 
+mail_external (char *addr)
 {
   char *str;
 
@@ -721,9 +709,8 @@ mail_external(addr)
 }
 
 
-int		/* >=0:成功 -1:失敗或取消 */
-mail_send(rcpt)
-  char *rcpt;
+int 
+mail_send (char *rcpt)
 {
   /* Thor.981105: 進入前需設好 quote_file */
   /* itoc.041116: 進入前需設好 ve_title (之所以用 ve_title 是希望在 vedit 改標題時，也能一起改信件檔頭的標題) */
@@ -801,9 +788,8 @@ mail_send(rcpt)
 }
 
 
-static void
-mail_reply(hdr)
-  HDR *hdr;
+static void 
+mail_reply (HDR *hdr)
 {
   int xmode, prefix;
 
@@ -832,9 +818,10 @@ mail_reply(hdr)
 }
 
 
-int
-my_send(userid)		/* 站內寄信給 userid */
-  char *userid;
+int 
+my_send (		/* 站內寄信給 userid */
+    char *userid
+)
 {
   if (HAS_PERM(PERM_DENYMAIL) || !HAS_PERM(PERM_LOCAL))
     return XO_NONE;
@@ -850,8 +837,8 @@ my_send(userid)		/* 站內寄信給 userid */
 }
 
 
-int
-m_send()
+int 
+m_send (void)
 {
   ACCT acct;
 
@@ -865,8 +852,8 @@ m_send()
 }
 
 
-int
-m_internet()
+int 
+m_internet (void)
 {
   char rcpt[60];
 
@@ -887,8 +874,8 @@ m_internet()
 }
 
 
-int
-m_sysop()
+int 
+m_sysop (void)
 {
   int fd;
 
@@ -952,12 +939,13 @@ m_sysop()
 }
 
 
-void
-mail_self(fpath, owner, title, xmode)		/* itoc.011115: 寄檔案給自己 */
-  char *fpath;		/* 檔案路徑 */
-  char *owner;		/* 寄件人 */
-  char *title;		/* 郵件標題 */
-  usint xmode;
+void 
+mail_self (		/* itoc.011115: 寄檔案給自己 */
+    char *fpath,		/* 檔案路徑 */
+    char *owner,		/* 寄件人 */
+    char *title,		/* 郵件標題 */
+    usint xmode
+)
 {
   HDR hdr;
   char *folder;
@@ -971,12 +959,13 @@ mail_self(fpath, owner, title, xmode)		/* itoc.011115: 寄檔案給自己 */
 }
 
 
-int
-mail_him(fpath, rcpt, title, xmode)		/* itoc.041111: 寄檔案給他人 */
-  char *fpath;		/* 檔案路徑 */
-  char *rcpt;		/* 收件人 */
-  char *title;		/* 郵件標題 */
-  usint xmode;
+int 
+mail_him (		/* itoc.041111: 寄檔案給他人 */
+    char *fpath,		/* 檔案路徑 */
+    char *rcpt,		/* 收件人 */
+    char *title,		/* 郵件標題 */
+    usint xmode
+)
 {
   int userno;
   HDR hdr;
@@ -1003,9 +992,8 @@ mail_him(fpath, rcpt, title, xmode)		/* itoc.041111: 寄檔案給他人 */
 
 #ifdef MULTI_MAIL	/* Thor.981009: 防止愛情幸運信 */
 
-static int
-multi_send(title)
-  char *title;
+static int 
+multi_send (char *title)
 {
   FILE *fp;
   HDR hdr;
@@ -1174,17 +1162,16 @@ multi_send(title)
 }
 
 
-static void
-multi_reply(hdr)
-  HDR *hdr;
+static void 
+multi_reply (HDR *hdr)
 {
   if (!multi_send(hdr->title))
     hdr->xmode |= (MAIL_REPLIED | MAIL_READ);
 }
 
 
-int
-m_list()
+int 
+m_list (void)
 {
   if (HAS_PERM(PERM_DENYMAIL))
     return XEASY;
@@ -1197,10 +1184,11 @@ m_list()
 #endif
 
 
-int
-do_mreply(hdr, noreply)
-  HDR *hdr;
-  int noreply;		/* 1:要 0:不要 檢查 MAIL_NOREPLY */
+int 
+do_mreply (
+    HDR *hdr,
+    int noreply		/* 1:要 0:不要 檢查 MAIL_NOREPLY */
+)
 {
   if ((noreply && (hdr->xmode & MAIL_NOREPLY)) ||
     HAS_PERM(PERM_DENYMAIL) ||
@@ -1229,9 +1217,8 @@ do_mreply(hdr, noreply)
 /* ----------------------------------------------------- */
 
 
-static inline int
-mbox_attr(type)
-  int type;
+static inline int 
+mbox_attr (int type)
 {
 #ifdef OVERDUE_MAILDEL
   if (type & MAIL_DELETE)
@@ -1245,10 +1232,11 @@ mbox_attr(type)
 }
 
 
-static void
-mbox_item(num, hdr)
-  int num;			/* sequence number */
-  HDR *hdr;
+static void 
+mbox_item (
+    int num,			/* sequence number */
+    HDR *hdr
+)
 {
 #ifdef OVERDUE_MAILDEL
   int xmode;
@@ -1264,9 +1252,8 @@ mbox_item(num, hdr)
 }
 
 
-static int
-mbox_body(xo)
-  XO *xo;
+static int 
+mbox_body (XO *xo)
 {
   HDR *hdr;
   int num, max, tail;
@@ -1296,9 +1283,8 @@ mbox_body(xo)
 }
 
 
-static int
-mbox_head(xo)
-  XO *xo;
+static int 
+mbox_head (XO *xo)
 {
   if (HAS_STATUS(STATUS_BIFF))	/* 一進入信箱就拿掉 STATUS_BIFF */
     cutmp->status ^= STATUS_BIFF;
@@ -1309,27 +1295,24 @@ mbox_head(xo)
 }
 
 
-static int
-mbox_load(xo)
-  XO *xo;
+static int 
+mbox_load (XO *xo)
 {
   xo_load(xo, sizeof(HDR));
   return mbox_body(xo);
 }
 
 
-static int
-mbox_init(xo)
-  XO *xo;
+static int 
+mbox_init (XO *xo)
 {
   xo_load(xo, sizeof(HDR));
   return mbox_head(xo);
 }
 
 
-static int
-mbox_delete(xo)
-  XO *xo;
+static int 
+mbox_delete (XO *xo)
 {
   int pos;
   HDR *hdr;
@@ -1361,27 +1344,22 @@ mbox_delete(xo)
 }
 
 
-static int
-chkmbox(hdr)
-  HDR *hdr;
+static int 
+chkmbox (HDR *hdr)
 {
   return (hdr->xmode & MAIL_MARKED);
 }
 
 
-static int
-vfymbox(hdr, pos)
-  HDR *hdr;
-  int pos;
+static int 
+vfymbox (HDR *hdr, int pos)
 {
   return (Tagger(hdr->chrono, pos, TAG_NIN) || chkmbox(hdr));
 }
 
 
-static void
-delmbox(xo, hdr)
-  XO *xo;
-  HDR *hdr;
+static void 
+delmbox (XO *xo, HDR *hdr)
 {
   char fpath[64];
 
@@ -1390,25 +1368,22 @@ delmbox(xo, hdr)
 }
 
 
-static int
-mbox_rangedel(xo)
-  XO *xo;
+static int 
+mbox_rangedel (XO *xo)
 {
   return xo_rangedel(xo, sizeof(HDR), chkmbox, delmbox);
 }
 
 
-static int
-mbox_prune(xo)
-  XO *xo;
+static int 
+mbox_prune (XO *xo)
 {
   return xo_prune(xo, sizeof(HDR), vfymbox, delmbox);
 }
 
 
-static int
-mbox_forward(xo)
-  XO *xo;
+static int 
+mbox_forward (XO *xo)
 {
   if (HAS_PERM(PERM_DENYMAIL))
     return XO_NONE;
@@ -1417,9 +1392,10 @@ mbox_forward(xo)
 }
 
 
-static int
-mbox_browse(xo)	/* itoc.000513: 讓信讀到一半也能 reply mark delete */
-  XO *xo;
+static int 
+mbox_browse (	/* itoc.000513: 讓信讀到一半也能 reply mark delete */
+    XO *xo
+)
 {
   HDR *hdr;
   int pos, xmode, nmode;
@@ -1512,9 +1488,8 @@ mbox_browse(xo)	/* itoc.000513: 讓信讀到一半也能 reply mark delete */
 }
 
 
-static int
-mbox_reply(xo)
-  XO *xo;
+static int 
+mbox_reply (XO *xo)
 {
   int pos, xmode;
   HDR *hdr;
@@ -1533,9 +1508,10 @@ mbox_reply(xo)
 }
 
 
-int
-mbox_edit(xo)		/* itoc.010301: 可以編輯自己信箱中的信 */
-  XO *xo;
+int 
+mbox_edit (		/* itoc.010301: 可以編輯自己信箱中的信 */
+    XO *xo
+)
 {
   char fpath[64];
   HDR *hdr;
@@ -1555,9 +1531,10 @@ mbox_edit(xo)		/* itoc.010301: 可以編輯自己信箱中的信 */
 }
 
 
-static int
-mbox_title(xo)		/* itoc.020113: 可以改自己信箱中的標題 */
-  XO *xo;
+static int 
+mbox_title (		/* itoc.020113: 可以改自己信箱中的標題 */
+    XO *xo
+)
 {
   HDR *fhdr, mhdr;
   int pos, cur;
@@ -1594,9 +1571,8 @@ mbox_title(xo)		/* itoc.020113: 可以改自己信箱中的標題 */
 }
 
  
-static int
-mbox_mark(xo)
-  XO *xo;
+static int 
+mbox_mark (XO *xo)
 {
   HDR *hdr;
   int cur, pos;
@@ -1611,9 +1587,8 @@ mbox_mark(xo)
 }
 
 
-static int
-mbox_tag(xo)
-  XO *xo;
+static int 
+mbox_tag (XO *xo)
 {
   HDR *hdr;
   int tag, pos, cur;
@@ -1636,18 +1611,16 @@ mbox_tag(xo)
 }
 
 
-static int
-mbox_send(xo)
-  XO *xo;
+static int 
+mbox_send (XO *xo)
 {
   m_send();
   return mbox_head(xo);
 }
 
 
-static int
-mbox_visit(xo)
-  XO *xo;
+static int 
+mbox_visit (XO *xo)
 {
   int pos, fd;
   char *dir;
@@ -1682,9 +1655,10 @@ mbox_visit(xo)
 }
 
 
-static int
-mbox_sysop(xo)		/* itoc.001029.註解: 方便收 sysop/guest 的信 */
-  XO *xo;
+static int 
+mbox_sysop (		/* itoc.001029.註解: 方便收 sysop/guest 的信 */
+    XO *xo
+)
 {
   if (xo == (XO *) &cmbox)	/* 若已經進入第二人信箱，則不能再進第三人信箱 */
   {
@@ -1710,9 +1684,10 @@ mbox_sysop(xo)		/* itoc.001029.註解: 方便收 sysop/guest 的信 */
 }
 
 
-static int
-mbox_gem(xo)		/* itoc.010727: 將個人精華區和看板精華區整合 */
-  XO *xo;
+static int 
+mbox_gem (		/* itoc.010727: 將個人精華區和看板精華區整合 */
+    XO *xo
+)
 {
   char fpath[64];
 
@@ -1723,9 +1698,10 @@ mbox_gem(xo)		/* itoc.010727: 將個人精華區和看板精華區整合 */
 }
 
 
-static int
-mbox_copy(xo)		/* itoc.011025: 取代 gem_gather */
-  XO *xo;
+static int 
+mbox_copy (		/* itoc.011025: 取代 gem_gather */
+    XO *xo
+)
 {
   int tag;
 
@@ -1741,9 +1717,8 @@ mbox_copy(xo)		/* itoc.011025: 取代 gem_gather */
 }
 
 
-static int
-mbox_tbf(xo)
-  XO *xo;
+static int 
+mbox_tbf (XO *xo)
 {
   if (!cuser.userlevel)
     return XO_NONE;
@@ -1754,9 +1729,8 @@ mbox_tbf(xo)
 }
 
 
-static int
-mbox_help(xo)
-  XO *xo;
+static int 
+mbox_help (XO *xo)
 {
   xo_help("mbox");
   return mbox_head(xo);
@@ -1808,8 +1782,8 @@ static KeyFunc mbox_cb[] =
 };
 
 
-void
-mbox_main()
+void 
+mbox_main (void)
 {
   cmbox.mail_xo.pos = XO_TAIL;
   cmbox.mail_xo.xyz = str_site;

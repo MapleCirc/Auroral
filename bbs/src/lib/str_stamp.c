@@ -11,9 +11,7 @@
 
 
 void
-str_stamp(str, chrono)
-  char *str;
-  time_t *chrono;
+str_stamp(char *str, time_t chrono)
 {
   struct tm *ptime;
 

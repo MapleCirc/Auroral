@@ -36,11 +36,8 @@ static MF mftmp;		/* for copy & paste */
 static int mf_depth;
 
 
-void
-mf_fpath(fpath, userid, fname)
-  char *fpath;
-  char *userid;
-  char *fname;
+void 
+mf_fpath (char *fpath, char *userid, char *fname)
 {
   char buf[64];
 
@@ -49,10 +46,8 @@ mf_fpath(fpath, userid, fname)
 }
 
 
-static void
-mf_item(num, mf)
-  int num;
-  MF *mf;
+static void 
+mf_item (int num, MF *mf)
 {
   char folder[64];
   int mftype, brdpost, bno;
@@ -111,9 +106,8 @@ mf_item(num, mf)
 }
 
 
-static int
-mf_body(xo)
-  XO *xo;
+static int 
+mf_body (XO *xo)
 {
   MF *mf;
   int max, num, tail;
@@ -221,9 +215,8 @@ mf_body(xo)
 }
 
 
-static int
-mf_head(xo)
-  XO *xo;
+static int 
+mf_head (XO *xo)
 {
   vs_head("我的最愛", str_site);
   prints(NECKER_MF, 
@@ -233,27 +226,24 @@ mf_head(xo)
 }
 
 
-static int
-mf_init(xo)
-  XO *xo;
+static int 
+mf_init (XO *xo)
 {
   xo_load(xo, sizeof(MF));
   return mf_head(xo);
 }
 
 
-static int
-mf_load(xo)
-  XO *xo;
+static int 
+mf_load (XO *xo)
 {
   xo_load(xo, sizeof(MF));
   return mf_body(xo);
 }
 
 
-static int
-mf_stamp(mf)
-  MF *mf;
+static int 
+mf_stamp (MF *mf)
 {
   char fpath[64];
   int fd;
@@ -270,9 +260,8 @@ mf_stamp(mf)
 }
 
 
-static int
-mf_add(xo)
-  XO *xo;
+static int 
+mf_add (XO *xo)
 {
   MF mf;
   int ans;
@@ -332,9 +321,8 @@ mf_add(xo)
 }
 
 
-static void
-mf_do_delete(folder)
-  char *folder;
+static void 
+mf_do_delete (char *folder)
 {
   MF mf;
   char fpath[64];
@@ -357,9 +345,8 @@ mf_do_delete(folder)
 }
 
 
-static int
-mf_delete(xo)
-  XO *xo;
+static int 
+mf_delete (XO *xo)
 {
   MF *mf;
   int mftype;
@@ -386,10 +373,8 @@ mf_delete(xo)
 }
 
 
-static void
-delmf(xo, mf)
-  XO *xo;
-  MF *mf;
+static void 
+delmf (XO *xo, MF *mf)
 {
   if (mf->mftype & MF_FOLDER)
   {
@@ -401,17 +386,17 @@ delmf(xo, mf)
 }
 
 
-static int
-mf_rangedel(xo)		/* amaki.030910: 提供我的最愛區段刪除 */
-  XO *xo;
+static int 
+mf_rangedel (		/* amaki.030910: 提供我的最愛區段刪除 */
+    XO *xo
+)
 {
   return xo_rangedel(xo, sizeof(MF), NULL, delmf);
 }
 
 
-static int
-mf_title(xo)
-  XO *xo;
+static int 
+mf_title (XO *xo)
 {
   MF *mf, xmf;
 
@@ -439,9 +424,8 @@ mf_title(xo)
 }
 
 
-static int
-mf_move(xo)
-  XO *xo;
+static int 
+mf_move (XO *xo)
 {
   MF *mf;
   char *dir, buf[40];
@@ -475,9 +459,8 @@ mf_move(xo)
 }
 
 
-static int
-mf_mark(xo)
-  XO *xo;
+static int 
+mf_mark (XO *xo)
 {
   MF *mf;
 
@@ -499,9 +482,8 @@ mf_mark(xo)
 }
 
 
-static int
-mf_browse(xo)
-  XO *xo;
+static int 
+mf_browse (XO *xo)
 {
   int type, bno;
   char *xname, fpath[64];
@@ -574,9 +556,8 @@ mf_browse(xo)
 }
 
 
-static int
-mf_copy(xo)
-  XO *xo;
+static int 
+mf_copy (XO *xo)
 {
   MF *mf;
 
@@ -589,9 +570,8 @@ mf_copy(xo)
 }
 
 
-static int
-mf_paste(xo)
-  XO *xo;
+static int 
+mf_paste (XO *xo)
 {
   MF mf;
   int ans;
@@ -639,9 +619,8 @@ mf_paste(xo)
 }
 
 
-static int
-mf_namemode(xo)
-  XO *xo;
+static int 
+mf_namemode (XO *xo)
 {
   cuser.ufo ^= UFO_BRDPOST;
   cutmp->ufo = cuser.ufo;
@@ -650,9 +629,10 @@ mf_namemode(xo)
 }
 
 
-static int
-mf_edit(xo)		/* itoc.010110: 我的最愛中看板修改 */
-  XO *xo;
+static int 
+mf_edit (		/* itoc.010110: 我的最愛中看板修改 */
+    XO *xo
+)
 {
   MF *mf;
 
@@ -676,18 +656,18 @@ mf_edit(xo)		/* itoc.010110: 我的最愛中看板修改 */
 }
 
 
-static int
-mf_switch(xo)
-  XO *xo;
+static int 
+mf_switch (XO *xo)
 {
   Select();
   return mf_init(xo);
 }
 
 
-static int
-mf_visit(xo)		/* itoc.010402: 看板列表設定看板已讀 */
-  XO *xo;
+static int 
+mf_visit (		/* itoc.010402: 看板列表設定看板已讀 */
+    XO *xo
+)
 {
   int bno;
   MF *mf;
@@ -720,9 +700,10 @@ mf_visit(xo)		/* itoc.010402: 看板列表設定看板已讀 */
 }
 
 
-static int
-mf_unvisit(xo)		/* itoc.010402: 看板列表設定看板未讀 */
-  XO *xo;
+static int 
+mf_unvisit (		/* itoc.010402: 看板列表設定看板未讀 */
+    XO *xo
+)
 {
   int bno;
   MF *mf;
@@ -741,9 +722,8 @@ mf_unvisit(xo)		/* itoc.010402: 看板列表設定看板未讀 */
 }
 
 
-static int
-mf_nextunread(xo)
-  XO *xo;
+static int 
+mf_nextunread (XO *xo)
 {
   int max, pos, bno;
   MF *mf;
@@ -779,9 +759,8 @@ mf_nextunread(xo)
 }
 
 
-static int
-mf_help(xo)
-  XO *xo;
+static int 
+mf_help (XO *xo)
 {
   xo_help("mf");
   return mf_head(xo);
@@ -855,9 +834,8 @@ static KeyFunc mf_cb[] =
 };
 
 
-static void
-XoMF(folder)
-  char *folder;
+static void 
+XoMF (char *folder)
 {
   XO *xo, *last;
 
@@ -886,8 +864,8 @@ XoMF(folder)
 }
 
 
-int
-MyFavorite()
+int 
+MyFavorite (void)
 {
   /* 從主選單進入我的最愛，mf_depth 一定是 0 */
   XoMF(NULL);
@@ -896,8 +874,8 @@ MyFavorite()
 }
 
 
-void
-mf_main()
+void 
+mf_main (void)
 {
   char fpath[64];
   XO *xo;

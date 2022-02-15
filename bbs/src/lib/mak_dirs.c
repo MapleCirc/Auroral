@@ -6,9 +6,8 @@
 #include <sys/stat.h>
 
 
-void
-mak_dirs(fpath)
-  char *fpath;
+void 
+mak_dirs (char *fpath)
 {
   char *fname;
   int ch;
@@ -36,9 +35,10 @@ mak_dirs(fpath)
 }
 
 
-void
-mak_links(fpath)		/* itoc.010924: 減少個人精華區目錄，用 link 來代替目錄 */
-  char *fpath;
+void 
+mak_links (		/* itoc.010924: 減少個人精華區目錄，用 link 來代替目錄 */
+    char *fpath
+)
 {
   char *fname;
   int ch;

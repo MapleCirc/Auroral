@@ -28,10 +28,8 @@ typedef struct
 } timeC;
 
 
-int
-MonthToDay (m, y)
-  int m;
-  int y;
+int 
+MonthToDay (int m, int y)
 {
   if (m == 2)
   {
@@ -47,9 +45,8 @@ MonthToDay (m, y)
 }
 
 
-static timeC
-diff_baseDate(y, m, d, h, min, s)
-  int y, m, d, h, min, s;
+static timeC 
+diff_baseDate (int y, int m, int d, int h, int min, int s)
 {
   timeC a;
   int i;
@@ -73,11 +70,8 @@ diff_baseDate(y, m, d, h, min, s)
 
 
 /* dust.100314: 提供有小時與分的進化版本 */
-static int
-countdown_plus(year, mon, day, hour, min, str, output_mode)
-  int year, mon, day, hour, min;
-  char *str;
-  int output_mode;
+static int 
+countdown_plus (int year, int mon, int day, int hour, int min, char *str, int output_mode)
 {
   time_t rawtime;
   struct tm *nowtime;
@@ -166,20 +160,18 @@ countdown_plus(year, mon, day, hour, min, str, output_mode)
 
 
 /* return remaining days */
-int
-date_countdown(y, m, d, str, output_mode)
-  int y, m, d;
-  char *str;
-  int output_mode;
+int 
+date_countdown (int y, int m, int d, char *str, int output_mode)
 {
   return countdown_plus(y, m, d, 0, 0, str, output_mode);
 }
 
 
 int
-DCD_AlterVer(m, str)
-  MCD_info *m;
-  char *str;
+DCD_AlterVer(
+  MCD_info *m,
+  char *str
+)
 {
   return countdown_plus(m->year, m->mon, m->day, m->hr, m->min, str, 2);
 }

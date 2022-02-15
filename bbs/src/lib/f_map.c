@@ -12,9 +12,7 @@
 
 
 char *
-f_map(fpath, fsize)
-  char *fpath;
-  int *fsize;
+f_map(char *fpath, int *fsize)
 {
   int fd, size;
   struct stat st;
