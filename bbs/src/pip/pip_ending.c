@@ -168,8 +168,8 @@ struct endingset endmodefamily[] =
 
 
 /* 工作場所判斷 */
-static int
-pip_max_worktime()		/* workind: 在哪裡工作最多次 */
+static int 
+pip_max_worktime (void)		/* workind: 在哪裡工作最多次 */
 {
   int workind, times;		/* 幾次 */
 
@@ -262,9 +262,10 @@ pip_max_worktime()		/* workind: 在哪裡工作最多次 */
 
 
 /* 結局判斷 */
-static int		/* return 1:暗黑 2:藝術 3:萬能 4:戰士 5:魔法 6:社交 7:家事 */
-pip_future_decide(modeallpurpose)
-  int *modeallpurpose;	/* 如果是萬能結局，那麼還要 return 是哪一類的萬能 */
+static int 
+pip_future_decide (
+    int *modeallpurpose	/* 如果是萬能結局，那麼還要 return 是哪一類的萬能 */
+)
 {
   *modeallpurpose = 0;	/* 預設 0 */
 
@@ -320,8 +321,8 @@ pip_future_decide(modeallpurpose)
 
 
 /* 結婚的判斷 */
-static int		/* return grade */
-pip_marry_decide()
+static int 
+pip_marry_decide (void)
 {
   if (d.lover)		/* 商人 */
   {
@@ -351,9 +352,10 @@ pip_marry_decide()
 }
 
 
-static int
-pip_endwith_black(buf)	/* 暗黑 */
-  char *buf;
+static int 
+pip_endwith_black (	/* 暗黑 */
+    char *buf
+)
 {
   int m;
 
@@ -381,9 +383,10 @@ pip_endwith_black(buf)	/* 暗黑 */
 }
 
 
-static int
-pip_endwith_social(buf)	/* 社交 */
-  char *buf;
+static int 
+pip_endwith_social (	/* 社交 */
+    char *buf
+)
 {
   int m;
 
@@ -409,9 +412,10 @@ pip_endwith_social(buf)	/* 社交 */
 }
 
 
-static int
-pip_endwith_magic(buf)	/* 魔法 */
-  char *buf;
+static int 
+pip_endwith_magic (	/* 魔法 */
+    char *buf
+)
 {
   int m;
 
@@ -435,9 +439,10 @@ pip_endwith_magic(buf)	/* 魔法 */
 }
 
 
-static int
-pip_endwith_combat(buf)	/* 戰鬥 */
-  char *buf;
+static int 
+pip_endwith_combat (	/* 戰鬥 */
+    char *buf
+)
 {
   int m;
 
@@ -459,9 +464,10 @@ pip_endwith_combat(buf)	/* 戰鬥 */
 }
 
 
-static int
-pip_endwith_family(buf)	/* 家事 */
-  char *buf;
+static int 
+pip_endwith_family (	/* 家事 */
+    char *buf
+)
 {
   int m;
 
@@ -479,10 +485,11 @@ pip_endwith_family(buf)	/* 家事 */
 }
 
 
-static int
-pip_endwith_allpurpose(buf, mode)	/* 萬能 */
-  char *buf;
-  int mode;
+static int 
+pip_endwith_allpurpose (	/* 萬能 */
+    char *buf,
+    int mode
+)
 {
   int m;
   int point, workind;
@@ -532,9 +539,10 @@ pip_endwith_allpurpose(buf, mode)	/* 萬能 */
 }
 
 
-static int
-pip_endwith_art(buf)		/* 藝術 */
-  char *buf;
+static int 
+pip_endwith_art (		/* 藝術 */
+    char *buf
+)
 {
   int m;
 
@@ -560,10 +568,8 @@ pip_endwith_art(buf)		/* 藝術 */
 /* 結局決定                                                */
 /* ------------------------------------------------------- */
 
-static void
-pip_endwith_decide(endbuf1, endbuf2, endmode, endgrade)
-  char *endbuf1, *endbuf2;
-  int *endmode, *endgrade;
+static void 
+pip_endwith_decide (char *endbuf1, char *endbuf2, int *endmode, int *endgrade)
 {
   char *name[8][2] = 
   {
@@ -631,9 +637,8 @@ pip_endwith_decide(endbuf1, endbuf2, endmode, endgrade)
 }
 
 
-static void
-pip_ending_grade(endgrade)
-  int endgrade;
+static void 
+pip_ending_grade (int endgrade)
 {
   clrfromto(1, 23);
   move(8, 17);
@@ -645,8 +650,8 @@ pip_ending_grade(endgrade)
 }
 
 
-int
-pip_ending_screen()		/* 結局畫面 */
+int 
+pip_ending_screen (void)		/* 結局畫面 */
 {
   char endbuf1[50], endbuf2[50];
   int endgrade = 0;
@@ -698,8 +703,8 @@ pip_ending_screen()		/* 結局畫面 */
 /* ------------------------------------------------------- */
 
 
-int				/* 1:接受求婚  0:拒絕求婚 */
-pip_marriage_offer()		/* 求婚 */
+int 
+pip_marriage_offer (void)		/* 求婚 */
 {
   char buf[128];
   int money, who;
@@ -751,8 +756,8 @@ pip_marriage_offer()		/* 求婚 */
 }
 
 
-int			/* 1:被占卜 0:放棄或沒錢 */
-pip_meet_divine()	/* 占卜師來訪 */
+int 
+pip_meet_divine (void)	/* 占卜師來訪 */
 {
   char buf[80];
   int money;
@@ -809,8 +814,8 @@ pip_meet_divine()	/* 占卜師來訪 */
 }
 
 
-int
-pip_meet_sysop()	/* itoc.000416: 遇上站長大大 */
+int 
+pip_meet_sysop (void)	/* itoc.000416: 遇上站長大大 */
 {
   char msg[5][40] =
   {
@@ -894,8 +899,8 @@ pip_meet_sysop()	/* itoc.000416: 遇上站長大大 */
 }
 
 
-int
-pip_meet_smith()	/* itoc.021101: 遇上鐵匠 */
+int 
+pip_meet_smith (void)	/* itoc.021101: 遇上鐵匠 */
 {
   int randnum;
   char *equip;
@@ -965,8 +970,8 @@ pip_meet_smith()	/* itoc.021101: 遇上鐵匠 */
 }
 
 
-int
-pip_meet_angel()	/* itoc.010814: 遇到天使 */
+int 
+pip_meet_angel (void)	/* itoc.010814: 遇到天使 */
 {
   clear();
   show_system_pic(0);

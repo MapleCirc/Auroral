@@ -35,9 +35,8 @@ struct royalset royallist[] =
 };
 
 
-static int
-pip_go_palace_screen(p)
-  struct royalset *p;
+static int 
+pip_go_palace_screen (struct royalset *p)
 {
   char inbuf1[128], inbuf2[20];
   char *needmode[3] = {"      ", "禮儀表現＞", "談吐技巧＞"};
@@ -190,8 +189,8 @@ pip_go_palace_screen(p)
 }
 
 
-int
-pip_go_palace()			/* 參見 */
+int 
+pip_go_palace (void)			/* 參見 */
 {
   pip_go_palace_screen(royallist);
   return 0;

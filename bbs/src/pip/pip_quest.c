@@ -29,8 +29,8 @@
   /*-----------------------------------------------------*/
 
 
-static int
-pip_quest_1()		/* ¨ú±o°òÂ¦¸Ë³Æ */
+static int 
+pip_quest_1 (void)		/* ¨ú±o°òÂ¦¸Ë³Æ */
 {
   /* ¥þ¨­¨C­Ó³¡¦ì³£¬ïµÛ¸Ë³Æ´Nºâ¦X®æ */
   if (d.weaponhead && d.weaponhand && d.weaponshield && d.weaponbody && d.weaponfoot)
@@ -48,8 +48,8 @@ pip_quest_1()		/* ¨ú±o°òÂ¦¸Ë³Æ */
 }
 
 
-static int
-pip_quest_2()		/* ¨ú±o¶Àª÷¸Ë³Æ */
+static int 
+pip_quest_2 (void)		/* ¨ú±o¶Àª÷¸Ë³Æ */
 {
   /* ¥þ¨­¨C­Ó³¡¦ìªº¸Ë³Æ¦WºÙ³£¥]§t¡uª÷¡v³o¦r´Nºâ¦X®æ */
   if (strstr(d.equiphead, "ª÷") && strstr(d.equiphand, "ª÷") &&
@@ -69,8 +69,8 @@ pip_quest_2()		/* ¨ú±o¶Àª÷¸Ë³Æ */
 }
 
 
-static int
-pip_quest_3()		/* ¨ú±oÃÄ§÷ */
+static int 
+pip_quest_3 (void)		/* ¨ú±oÃÄ§÷ */
 {
   /* ¨ú±o¤jÁÙ¤¦¡BÆFªÛ¡B¤j¸É¤Y¡B¤d¦~¤Hçx¡B¶Â¥ÉÂ_Äò»I¡B¤Ñ¤s³·½¬¦U¤@ */
   if (d.pill && d.medicine && d.burger && d.ginseng && d.paste && d.snowgrass)
@@ -95,8 +95,8 @@ pip_quest_3()		/* ¨ú±oÃÄ§÷ */
   /*-----------------------------------------------------*/
 
 
-static int
-pip_quest_101()		/* §¹¥þ°·±d */
+static int 
+pip_quest_101 (void)		/* §¹¥þ°·±d */
 {
   /* ¹F¨ì¤£¯h²Ö¡B¤£¥Í¯f¡B¤£»êÅ¼ */
   if (d.tired == 0 && d.sick == 0 && d.shit == 0)
@@ -116,8 +116,8 @@ pip_quest_101()		/* §¹¥þ°·±d */
   /*-----------------------------------------------------*/
 
 
-static int
-pip_quest_201()		/* ¥´­Ë¯f¬r */
+static int 
+pip_quest_201 (void)		/* ¥´­Ë¯f¬r */
 {
   /* ¥´­Ë¤@°¦¯à¤O¤ñ¦Û¤v°ªªº©Çª« */
 
@@ -145,8 +145,8 @@ pip_quest_201()		/* ¥´­Ë¯f¬r */
 }
 
 
-static int
-pip_quest_202()		/* ¤Q¤j´c¤H */
+static int 
+pip_quest_202 (void)		/* ¤Q¤j´c¤H */
 {
   /* ¨Ì§Ç¥´­Ë¼Æ°¦©Çª« */
   /* ­Y¥´±Ñ¤Q¤j´c¤H¡A¦WÁn´£°ª¡F¤Ï¤§¡A½m¦¨¶ù¦ç¯«¥\ */
@@ -211,8 +211,8 @@ pip_quest_202()		/* ¤Q¤j´c¤H */
   /*-----------------------------------------------------*/
 
 
-static int
-pip_quest_301()		/* ¤À°t¯]Ä_ */
+static int 
+pip_quest_301 (void)		/* ¤À°t¯]Ä_ */
 {
   char ans[3];
 
@@ -228,8 +228,8 @@ pip_quest_301()		/* ¤À°t¯]Ä_ */
 }
 
 
-static int
-pip_quest_302()		/* 0.9999... ´`Àô¤p¼Æ */
+static int 
+pip_quest_302 (void)		/* 0.9999... ´`Àô¤p¼Æ */
 {
   int num;
   char ans1[4], ans2[4];
@@ -254,8 +254,8 @@ pip_quest_302()		/* 0.9999... ´`Àô¤p¼Æ */
   /*-----------------------------------------------------*/
 
 
-static int
-pip_quest_401()		/* ºA«×¦Ê¤À¦Ê */
+static int 
+pip_quest_401 (void)		/* ºA«×¦Ê¤À¦Ê */
 {
   if (ians(b_lines - 1, 0, "1)ª¾ÃÑ 2)§V¤O 3)ºA«× ") == '3')
   {
@@ -308,9 +308,10 @@ static KeyFunc quest_cb[PIPQUEST_NUM + 1] =	/* §â PIPQUEST_NUM «ü©w¶i¥h¡A¦pªG¦³¿
 /*-------------------------------------------------------*/
 
 
-static int		/* 1:¬d¸ß¥ô°È  0:¨S¦³¥ô°È */
-pip_quest_query(quest)	/* ¬d¸ßÂÂ¥ô°È */
-  int quest;		/* ¥ô°È½s¸¹ */
+static int 
+pip_quest_query (	/* ¬d¸ßÂÂ¥ô°È */
+    int quest		/* ¥ô°È½s¸¹ */
+)
 {
   if (!quest && !(quest = d.quest))
   {
@@ -322,8 +323,8 @@ pip_quest_query(quest)	/* ¬d¸ßÂÂ¥ô°È */
 }
 
 
-int			/* 1:¨ú±o·s¥ô°È  0:¨ú®ø¨ú±o©Î¤w¦³¥ô°È */
-pip_quest_new()		/* ¨ú±o·s¥ô°È */
+int 
+pip_quest_new (void)		/* ¨ú±o·s¥ô°È */
 {
   if (ians(b_lines - 1, 0, "±z¤w¹F¤É¯Å¼Ð·Ç¡AÄ@·N±µ¨üªø¦Ñ«ü¬£¥ô°È¶Ü(Y/N)¡H[N] ") == 'y')
   {
@@ -336,8 +337,8 @@ pip_quest_new()		/* ¨ú±o·s¥ô°È */
 }
 
 
-static int		/* 1:¥ô°È§¹¦¨  0:¥ô°È¥¢±Ñ */
-pip_quest_done()	/* §¹¦¨¥ô°È */
+static int 
+pip_quest_done (void)	/* §¹¦¨¥ô°È */
 {
   KeyFunc *cb;
   int key;
@@ -364,8 +365,8 @@ pip_quest_done()	/* §¹¦¨¥ô°È */
 }
 
 
-static int		/* 1:©ñ±óÂÂ¥ô°È  0:¨ú®ø©ñ±ó©Î¨S¦³¥ô°È */
-pip_quest_abort()	/* ©ñ±óÂÂ¥ô°È */
+static int 
+pip_quest_abort (void)	/* ©ñ±óÂÂ¥ô°È */
 {
   if (!d.quest)
   {
@@ -389,8 +390,8 @@ pip_quest_abort()	/* ©ñ±óÂÂ¥ô°È */
 /*-------------------------------------------------------*/
 
 
-int
-pip_quest_menu()
+int 
+pip_quest_menu (void)
 {
   while (1)
   {

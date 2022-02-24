@@ -39,16 +39,15 @@ static PTMP *cp;		/* 我的小雞 */
 static PTMP *ep;		/* 對手的小雞 */
 
 
-static void
-pip_pkshm_init()
+static void 
+pip_pkshm_init (void)
 {
   pshm = shm_new(PIPSHM_KEY, sizeof(PCACHE));
 }
 
 
-static int
-pip_ptmp_new(pp)
-  PTMP *pp;
+static int 
+pip_ptmp_new (PTMP *pp)
 {
   PTMP *pentp, *ptail;
 
@@ -88,8 +87,8 @@ pip_ptmp_new(pp)
 }
 
 
-static int
-pip_ptmp_setup()
+static int 
+pip_ptmp_setup (void)
 {
   PTMP ptmp;
 
@@ -131,8 +130,8 @@ pip_ptmp_setup()
 }
 
 
-static void
-pip_ptmp_free()
+static void 
+pip_ptmp_free (void)
 {
   if (!cp || !cp->inuse)
     return;
@@ -150,9 +149,10 @@ pip_ptmp_free()
 
 
 static PTMP *
-pip_ptmp_get(userid, inuse)
-  char *userid;
-  int inuse;		/* 1:找「蓄勢待發」的人來挑戰  2:找「下挑戰書」的挑戰者回應 */
+pip_ptmp_get (
+    char *userid,
+    int inuse		/* 1:找「蓄勢待發」的人來挑戰  2:找「下挑戰書」的挑戰者回應 */
+)
 {
   PTMP *pentp, *ptail;
 
@@ -168,8 +168,8 @@ pip_ptmp_get(userid, inuse)
 }
 
 
-static void
-pip_ptmp_show()
+static void 
+pip_ptmp_show (void)
 {
   int max;
   PTMP *pentp, *ptail;
@@ -208,8 +208,8 @@ pip_ptmp_show()
   /*-----------------------------------------------------*/
 
 
-static void
-pip_pk_turn()	/* 換對方 */
+static void 
+pip_pk_turn (void)	/* 換對方 */
 {
   cp->done = 1;
   ep->done = 0;
@@ -221,15 +221,15 @@ pip_pk_turn()	/* 換對方 */
   /*-----------------------------------------------------*/
 
 
-static void
-pip_pk_showfoot()
+static void 
+pip_pk_showfoot (void)
 {
   out_cmd("", COLOR1 " 戰鬥命令 " COLOR2 " [1]肉搏 [2]技能 [3]魅惑 [4]召喚 [5]說服 [6]煽動 [Q]認輸            \033[m");
 }
 
 
-static void
-pip_pk_showing()
+static void 
+pip_pk_showing (void)
 {
   int pic;
   char inbuf1[20], inbuf2[20], inbuf3[20], inbuf4[20];
@@ -290,8 +290,8 @@ pip_pk_showing()
 }
 
 
-static void
-pip_pk_ending()
+static void 
+pip_pk_ending (void)
 {
   clrfromto(7, 16);
   move(8, 0);
@@ -324,8 +324,8 @@ pip_pk_ending()
   /*-----------------------------------------------------*/
 
 
-static void
-pip_pk_combat()		/* 肉搏 */
+static void 
+pip_pk_combat (void)		/* 肉搏 */
 {
   int injure;
 
@@ -346,7 +346,7 @@ pip_pk_combat()		/* 肉搏 */
 
 
 static void 
-pip_pk_skill()		/* 技能: 武功/魔法 */
+pip_pk_skill (void)		/* 技能: 武功/魔法 */
 {
   /* itoc.020217: 懶得寫像 pip_fight.c 裡面那種的了，有興趣的人自己抄著改 :p */
 
@@ -510,8 +510,8 @@ pip_pk_skill()		/* 技能: 武功/魔法 */
 }
 
 
-static void
-pip_pk_charm()		/* 魅惑: 耗 hp */
+static void 
+pip_pk_charm (void)		/* 魅惑: 耗 hp */
 {
   int class;
   char buf[80];
@@ -539,8 +539,8 @@ pip_pk_charm()		/* 魅惑: 耗 hp */
 }
 
 
-static void
-pip_pk_summon()		/* 召喚: 耗 mp */
+static void 
+pip_pk_summon (void)		/* 召喚: 耗 mp */
 {
   int class;
   char buf[80];
@@ -568,8 +568,8 @@ pip_pk_summon()		/* 召喚: 耗 mp */
 }
 
 
-static void
-pip_pk_convince()	/* 說服: 耗 vp */
+static void 
+pip_pk_convince (void)	/* 說服: 耗 vp */
 {
   int class;
   char buf[80];
@@ -597,8 +597,8 @@ pip_pk_convince()	/* 說服: 耗 vp */
 }
 
 
-static void
-pip_pk_incite()		/* 煽動: 耗 sp */
+static void 
+pip_pk_incite (void)		/* 煽動: 耗 sp */
 {
   int class;
   char buf[80];
@@ -626,8 +626,8 @@ pip_pk_incite()		/* 煽動: 耗 sp */
 }
 
 
-static void
-pip_pk_man()		/* 輪到我下指令 */
+static void 
+pip_pk_man (void)		/* 輪到我下指令 */
 {
   /* 秀出戰鬥主畫面 */
   pip_pk_showing();
@@ -669,8 +669,8 @@ pip_pk_man()		/* 輪到我下指令 */
 }
 
 
-static void
-pip_pk_wait()		/* 等待對方下指令 */
+static void 
+pip_pk_wait (void)		/* 等待對方下指令 */
 {
   int fd;
   struct timeval tv = {1, 100};
@@ -704,7 +704,7 @@ pip_pk_wait()		/* 等待對方下指令 */
 
 
 int 
-pip_pk_menu()
+pip_pk_menu (void)
 {
   int ch;
   char userid[IDLEN + 1];

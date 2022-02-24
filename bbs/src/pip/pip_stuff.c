@@ -21,8 +21,8 @@
 /*-------------------------------------------------------*/
 
 
-void
-pip_write_file()		/* ¹CÀ¸¼g¸ê®Æ¤JÀÉ®× */
+void 
+pip_write_file (void)		/* ¹CÀ¸¼g¸ê®Æ¤JÀÉ®× */
 {
   int fd;
   char fpath[64];
@@ -34,10 +34,11 @@ pip_write_file()		/* ¹CÀ¸¼g¸ê®Æ¤JÀÉ®× */
 }
 
 
-int		/* >=0:¦¨¥\  <0:¥¢±Ñ */
-pip_read_file(userid, p)	/* ¹CÀ¸Åª¸ê®Æ¥XÀÉ®× */
-  char *userid;
-  struct CHICKEN *p;
+int 
+pip_read_file (	/* ¹CÀ¸Åª¸ê®Æ¥XÀÉ®× */
+    char *userid,
+    struct CHICKEN *p
+)
 {
   int fd;
   char fpath[64];
@@ -53,8 +54,8 @@ pip_read_file(userid, p)	/* ¹CÀ¸Åª¸ê®Æ¥XÀÉ®× */
 }
 
 
-int			/* 1: ¦¨¥\¼g¤J  0: ©ñ±ó */
-pip_write_backup()	/* ¤pÂû¶i«×³Æ¥÷ */
+int 
+pip_write_backup (void)	/* ¤pÂû¶i«×³Æ¥÷ */
 {
   char *files[4] = {"¨S¦³", "¶i«×¤@", "¶i«×¤G", "¶i«×¤T"};
   char buf[80], fpath[64];
@@ -90,8 +91,8 @@ pip_write_backup()	/* ¤pÂû¶i«×³Æ¥÷ */
 }
 
 
-int			/* 1: ¦¨¥\Åª¥X  0: ©ñ±ó */
-pip_read_backup()	/* ¤pÂû³Æ¥÷Åª¨ú */
+int 
+pip_read_backup (void)	/* ¤pÂû³Æ¥÷Åª¨ú */
 {
   char *files[4] = {"¨S¦³", "¶i«×¤@", "¶i«×¤G", "¶i«×¤T"};
   char buf[80], fpath[64];
@@ -140,10 +141,11 @@ pip_read_backup()	/* ¤pÂû³Æ¥÷Åª¨ú */
 /*-------------------------------------------------------*/
 
 
-void
-pipdie(msg, diemode)	/* ¤pÂû¦º¤` */
-  char *msg;
-  int diemode;
+void 
+pipdie (	/* ¤pÂû¦º¤` */
+    char *msg,
+    int diemode
+)
 {
   vs_head("¹q¤l¾i¤pÂû", str_site);
 
@@ -173,13 +175,14 @@ pipdie(msg, diemode)	/* ¤pÂû¦º¤` */
 }
 
 
-int
-count_tired(prob, base, mode, mul, cal)		/* itoc.010803: ¨Ì·Ó¶Ç¤Jªº¤Þ¼Æ¨Ó¼W´î¯h³Ò«× */
-  int prob;				/* ¾÷²v */
-  int base;				/* ©³¼Æ */
-  int mode;				/* Ãþ«¬ 1:©M¦~ÄÖ¦³Ãö  0:©M¦~ÄÖµLÃö  */
-  int mul;				/* ¥[Åv (¥H % ¨Ó­p 100->1) */
-  int cal;				/* 1:¥[¯h³Ò  0:´î¯h³Ò */
+int 
+count_tired (		/* itoc.010803: ¨Ì·Ó¶Ç¤Jªº¤Þ¼Æ¨Ó¼W´î¯h³Ò«× */
+    int prob,				/* ¾÷²v */
+    int base,				/* ©³¼Æ */
+    int mode,				/* Ãþ«¬ 1:©M¦~ÄÖ¦³Ãö  0:©M¦~ÄÖµLÃö  */
+    int mul,				/* ¥[Åv (¥H % ¨Ó­p 100->1) */
+    int cal				/* 1:¥[¯h³Ò  0:´î¯h³Ò */
+)
 {
   int tiredvary;       /* §ïÅÜ­È */
 
@@ -233,8 +236,8 @@ count_tired(prob, base, mode, mul, cal)		/* itoc.010803: ¨Ì·Ó¶Ç¤Jªº¤Þ¼Æ¨Ó¼W´î¯h³
 /*-------------------------------------------------------*/
 
 
-int				/* 1:¬Ý§¹Âå¥Í  0:¨S¯f¨ÓÂå°|´c·d */
-pip_see_doctor()		/* ¬ÝÂå¥Í */
+int 
+pip_see_doctor (void)		/* ¬ÝÂå¥Í */
 {
   char buf[256];
   long savemoney;
@@ -269,8 +272,8 @@ pip_see_doctor()		/* ¬ÝÂå¥Í */
 }
 
 
-int				/* 1:¾ã®e  0:¨S¦³¾ã®e */
-pip_change_weight()		/* ¼W­D/´îªÎ */
+int 
+pip_change_weight (void)		/* ¼W­D/´îªÎ */
 {
   char buf[80];
   int weightmp;
@@ -412,9 +415,10 @@ pip_change_weight()		/* ¼W­D/´îªÎ */
 /*-------------------------------------------------------*/
 
 
-static int			/* 0: ¨S¦³¾i¤pÂû  1: ¦³¾i¤pÂû */
-pip_data_list(userid)		/* ¬Ý¬Y¤H¤pÂû¸Ô²Ó¸ê®Æ */
-  char *userid;
+static int 
+pip_data_list (		/* ¬Ý¬Y¤H¤pÂû¸Ô²Ó¸ê®Æ */
+    char *userid
+)
 {
   char buf1[20], buf2[20], buf3[20], buf4[20];
   int ch, page;
@@ -557,16 +561,16 @@ pip_data_list(userid)		/* ¬Ý¬Y¤H¤pÂû¸Ô²Ó¸ê®Æ */
 }
 
 
-int
-pip_query_self()		/* ¬d¸ß¦Û¤v */
+int 
+pip_query_self (void)		/* ¬d¸ß¦Û¤v */
 {
   pip_data_list(cuser.userid);
   return 0;
 }
 
 
-int				/* 1:«ô³X¦¨¥\  0:¨S³o°¦Âû */
-pip_query()			/* «ô³X¤pÂû */
+int 
+pip_query (void)			/* «ô³X¤pÂû */
 {
   int uno;
   char uid[IDLEN + 1];
@@ -590,8 +594,8 @@ pip_query()			/* «ô³X¤pÂû */
 }
 
 
-int				/* 1:©ñ¥Í  0:Äò¾i */
-pip_system_freepip()
+int 
+pip_system_freepip (void)
 {
   char buf[80];
 
@@ -605,8 +609,8 @@ pip_system_freepip()
 }
 
 
-int
-pip_system_service()
+int 
+pip_system_service (void)
 {
   int choice;
   char buf[128];

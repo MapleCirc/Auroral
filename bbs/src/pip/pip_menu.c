@@ -229,8 +229,8 @@ static char *menuname[8][2] =
 
 #define PIP_CHECK_PERIOD	60		/* 每 60 秒檢查一次 */
 
-static int			/* 回傳 歲數 */
-pip_time_update()
+static int 
+pip_time_update (void)
 {
   int oldtm, tm;
 
@@ -326,10 +326,11 @@ pip_time_update()
 }
 
 
-static int				/* -1:死亡  0:沒事 */
-pip_refresh_screen(menunum, mode)	/* 重繪整個畫面 */
-  int menunum;		/* 選單編號 */
-  int mode;		/* 畫面種類 0:一般 1:餵食 2:打工 3:修行 */
+static int 
+pip_refresh_screen (	/* 重繪整個畫面 */
+    int menunum,		/* 選單編號 */
+    int mode		/* 畫面種類 0:一般 1:餵食 2:打工 3:修行 */
+)
 {
   int tm, age, pic;
   char inbuf2[20], inbuf3[20], inbuf4[20], inbuf5[20], inbuf6[20], inbuf7[20];
@@ -660,11 +661,12 @@ pip_refresh_screen(menunum, mode)	/* 重繪整個畫面 */
 
 /* 類似 menu.c 的功能 */
 
-static int
-pip_do_menu(menunum, menumode, cmdtable)
-  int menunum;		/* 哪一頁選單 */
-  int menumode;		/* 哪一類畫面 */
-  struct pipcommands cmdtable[];	/* 指令集 */
+static int 
+pip_do_menu (
+    int menunum,		/* 哪一頁選單 */
+    int menumode,		/* 哪一類畫面 */
+    struct pipcommands cmdtable[]	/* 指令集 */
+)
 {
   int ch, key;
   struct pipcommands *cmd;
@@ -716,8 +718,8 @@ pip_do_menu(menunum, menumode, cmdtable)
   /* 主選單: 基本 逛街 修行 玩樂 打工 特殊		 */
   /*-----------------------------------------------------*/
 
-int
-pip_main_menu()
+int 
+pip_main_menu (void)
 {
   pip_do_menu(0, 0, pipmainlist);
   return 0;
@@ -728,8 +730,8 @@ pip_main_menu()
   /* 基本選單: 餵食 清潔 親親 休息			 */
   /*-----------------------------------------------------*/
 
-int
-pip_basic_menu()
+int 
+pip_basic_menu (void)
 {
   pip_do_menu(1, 0, pipbasiclist);
   return 0;
@@ -740,8 +742,8 @@ pip_basic_menu()
   /* 商店選單: 食物 零食 大補丸 玩具 書本		 */
   /*-----------------------------------------------------*/
 
-int
-pip_store_menu()
+int 
+pip_store_menu (void)
 {
   pip_do_menu(2, 1, pipstorelist);
   return 0;
@@ -752,8 +754,8 @@ pip_store_menu()
   /* 修行選單: 念書 練武 修行     			 */
   /*-----------------------------------------------------*/
 
-int
-pip_practice_menu()
+int 
+pip_practice_menu (void)
 {
   pip_do_menu(3, 3, pippracticelist);
   return 0;
@@ -764,8 +766,8 @@ pip_practice_menu()
   /* 玩樂選單: 散步 旅遊 運動 約會 猜拳			 */
   /*-----------------------------------------------------*/
 
-int
-pip_play_menu()
+int 
+pip_play_menu (void)
 {
   pip_do_menu(4, 0, pipplaylist);
   return 0;
@@ -776,8 +778,8 @@ pip_play_menu()
   /* 打工選單: 家事 苦工 家教 地攤			 */
   /*-----------------------------------------------------*/
 
-int
-pip_job_menu()
+int 
+pip_job_menu (void)
 {
   pip_do_menu(5, 2, pipjoblist);
   return 0;
@@ -788,8 +790,8 @@ pip_job_menu()
   /* 特殊選單: 看病 減肥 戰鬥 拜訪 朝見			 */
   /*-----------------------------------------------------*/
 
-int
-pip_special_menu()
+int 
+pip_special_menu (void)
 {
   pip_do_menu(6, 0, pipspeciallist);
   return 0;
@@ -800,8 +802,8 @@ pip_special_menu()
   /* 系統選單: 個人資料 小雞放生 特別服務		 */
   /*-----------------------------------------------------*/
 
-int
-pip_system_menu()
+int 
+pip_system_menu (void)
 {
   pip_do_menu(7, 0, pipsystemlist);
   return;

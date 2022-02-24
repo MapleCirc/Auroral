@@ -21,9 +21,10 @@
 /*-------------------------------------------------------*/
 
 
-void
-pip_levelup(success)
-  int success;		/* 1:成功解決升級任務 0:失敗 */
+void 
+pip_levelup (
+    int success		/* 1:成功解決升級任務 0:失敗 */
+)
 {
   int level;
 
@@ -66,8 +67,8 @@ pip_levelup(success)
 
 
 /* itoc.010731: 檢查經驗值是否已經達升級標準 */
-static void
-pip_check_levelup()
+static void 
+pip_check_levelup (void)
 {
   /* itoc.010731: 每升一級要 (等級 * 100) 的經驗值 */
   /* 等級 n 怪物的 exp = n*5 (原則上打20隻怪物升一級) */
@@ -112,9 +113,10 @@ static playrule m;		/* 記錄怪物 */
 
 
 /* itoc.010731: 為了避免怪物的資料太龐大，吃太多資源，寫一支怪物產生器 */
-static void
-badman_generate(area)
-  int area;		/* 傳入區域來產生怪物 */
+static void 
+badman_generate (
+    int area		/* 傳入區域來產生怪物 */
+)
 {
   int level;		/* 怪物的等級 */
 
@@ -554,9 +556,10 @@ struct skillset spellGlist[] =
 
 
 /* itoc.010801: 學到新技能 */
-int				/* 0:沒有學到 1:學到 */
-pip_learn_skill(smode)
-  int smode;			/* skill mode  0:雜項  >0:武功  <0:魔法 */
+int 
+pip_learn_skill (
+    int smode			/* skill mode  0:雜項  >0:武功  <0:魔法 */
+)
 {
   int num;
   char buf[80];
@@ -707,13 +710,14 @@ pip_learn_skill(smode)
 
 
 /* itoc.010729: 技能視窗 */
-static void
-pip_skill_doing_menu(p, dr, sr, mr, hr)		/* 技能畫面 */
-  struct skillset *p;
-  int dr;		/* 傷害力 damage rate */
-  int sr;		/* 內力強度 spirit rate */
-  int mr;		/* 魔法強度 magic rate */
-  int hr;		/* 命中率 hit rate */
+static void 
+pip_skill_doing_menu (		/* 技能畫面 */
+    struct skillset *p,
+    int dr,		/* 傷害力 damage rate */
+    int sr,		/* 內力強度 spirit rate */
+    int mr,		/* 魔法強度 magic rate */
+    int hr		/* 命中率 hit rate */
+)
 {
   int n, ch;
   char ans[5];
@@ -927,12 +931,13 @@ pip_skill_doing_menu(p, dr, sr, mr, hr)		/* 技能畫面 */
 
 
 /* itoc.010729: 進入使用技能選單 */
-static void
-pip_skill_menu(dr, sr, mr, hr)	/* 戰鬥中技能的應用 */
-  int dr;		/* 傷害力 damage rate */
-  int sr;		/* 內力強度 spirit rate */
-  int mr;		/* 魔法強度 magic rate */
-  int hr;		/* 命中率 hit rate */
+static void 
+pip_skill_menu (	/* 戰鬥中技能的應用 */
+    int dr,		/* 傷害力 damage rate */
+    int sr,		/* 內力強度 spirit rate */
+    int mr,		/* 魔法強度 magic rate */
+    int hr		/* 命中率 hit rate */
+)
 {
   while (d_nodone)
   {   
@@ -1011,12 +1016,13 @@ pip_skill_menu(dr, sr, mr, hr)	/* 戰鬥中技能的應用 */
 
 /* itoc.010801: 由於怪物技能攻擊，不需要選單，所以要和小雞技能攻擊分開寫 */
 
-static void
-pip_attack_skill(dr, sr, mr, hr)	/* 怪物技能攻擊 */
-  int dr;		/* 傷害力 damage rate */
-  int sr;		/* 內力強度 spirit rate */
-  int mr;		/* 魔法強度 magic rate */
-  int hr;		/* 命中率 hit rate */
+static void 
+pip_attack_skill (	/* 怪物技能攻擊 */
+    int dr,		/* 傷害力 damage rate */
+    int sr,		/* 內力強度 spirit rate */
+    int mr,		/* 魔法強度 magic rate */
+    int hr		/* 命中率 hit rate */
+)
 {
   int num, mankey;
   char buf[80];
@@ -1174,11 +1180,12 @@ pip_attack_skill(dr, sr, mr, hr)	/* 怪物技能攻擊 */
 
 /* itoc.010731: 怪物和小雞的物理攻擊，可以寫成同一支函式 */
 
-static void
-pip_attack_normal(who, dr, hr)		/* itoc.010731: 普通攻擊 */
-  int who;		/* 我是誰 1: 小雞下攻擊指令  0: 怪物下攻擊指令 */
-  int dr;		/* 傷害力 damage rate */
-  int hr;		/* 命中率 hit rate */
+static void 
+pip_attack_normal (		/* itoc.010731: 普通攻擊 */
+    int who,		/* 我是誰 1: 小雞下攻擊指令  0: 怪物下攻擊指令 */
+    int dr,		/* 傷害力 damage rate */
+    int hr		/* 命中率 hit rate */
+)
 {
   int injure;
   char buf[80];
@@ -1241,11 +1248,12 @@ pip_attack_normal(who, dr, hr)		/* itoc.010731: 普通攻擊 */
 }
 
 
-static void
-pip_attack_aggressive(who, dr, hr)	/* itoc.010731: 全力一擊 */
-  int who;		/* 我是誰 1: 小雞下攻擊指令  0: 怪物下攻擊指令 */
-  int dr;		/* 傷害力 damage rate */
-  int hr;		/* 命中率 hit rate */
+static void 
+pip_attack_aggressive (	/* itoc.010731: 全力一擊 */
+    int who,		/* 我是誰 1: 小雞下攻擊指令  0: 怪物下攻擊指令 */
+    int dr,		/* 傷害力 damage rate */
+    int hr		/* 命中率 hit rate */
+)
 {
   int injure;
   char buf[80];
@@ -1315,8 +1323,8 @@ pip_attack_aggressive(who, dr, hr)	/* itoc.010731: 全力一擊 */
 /*-------------------------------------------------------*/
 
 
-static void
-pip_vs_showing()
+static void 
+pip_vs_showing (void)
 {
   int color;
   char inbuf1[20], inbuf2[20];
@@ -1368,10 +1376,11 @@ pip_vs_showing()
 }
 
 
-static void
-pip_vs_ending(winorlost, area)
-  int winorlost;		/* 2:K死怪物  1:怪物逃跑  -1:小雞逃跑  -2:小雞被K死 */
-  char area;			/* !=0: K怪物  0:收穫季比賽 */
+static void 
+pip_vs_ending (
+    int winorlost,		/* 2:K死怪物  1:怪物逃跑  -1:小雞逃跑  -2:小雞被K死 */
+    int area			/* !=0: K怪物  0:收穫季比賽 */
+)
 {
   int mode;
 
@@ -1503,10 +1512,11 @@ pip_vs_ending(winorlost, area)
 
 
 /* static */			/* itoc.010731: 給收穫季對戰用 */
-int				/* 1: 小雞 win  0: 小雞 lose */
-pip_vs_man(p, area)
-  struct playrule p;		/* 傳入怪物資料 */
-  int area;			/* !=0: K怪物時的區域  0: 收穫季比賽 */
+int 
+pip_vs_man (
+    struct playrule p,		/* 傳入怪物資料 */
+    int area			/* !=0: K怪物時的區域  0: 收穫季比賽 */
+)
 {
   int d_dr;			/* 小雞打怪物 物理攻擊指數 damage rate */
   int d_sr;			/* 小雞打怪物 武功攻擊指數 spirit rate */
@@ -1773,8 +1783,8 @@ pip_vs_man(p, area)
 #define MAP_NORTH	0x08
 
 
-static int		/* 傳回本房間有哪些方向可以走 */
-map_generate()
+static int 
+map_generate (void)
 {
   int direction;
   int map[16] = 
@@ -1805,8 +1815,8 @@ map_generate()
 /*-------------------------------------------------------*/
 
 
-int
-pip_fight_menu()
+int 
+pip_fight_menu (void)
 {
   int ch, area, direction;
 

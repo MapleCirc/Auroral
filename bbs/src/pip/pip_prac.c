@@ -80,11 +80,12 @@ static char classword[11][5][41] = 	/* 限二十個中文字 */
 /*-------------------------------------------------------*/
 
 
-static int
-pip_practice_gradeup(classnum, classgrade, newgrade)	/* 修行等級提升 */
-  int classnum;		/* 課號 */
-  int classgrade;	/* 年級 */
-  int newgrade;		/* 新年級 */
+static int 
+pip_practice_gradeup (	/* 修行等級提升 */
+    int classnum,		/* 課號 */
+    int classgrade,	/* 年級 */
+    int newgrade		/* 新年級 */
+)
 {
   /* itoc.0108802: 為省計算，newgrade 從 0 開始算，classgrade 從 1 開始算 */
   if (newgrade >= classgrade && newgrade < 5)
@@ -98,16 +99,18 @@ pip_practice_gradeup(classnum, classgrade, newgrade)	/* 修行等級提升 */
 
 
 /* 傳入:課號 等級 生命 快樂 滿足 髒髒 傳回:變數12345   傳回: -1:放棄 0:失敗 1:成功 */
-static int
-pip_practice_function(classnum, classgrade, pic1, pic2, change1, change2, change3, change4, change5)
-  int classnum;			/* 修行種類 */
-  int classgrade;		/* 修行等級 */
-  int pic1, pic2;		/* 圖檔 */
-  int *change1;			/* 主要屬性增加 */
-  int *change2;			/* 次要屬性增加 */
-  int *change3;			/* 附加屬性增加 */
-  int *change4;			/* 相剋屬性減少 */
-  int *change5;			/* 相斥屬性減少 */
+static int 
+pip_practice_function (
+    int classnum,			/* 修行種類 */
+    int classgrade,		/* 修行等級 */
+    int pic1,
+    int pic2,		/* 圖檔 */
+    int *change1,			/* 主要屬性增加 */
+    int *change2,			/* 次要屬性增加 */
+    int *change3,			/* 附加屬性增加 */
+    int *change4,			/* 相剋屬性減少 */
+    int *change5			/* 相斥屬性減少 */
+)
 {
   int grade, success;
   char buf[80];
@@ -177,8 +180,8 @@ pip_practice_function(classnum, classgrade, pic1, pic2, change1, change2, change
 
 /* itoc.010802: 各類 classgrage 的界定是小雞的某項屬性 / 200，當然也可以加權處理 */
 
-int
-pip_practice_classA()
+int 
+pip_practice_classA (void)
 {
   /* ┌────┬─────────────────┐ */
   /* │自然科學│正屬性：智力、抗魔、從缺          │ */
@@ -211,8 +214,8 @@ pip_practice_classA()
 }
 
 
-int
-pip_practice_classB()
+int 
+pip_practice_classB (void)
 {
   /* ┌────┬─────────────────┐ */
   /* │  詩詞  │正屬性：感受、氣質、藝術          │ */
@@ -246,8 +249,8 @@ pip_practice_classB()
 }
 
 
-int
-pip_practice_classC()
+int 
+pip_practice_classC (void)
 {
   /* ┌────┬─────────────────┐ */
   /* │  神學  │正屬性：信仰、抗魔、智力          │ */
@@ -281,8 +284,8 @@ pip_practice_classC()
 }
 
 
-int
-pip_practice_classD()
+int 
+pip_practice_classD (void)
 {
   /* ┌────┬─────────────────┐ */
   /* │  軍學  │正屬性：戰鬥技術、智力、從缺      │ */
@@ -315,8 +318,8 @@ pip_practice_classD()
 }
 
 
-int
-pip_practice_classE()
+int 
+pip_practice_classE (void)
 {
   /* ┌────┬─────────────────┐ */
   /* │  劍術  │正屬性：攻擊、戰鬥技術、防禦      │ */
@@ -350,8 +353,8 @@ pip_practice_classE()
 }
 
 
-int
-pip_practice_classF()
+int 
+pip_practice_classF (void)
 {
   /* ┌────┬─────────────────┐ */
   /* │  格鬥  │正屬性：防禦、速度、攻擊          │ */
@@ -385,8 +388,8 @@ pip_practice_classF()
 }
 
 
-int
-pip_practice_classG()
+int 
+pip_practice_classG (void)
 {
   /* ┌────┬─────────────────┐ */
   /* │  魔法  │正屬性：魔法技術、抗魔、從缺      │ */
@@ -422,8 +425,8 @@ pip_practice_classG()
 }
 
 
-int
-pip_practice_classH()
+int 
+pip_practice_classH (void)
 {
   /* ┌────┬─────────────────┐ */
   /* │  禮儀  │正屬性：禮儀、氣質、談吐          │ */
@@ -453,8 +456,8 @@ pip_practice_classH()
 }
 
 
-int
-pip_practice_classI()
+int 
+pip_practice_classI (void)
 {
   /* ┌────┬─────────────────┐ */
   /* │  繪畫  │正屬性：藝術、感受、從缺          │ */
@@ -483,8 +486,8 @@ pip_practice_classI()
 }
 
 
-int
-pip_practice_classJ()
+int 
+pip_practice_classJ (void)
 {
   /* ┌────┬─────────────────┐ */
   /* │  舞蹈  │正屬性：藝術、魅力、氣質          │ */
