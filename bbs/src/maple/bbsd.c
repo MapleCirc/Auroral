@@ -1845,7 +1845,6 @@ main (int argc, char *argv[])
 #endif
   ushm_init();
   bshm_init();
-puts("here");
   fshm_init();
   vo_init();
 
@@ -1856,7 +1855,6 @@ puts("here");
   totaluser = &ushm->count;
   /* avgload = &ushm->avgload; */
 
- f_cat("tmp/bbsd.log", "loop\n");
   for (;;)
   {
     value = 1;
@@ -1870,7 +1868,6 @@ puts("here");
       reaper();
       continue;
     }
- f_cat("tmp/bbsd.log", "accept\n");
 
     ap_start++;
     argc = *totaluser;
