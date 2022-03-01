@@ -53,17 +53,15 @@ static SyncMail *xlist;
 static int xsize;
 
 
-static int
-sync_cmp(s1, s2)
-  SyncMail *s1, *s2;
+static int 
+sync_cmp (SyncMail *s1, SyncMail *s2)
 {
   return s1->chrono - s2->chrono;
 }
 
 
-static int
-bquota(userid)
-  char *userid;
+static int 
+bquota (char *userid)
 {
   HDR hdr;
   char *fname, *str, fpath[80], fnew[80], fold[80];
@@ -291,10 +289,8 @@ bquota(userid)
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   DIR *dirp;
   struct dirent *de;
@@ -379,8 +375,8 @@ main(argc, argv)
 }
 
 #else
-int
-main()
+int 
+main (void)
 {
   printf("You should define OVERDUE_MAILDEL first.\n");
   return -1;

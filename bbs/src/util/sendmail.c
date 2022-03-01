@@ -166,8 +166,8 @@ timeout_signal(int sig)
 }
 
 
-static int
-get_mailinfo()
+static int 
+get_mailinfo (void)
 {
   FILE *fp;
   char pipe_path[64];
@@ -247,8 +247,8 @@ get_mailinfo()
 }
 
 
-static void
-tn_signal()
+static void 
+tn_signal (void)
 {
   struct sigaction act;
 
@@ -264,8 +264,8 @@ tn_signal()
 }
 
 
-int
-main()
+int 
+main (void)
 {
   int sock;
   FILE *fp, *fr, *fw;

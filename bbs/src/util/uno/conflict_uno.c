@@ -18,16 +18,15 @@ typedef struct
 }    COLLECTION;
 
 
-static int
-cmp_collection(i, j)
-  COLLECTION *i, *j;
+static int 
+cmp_collection (COLLECTION *i, COLLECTION *j)
 {
   return i->userno - j->userno;
 }
 
 
-int
-main()
+int 
+main (void)
 {
   int fd, n;
   COLLECTION *usr;

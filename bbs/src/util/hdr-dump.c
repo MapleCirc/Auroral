@@ -11,10 +11,8 @@
 
 #include "bbs.h"
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   int fd, count;
   HDR hdr;

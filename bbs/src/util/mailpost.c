@@ -12,9 +12,8 @@
 #include "bbs.h"
 
 
-static void
-mailog(msg)
-  char *msg;
+static void 
+mailog (char *msg)
 {
   FILE *fp;
 
@@ -39,9 +38,8 @@ mailog(msg)
 /* ----------------------------------------------------- */
 
 
-static int
-is_badid(userid)
-  char *userid;
+static int 
+is_badid (char *userid)
 {
   int ch;
   char *str;
@@ -63,9 +61,8 @@ is_badid(userid)
 }
 
 
-static void
-justify_user(userid, email)
-  char *userid, *email;
+static void 
+justify_user (char *userid, char *email)
 {
   char fpath[64];
   HDR hdr;
@@ -91,9 +88,8 @@ justify_user(userid, email)
 }
 
 
-static void
-verify_user(str)
-  char *str;
+static void 
+verify_user (char *str)
 {
   int fd;
   char *ptr, *next, fpath[64];
@@ -138,8 +134,8 @@ verify_user(str)
 /* ----------------------------------------------------- */
 
 
-static void
-mailpost()
+static void 
+mailpost (void)
 {
   int count;
   char *ptr, buf[512];
@@ -165,9 +161,8 @@ mailpost()
 }
 
 
-static void
-sig_catch(sig)
-  int sig;
+static void 
+sig_catch (int sig)
 {
   char buf[512];
   
@@ -179,8 +174,8 @@ sig_catch(sig)
 }
 
 
-int
-main()
+int 
+main (void)
 {
   char buf[512];
 

@@ -50,10 +50,11 @@ typedef struct NewHDR
 } NEW;
 
 
-static void
-transformation(old, new)	/* 轉換函數，請依據OLD和NEW節構體來修改 */
-  OLD *old;
-  NEW *new;
+static void 
+transformation (	/* 轉換函數，請依據OLD和NEW節構體來修改 */
+    OLD *old,
+    NEW *new
+)
 {
   memset(new, 0x00, sizeof(NEW));
 
@@ -84,9 +85,8 @@ typedef struct
 
 
 
-static void
-transDIR(fpath)
-  char *fpath;
+static void 
+transDIR (char *fpath)
 {
   FILE *fpr, *fpw;
   NEW new;
@@ -140,10 +140,8 @@ CI_cmp(const void *a, const void *b)
 }
 
 
-static void
-scanClass(fpath, gpath)
-  const char *fpath;
-  const char *gpath;
+static void 
+scanClass (const char *fpath, const char *gpath)
 {
   FILE *fp;
   ClassInfo *key;
@@ -184,9 +182,8 @@ scanClass(fpath, gpath)
 }
 
 
-static int
-pickmouse(gpath)
-  const char *gpath;
+static int 
+pickmouse (const char *gpath)
 {
   char dpath[64], *xname;
   struct dirent *de;
@@ -238,10 +235,8 @@ pickmouse(gpath)
 }
 
 
-static void
-gem_trans(gpath, inPersonalGem)
-  const char *gpath;
-  int inPersonalGem;
+static void 
+gem_trans (const char *gpath, int inPersonalGem)
 {
   char fpath[64], dpath[64], *str;
   int CheckClass = !inPersonalGem;
@@ -310,7 +305,8 @@ gem_trans(gpath, inPersonalGem)
 
 
 
-int main()
+int 
+main (void)
 {
   char fpath[64], dpath[64], *str, c;
   struct dirent *de;

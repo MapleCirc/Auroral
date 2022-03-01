@@ -126,9 +126,7 @@ typedef struct
 
 
 static void
-trans_acct(old, new)
-  OLD *old;
-  NEW *new;
+trans_acct(OLD *old, NEW *new)
 {
   memset(new, 0, sizeof(NEW));
 
@@ -171,10 +169,8 @@ trans_acct(old, new)
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   NEW new;
   char c;

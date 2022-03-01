@@ -15,9 +15,8 @@
 #define	ANTI_NOTMYCHARSETMAIL	/* itoc.030513: พื not-mycharset mail */
 
 
-static void
-mailog(msg)
-  char *msg;
+static void 
+mailog (char *msg)
 {
   FILE *fp;
 
@@ -45,16 +44,15 @@ mailog(msg)
 static UCACHE *ushm;
 
 
-static inline void
-init_ushm()
+static inline void 
+init_ushm (void)
 {
   ushm = shm_new(UTMPSHM_KEY, sizeof(UCACHE));
 }
 
 
-static inline void
-bbs_biff(userid)
-  char *userid;
+static inline void 
+bbs_biff (char *userid)
 {
   UTMP *utmp, *uceil;
   usint offset;
@@ -79,9 +77,8 @@ bbs_biff(userid)
 /* ----------------------------------------------------- */
 
 
-static int
-mail2bbs(userid)
-  char *userid;
+static int 
+mail2bbs (char *userid)
 {
   HDR hdr;
   char buf[512], title[256], sender[256], owner[256], nick[256], folder[64];
@@ -250,9 +247,8 @@ start:
 }
 
 
-static void
-sig_catch(sig)
-  int sig;
+static void 
+sig_catch (int sig)
 {
   char buf[512];
 
@@ -264,10 +260,8 @@ sig_catch(sig)
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   char buf[512];
 

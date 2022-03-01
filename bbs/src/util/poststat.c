@@ -44,9 +44,8 @@ struct postrec
 static POSTLOG top[TOPCOUNT], *tp;          
 
 
-static int
-hash(key)
-  char *key;
+static int 
+hash (char *key)
 {
   int i, ch, value = 0;
 
@@ -64,9 +63,8 @@ hash(key)
 /* ---------------------------------- */
 
 
-static void
-search(t)
-  POSTLOG *t;
+static void 
+search (POSTLOG *t)
 {
   struct postrec *p, *q, *s;
   int i, found = 0;
@@ -103,9 +101,8 @@ search(t)
 }
 
 
-static int
-sort(pp, count)
-  struct postrec *pp;
+static int 
+sort (struct postrec *pp, int count)
 {
   int i, j;
 
@@ -126,9 +123,8 @@ sort(pp, count)
 }
 
 
-static void
-load_stat(fname)
-  char *fname;
+static void 
+load_stat (char *fname)
 {
   FILE *fp;
 
@@ -142,9 +138,8 @@ load_stat(fname)
 }
 
 
-static void
-poststat(mytype)
-  int mytype;
+static void 
+poststat (int mytype)
 {
   FILE *fp;
   char buf[40], *p;
@@ -291,10 +286,8 @@ typedef struct PostAuthor
 }	PostAuthor;
 
 
-static int
-pa_cmp(x, y)
- PostAuthor *x;
- PostAuthor *y;
+static int 
+pa_cmp (PostAuthor *x, PostAuthor *y)
 {
   int dif;
 
@@ -306,9 +299,7 @@ pa_cmp(x, y)
 
 
 static void
-pa_out(top, fp)
-  SplayNode *top;
-  FILE *fp;
+pa_out(SplayNode *top, FILE *fp)
 {
   PostAuthor *pa;
   PostText *text;
@@ -332,8 +323,8 @@ pa_out(top, fp)
 }
 
 
-static void
-post_author()
+static void 
+post_author (void)
 {
   int cc, i, len;
   char *str;
@@ -428,10 +419,8 @@ post_author()
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   time_t now;
   struct tm *ptime;

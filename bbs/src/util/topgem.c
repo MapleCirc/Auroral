@@ -25,8 +25,8 @@
 static BCACHE *bshm;
 
 
-static void
-init_bshm()
+static void 
+init_bshm (void)
 {
   /* itoc.030727: 在開啟 bbsd 之前，應該就要執行過 account，
      所以 bshm 應該已設定好 */
@@ -51,9 +51,8 @@ typedef struct
 }	BRDDATA;
 
 
-static int
-int_cmp(a, b)
-  BRDDATA *a, *b;
+static int 
+int_cmp (BRDDATA *a, BRDDATA *b)
 {
   return (b->day - a->day);	/* 由大排到小 */
 }
@@ -63,8 +62,8 @@ static BRDDATA board[MAXBOARD];
 static int locus = 0;			/* 總共記錄了幾個板 */
 
 
-static void
-topgem()
+static void 
+topgem (void)
 {
   time_t now;
   struct stat st;
@@ -98,8 +97,8 @@ topgem()
 }
 
 
-static void
-write_data()
+static void 
+write_data (void)
 {
   time_t now;
   struct tm *ptime;
@@ -148,7 +147,7 @@ write_data()
 
 
 int 
-main()
+main (void)
 {
   chdir(BBSHOME);
 

@@ -11,8 +11,8 @@
 #include "bbs.h"
 
 
-int
-main()
+int 
+main (void)
 {
   char bakpath[128], cmd[256];
   time_t now;

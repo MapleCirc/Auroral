@@ -30,8 +30,7 @@
 #define MAXUSIES	9	/* 共有 9 種可以改的 */
 
 static void
-usage(msg)
-  char *msg;
+usage(char *msg)
 {
   int i, len;
   char buf[80];
@@ -52,9 +51,10 @@ usage(msg)
 
 
 static usint
-bitcfg(len, str)	/* config bits */
-  int len;		/* 該欄位的長度 */
-  char *str;		/* optarg */
+bitcfg(		/* config bits */
+  int len,		/* 該欄位的長度 */
+  char *str		/* optarg */
+)
 {
   int i;
   char c;
@@ -86,10 +86,8 @@ bitcfg(len, str)	/* config bits */
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   int c;
   char *userid, fpath[64];

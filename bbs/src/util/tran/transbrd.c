@@ -80,8 +80,8 @@ typedef struct                  /* 要和新版程式 struct 一樣 */
 #define FN_BRD_TMP	".BRD.tmp"
 
 
-int
-main()
+int 
+main (void)
 {
   int fd;
   OLD old;

@@ -18,10 +18,8 @@
 #define OUTFILE_TOPSONG	"gem/@/@-topsong"
 
 
-static void
-write_data(songs, num)
-  SONGDATA *songs;
-  int num;
+static void 
+write_data (SONGDATA *songs, int num)
 {
   int n;
   FILE *fp;
@@ -42,16 +40,15 @@ write_data(songs, num)
 }
 
 
-static int
-count_cmp(b, a)
-  SONGDATA *a, *b;
+static int 
+count_cmp (SONGDATA *b, SONGDATA *a)
 {
   return (a->count - b->count); 
 }
 
 
-int
-main()
+int 
+main (void)
 {
   int fd, size;
   struct stat st;
@@ -82,8 +79,8 @@ main()
 }
 
 #else
-int
-main()
+int 
+main (void)
 {
   printf("You shoule define LOG_SONG_USIES first.\n");
   return 0;

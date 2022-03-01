@@ -17,10 +17,8 @@
 static int reserve, r_size, ulink, u_size;
 
 
-static void
-reaper(fpath, lowid)
-  char *fpath;
-  char *lowid;
+static void 
+reaper (char *fpath, char *lowid)
 {
   int fd, size, check;
   char buf[256], *fname, folder[128], *ptr;
@@ -118,10 +116,8 @@ reaper(fpath, lowid)
 }
 
 
-static void
-expire(fpath, lowid)
-  char *fpath;
-  char *lowid;
+static void 
+expire (char *fpath, char *lowid)
 {
   int fd, size, check;
   char buf[256], *fname, folder[128], *ptr, *str;
@@ -220,10 +216,8 @@ expire(fpath, lowid)
 }
 
 
-static void
-traverse(fpath, mode)
-  char *fpath;
-  int mode;
+static void 
+traverse (char *fpath, int mode)
 {
   DIR *dirp;
   struct dirent *de;
@@ -252,10 +246,8 @@ traverse(fpath, mode)
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   int ch;
   char *fname, fpath[256], buf[32];

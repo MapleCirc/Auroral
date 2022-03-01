@@ -15,9 +15,8 @@
 #define	ANTI_NOTMYCHARSETMAIL	/* itoc.030513: 擋 not-mycharset mail */
 
 
-static void
-mailog(msg)
-  char *msg;
+static void 
+mailog (char *msg)
 {
   FILE *fp;
 
@@ -45,8 +44,8 @@ mailog(msg)
 static BCACHE *bshm;
 
 
-static void
-init_bshm()
+static void 
+init_bshm (void)
 {
   /* itoc.030727: 在開啟 bbsd 之前，應該就要執行過 account，
      所以 bshm 應該已設定好 */
@@ -59,8 +58,7 @@ init_bshm()
 
 
 static BRD *
-brd_get(bname)
-  char *bname;
+brd_get (char *bname)
 {
   BRD *bhdr, *tail;
 
@@ -80,9 +78,8 @@ brd_get(bname)
 /* ----------------------------------------------------- */
 
 
-static int
-mail2brd(brd)
-  BRD *brd;
+static int 
+mail2brd (BRD *brd)
 {
   HDR hdr;
   char buf[512], title[256], sender[256], owner[256], nick[256], folder[64];
@@ -247,9 +244,8 @@ start:
 }
 
 
-static void
-sig_catch(sig)
-  int sig;
+static void 
+sig_catch (int sig)
 {
   char buf[512];
 
@@ -261,10 +257,8 @@ sig_catch(sig)
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   char buf[512];
   BRD *brd;

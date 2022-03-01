@@ -15,8 +15,7 @@
 
 
 static usint
-transfer_ufo(oldufo)
-  usint oldufo;
+transfer_ufo(usint oldufo)
 {
   usint ufo;
 
@@ -68,9 +67,7 @@ transfer_ufo(oldufo)
 
 
 static void
-trans_acct(old, new)
-  userec *old;
-  ACCT *new;
+trans_acct(userec *old, ACCT *new)
 {
   memset(new, 0, sizeof(ACCT));
 
@@ -106,10 +103,8 @@ trans_acct(old, new)
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   ACCT new;
   char c;
