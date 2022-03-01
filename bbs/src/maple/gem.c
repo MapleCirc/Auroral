@@ -31,11 +31,8 @@ static int gem_paste();
 static int gem_anchor();
 
 
-static void
-gem_item(num, hdr, level)
-  int num;
-  HDR *hdr;
-  int level;
+static void 
+gem_item (int num, HDR *hdr, int level)
 {
   int xmode, gtype;
 
@@ -64,9 +61,8 @@ gem_item(num, hdr, level)
 }
 
 
-static int
-gem_body(xo)
-  XO *xo;
+static int 
+gem_body (XO *xo)
 {
   HDR *hdr;
   int num, max, tail;
@@ -123,9 +119,8 @@ gem_body(xo)
 }
 
 
-static int
-gem_head(xo)
-  XO *xo;
+static int 
+gem_head (XO *xo)
 {
   char buf[20];
 
@@ -141,9 +136,8 @@ gem_head(xo)
 }
 
 
-static int
-gem_toggle(xo)
-  XO *xo;
+static int 
+gem_toggle (XO *xo)
 {
   gem_way++;
   gem_way %= GEM_WAY;
@@ -156,18 +150,16 @@ gem_toggle(xo)
 }
 
 
-static int
-gem_init(xo)
-  XO *xo;
+static int 
+gem_init (XO *xo)
 {
   xo_load(xo, sizeof(HDR));
   return gem_head(xo);
 }
 
 
-static int
-gem_load(xo)
-  XO *xo;
+static int 
+gem_load (XO *xo)
 {
   xo_load(xo, sizeof(HDR));
   return gem_body(xo);
@@ -182,11 +174,8 @@ gem_load(xo)
 #define	GEM_PLAIN	0x01	/* 預期是 plain text */
 
 
-static HDR *		/* NULL:無權讀取 */
-gem_check(xo, fpath, op)
-  XO *xo;
-  char *fpath;
-  int op;
+static HDR *
+gem_check (XO *xo, char *fpath, int op)
 {
   HDR *hdr;
   int gtype;
@@ -215,9 +204,8 @@ gem_check(xo, fpath, op)
 
 
 #if 0
-static int	/* -1:不是看板精華區  >=0:bno */
-gem_bno(xo)
-  XO *xo;
+static int 
+gem_bno (XO *xo)
 {
   char *dir, *str;
   int bno;
@@ -258,12 +246,13 @@ gem_bno(xo)
   3. 所以就從 hdr_stamp() 改寫一隻 gem_hdr_stamp()。
 */
 
-static int
-gem_hdr_stamp(folder, token, hdr, fpath)
-  char *folder;
-  int token;		/* 只會有 F/A/L | HDR_LINK/HDR_COPY */
-  HDR *hdr;
-  char *fpath;
+static int 
+gem_hdr_stamp (
+    char *folder,
+    int token,		/* 只會有 F/A/L | HDR_LINK/HDR_COPY */
+    HDR *hdr,
+    char *fpath
+)
 {
   char *fname, *family;
   int rc, chrono;
@@ -361,10 +350,8 @@ next_chrono:
 }
 
 
-void
-brd2gem(brd, gem)
-  BRD *brd;
-  HDR *gem;
+void 
+brd2gem (BRD *brd, HDR *gem)
 {
   memset(gem, 0, sizeof(HDR));
   time(&gem->chrono);
@@ -376,11 +363,8 @@ brd2gem(brd, gem)
 
 
 #if 0	/* itoc.010218: 換新的 gem_log() */
-static void
-gem_log(folder, action, hdr)
-  char *folder;
-  char *action;
-  HDR *hdr;
+static void 
+gem_log (char *folder, char *action, HDR *hdr)
 {
   char fpath[64], buf[256];
 
@@ -395,11 +379,8 @@ gem_log(folder, action, hdr)
 #endif
 
 
-static void
-gem_log(folder, action, hdr)
-  char *folder;
-  char *action;
-  HDR *hdr;
+static void 
+gem_log (char *folder, char *action, HDR *hdr)
 {
   char fpath1[64], fpath2[64];
   FILE *fp1, *fp2;
@@ -444,10 +425,8 @@ gem_log(folder, action, hdr)
 }
 
 
-static int
-gem_add(xo, gtype)
-  XO *xo;
-  int gtype;
+static int 
+gem_add (XO *xo, int gtype)
 {
   int level, fd, ans;
   char title[TTLEN + 1], fpath[64], *dir;
@@ -571,25 +550,26 @@ gem_add(xo, gtype)
 }
 
 
-static int
-gem_add_all(xo)
-  XO *xo;
+static int 
+gem_add_all (XO *xo)
 {
   return gem_add(xo, 0);
 }
 
 
-static int
-gem_add_article(xo)		/* itoc.010419: 快速鍵 */
-  XO *xo;
+static int 
+gem_add_article (		/* itoc.010419: 快速鍵 */
+    XO *xo
+)
 {
   return gem_add(xo, 'a');
 }
 
 
-static int
-gem_add_folder(xo)		/* itoc.010419: 快速鍵 */
-  XO *xo;
+static int 
+gem_add_folder (		/* itoc.010419: 快速鍵 */
+    XO *xo
+)
 {
   return gem_add(xo, 'f');
 }
@@ -600,9 +580,8 @@ gem_add_folder(xo)		/* itoc.010419: 快速鍵 */
 /* ----------------------------------------------------- */
 
 
-static int
-gem_edit(xo)
-  XO *xo;
+static int 
+gem_edit (XO *xo)
 {
   int level;
   char fpath[64];
@@ -627,9 +606,8 @@ gem_edit(xo)
 }
 
 
-static int
-gem_title(xo)
-  XO *xo;
+static int 
+gem_title (XO *xo)
 {
   HDR *fhdr, mhdr;
   int pos, cur;
@@ -693,9 +671,8 @@ gem_title(xo)
 }
 
 
-static int
-gem_refuse(xo)
-  XO *xo;
+static int 
+gem_refuse (XO *xo)
 {
   HDR *hdr;
   int num;
@@ -715,9 +692,8 @@ gem_refuse(xo)
 }
 
 
-static int
-gem_state(xo)
-  XO *xo;
+static int 
+gem_state (XO *xo)
 {
   HDR *hdr;
   char fpath[64];
@@ -750,9 +726,10 @@ gem_state(xo)
 /* ----------------------------------------------------- */
 
 
-int			/* -1:無權限 */
-gem_link(brdname)	/* 檢查連結去其他看板精華區的權限 */
-  char *brdname;
+int 
+gem_link (	/* 檢查連結去其他看板精華區的權限 */
+    char *brdname
+)
 {
   int bno, level;
 
@@ -771,9 +748,8 @@ gem_link(brdname)	/* 檢查連結去其他看板精華區的權限 */
 }
 
 
-static int
-gem_browse(xo)
-  XO *xo;
+static int 
+gem_browse (XO *xo)
 {
   HDR *hdr;
   int op, xmode;
@@ -860,27 +836,22 @@ gem_browse(xo)
 /* ----------------------------------------------------- */
 
 
-static int
-chkgem(hdr)
-  HDR *hdr;
+static int 
+chkgem (HDR *hdr)
 {
   return (hdr->xmode & (GEM_RESTRICT | GEM_RESERVED));
 }
 
 
-static int
-vfygem(hdr, pos)
-  HDR *hdr;
-  int pos;
+static int 
+vfygem (HDR *hdr, int pos)
 {
   return (Tagger(hdr->chrono, pos, TAG_NIN) || chkgem(hdr));
 }
 
 
-static void
-delgem(xo, hdr)
-  XO *xo;
-  HDR *hdr;
+static void 
+delgem (XO *xo, HDR *hdr)
 {
   char folder[64];
   HDR fhdr;
@@ -919,9 +890,8 @@ delgem(xo, hdr)
 }
 
 
-static int
-gem_delete(xo)
-  XO *xo;
+static int 
+gem_delete (XO *xo)
 {
   HDR *hdr;
   int xmode;
@@ -950,9 +920,10 @@ gem_delete(xo)
 }
 
 
-static int
-gem_rangedel(xo)	/* itoc.010726: 提供區段刪除 */
-  XO *xo;
+static int 
+gem_rangedel (	/* itoc.010726: 提供區段刪除 */
+    XO *xo
+)
 {
   if (!(xo->key & GEM_W_BIT) || !gem_check(xo, NULL, 0))
     return XO_NONE;
@@ -961,9 +932,8 @@ gem_rangedel(xo)	/* itoc.010726: 提供區段刪除 */
 }
 
 
-static int
-gem_prune(xo)
-  XO *xo;
+static int 
+gem_prune (XO *xo)
 {
   if (!(xo->key & GEM_W_BIT))
     return XO_NONE;
@@ -986,8 +956,7 @@ static HDR *GemBuffer;
 
 
 static HDR *
-gbuf_malloc(num)
-  int num;
+gbuf_malloc (int num)
 {
   HDR *gbuf;
   static int GemBufferSiz;	/* 目前 GemBuffer 的 size 是 GemBufferSiz * sizeof(HDR) */
@@ -1011,11 +980,12 @@ gbuf_malloc(num)
 }
 
 
-void
-gem_buffer(dir, hdr, fchk)
-  char *dir;
-  HDR *hdr;			/* NULL 代表放入 TagList, 否則將傳入的放入 */
-  int (*fchk)();		/* 允許放入 gbuf 的條件 */
+void 
+gem_buffer (
+    char *dir,
+    HDR *hdr,			/* NULL 代表放入 TagList, 否則將傳入的放入 */
+    int (*fchk)(HDR *)		/* 允許放入 gbuf 的條件 */
+)
 {
   int max, locus, num;
   HDR *gbuf, buf;
@@ -1064,9 +1034,8 @@ gem_buffer(dir, hdr, fchk)
 
 static int IamBM;
 
-static int
-chkgemrestrict(hdr)
-  HDR *hdr;
+static int 
+chkgemrestrict (HDR *hdr)
 {
   if (hdr->xmode & GEM_BOARD)		/* 看板不能被複製/貼上 */
     return 0;
@@ -1078,9 +1047,8 @@ chkgemrestrict(hdr)
 }
 
 
-static int
-gem_copy(xo)
-  XO *xo;
+static int 
+gem_copy (XO *xo)
 {
   int tag;
 
@@ -1100,9 +1068,8 @@ gem_copy(xo)
 
 static int check_key;
 
-static int
-gem_chkduplicable(hdr)
-  HDR *hdr;
+static int 
+gem_chkduplicable (HDR *hdr)
 {
   int gtype = hdr->xmode;
 
@@ -1119,9 +1086,8 @@ gem_chkduplicable(hdr)
 }
 
 
-static int
-gem_tbf(xo)
-  XO *xo;
+static int 
+gem_tbf (XO *xo)
 {
   if (!cuser.userlevel)
     return XO_NONE;
@@ -1133,10 +1099,8 @@ gem_tbf(xo)
 }
 
 
-static inline int
-gem_extend(xo, num)
-  XO *xo;
-  int num;
+static inline int 
+gem_extend (XO *xo, int num)
 {
   char *dir, fpath[64], gpath[64];
   FILE *fp;
@@ -1167,11 +1131,13 @@ gem_extend(xo, num)
 }
 
 
-static int					/* 1: 無窮迴圈  0: 合法 */
-invalid_loop(srcDir, dstDir, hdr, depth)	/* itoc.010727: 檢查是否會造成無窮迴圈 for gem_paste() */
-  char *srcDir, *dstDir;
-  HDR *hdr;
-  int depth;				/* 0: 遞迴第一圈  1: 遞迴中 */
+static int 
+invalid_loop (	/* itoc.010727: 檢查是否會造成無窮迴圈 for gem_paste() */
+    char *srcDir,
+    char *dstDir,
+    HDR *hdr,
+    int depth				/* 0: 遞迴第一圈  1: 遞迴中 */
+)
 {
   static int valid;
 
@@ -1228,12 +1194,13 @@ invalid_loop(srcDir, dstDir, hdr, depth)	/* itoc.010727: 檢查是否會造成無窮迴圈 
 }
 
 
-static void
-gem_do_paste(srcDir, dstDir, hdr, pos)		/* itoc.010725: for gem_paste() */
-  char *srcDir;		/* source folder */
-  char *dstDir;		/* destination folder */
-  HDR *hdr;		/* source hdr */
-  int pos;		/* -1: 附加在最後  >=0: 貼上的位置 */
+static void 
+gem_do_paste (		/* itoc.010725: for gem_paste() */
+    char *srcDir,		/* source folder */
+    char *dstDir,		/* destination folder */
+    HDR *hdr,		/* source hdr */
+    int pos		/* -1: 附加在最後  >=0: 貼上的位置 */
+)
 {
   int xmode, fsize;
   char folder[64], fpath[64];
@@ -1297,9 +1264,8 @@ gem_do_paste(srcDir, dstDir, hdr, pos)		/* itoc.010725: for gem_paste() */
 }
 
 
-static int
-gem_paste(xo)
-  XO *xo;
+static int 
+gem_paste (XO *xo)
 {
   int num, ans, pos;
   char *dir;
@@ -1352,9 +1318,8 @@ gem_paste(xo)
 }
 
 
-static int
-gem_move(xo)
-  XO *xo;
+static int 
+gem_move (XO *xo)
 {
   HDR *hdr;
   char *dir, buf[40];
@@ -1388,9 +1353,8 @@ gem_move(xo)
 }
 
 
-static int
-gem_anchor(xo)
-  XO *xo;
+static int 
+gem_anchor (XO *xo)
 {
   int ans;
   char *folder;
@@ -1428,9 +1392,8 @@ gem_anchor(xo)
 }
 
 
-static int
-chkgather(hdr)
-  HDR *hdr;
+static int 
+chkgather (HDR *hdr)
 {
   if (hdr->xmode & GEM_RESTRICT)	/* 限制級精華區不能定錨收錄 */
     return 0;
@@ -1442,9 +1405,8 @@ chkgather(hdr)
 }
 
 
-int
-gem_gather(xo)
-  XO *xo;
+int 
+gem_gather (XO *xo)
 {
   int tag;
   char *dir, *folder, fpath[80], title[TTLEN + 1];
@@ -1533,9 +1495,8 @@ gem_gather(xo)
 }
 
 
-static int
-gem_tag(xo)
-  XO *xo;
+static int 
+gem_tag (XO *xo)
 {
   HDR *hdr;
   int tag, pos, cur;
@@ -1557,9 +1518,8 @@ gem_tag(xo)
 
 //: gem.c:gem_notepad() 加在 gem_help() 前面
 
-static int
-gem_notepad(xo)
-  XO *xo;
+static int 
+gem_notepad (XO *xo)
 {
   HDR *hdr;
   char *fname;
@@ -1578,9 +1538,8 @@ gem_notepad(xo)
   return XO_NONE;
 }
 
-static int
-gem_help(xo)
-  XO *xo;
+static int 
+gem_help (XO *xo)
 {
   xo_help("gem");
   return gem_head(xo);
@@ -1634,11 +1593,8 @@ static KeyFunc gem_cb[] =
 };
 
 
-void
-XoGem(folder, title, level)
-  char *folder;
-  char *title;
-  int level;
+void 
+XoGem (char *folder, char *title, int level)
 {
   XO *xo, *last;
 
@@ -1657,8 +1613,8 @@ XoGem(folder, title, level)
 }
 
 
-void
-gem_main()
+void 
+gem_main (void)
 {
   XO *xo;
 

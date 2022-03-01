@@ -1103,8 +1103,8 @@ scrl(int rows)
     }
 }
 
-void
-scroll()
+void 
+scroll (void)
 {
     // scroll up
     int y;
@@ -1140,7 +1140,7 @@ scroll()
 }
 
 void 
-rscroll()
+rscroll (void)
 {
     // scroll down
     int y;
@@ -1465,8 +1465,8 @@ pfterm_indbc(int x)
 }
 
 
-void
-pfterm_resetcmd()
+void 
+pfterm_resetcmd (void)
 {
     ft.szcmd = 0;
 }

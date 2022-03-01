@@ -39,8 +39,7 @@ static int more_size;
  */
 
 char *
-mgets(fd)
-  int fd;
+mgets (int fd)
 {
   char *pool, *base, *head, *tail;
   int ch;
@@ -92,8 +91,7 @@ mgets(fd)
 /* use mgets(-1) to reset */
 
 void *
-mread(fd, len)
-  int fd, len;
+mread (int fd, int len)
 {
   char *pool;
   int base, size;
@@ -132,10 +130,11 @@ mread(fd, len)
 #define CAT_BUFFERSIZE	2048	/* 一次讀2KB就好，不需要塞滿more_pool */
 
 
-int	/* 0:正常秀出   -1:檔案開啟失敗 */
-lim_cat(fpath, lines)
-  char *fpath;
-  int lines;	/* 最多印出幾行，範圍 [1, b_lines] */
+int 
+lim_cat (
+    char *fpath,
+    int lines	/* 最多印出幾行，範圍 [1, b_lines] */
+)
 {
   int fd, end_of_file = 0;
 
@@ -293,10 +292,11 @@ flush_EScode:
 /* more 閱讀文字檔					 */
 /* ----------------------------------------------------- */
 
-int	/* -1: 檔案無法開啟  0:普通地結束  1:其他鍵跳出，需要處理按鍵 */
-more(fpath, ft_style)
-  char *fpath;
-  enum MFST ft_style;	/* dust.100925: [pmore第四回適應性修正]以enum MFST取代舊的char* */
+int 
+more (
+    char *fpath,
+    enum MFST ft_style	/* dust.100925: [pmore第四回適應性修正]以enum MFST取代舊的char* */
+)
 {
   int cmd, has_foot;
 
@@ -354,9 +354,8 @@ static uschar *fimage;		/* file image begin */
 static uschar *fend;		/* file image end */
 static uschar *foff;		/* 目前讀到哪裡 */
 
-static int
-more_line(buf)
-  char *buf;
+static int 
+more_line (char *buf)
 {
   int ch, len, bytes, in_ansi, in_chi;
 
@@ -433,9 +432,10 @@ more_line(buf)
 }
 
 
-static void
-outs_line(str)			/* 印出一般內容 */
-  char *str;
+static void 
+outs_line (			/* 印出一般內容 */
+    char *str
+)
 {
   int ch1, ch2, ansi;
 
@@ -506,10 +506,11 @@ outs_line(str)			/* 印出一般內容 */
 }
 
 
-static void
-outs_header(str, header_len)	/* 印出檔頭 */
-  char *str;
-  int header_len;
+static void 
+outs_header (	/* 印出檔頭 */
+    char *str,
+    int header_len
+)
 {
   static char header1[LINE_HEADER][LEN_AUTHOR1] = {"作者",   "標題",   "時間"};
   static char header2[LINE_HEADER][LEN_AUTHOR2] = {"發信人", "標  題", "發信站"};
@@ -556,11 +557,8 @@ outs_header(str, header_len)	/* 印出檔頭 */
 }
 
 
-static inline void
-outs_footer(buf, lino, fsize)
-  char *buf;
-  int lino;
-  int fsize;
+static inline void 
+outs_footer (char *buf, int lino, int fsize)
 {
   int i;
 
@@ -584,8 +582,8 @@ outs_footer(buf, lino, fsize)
 #ifdef SLIDE_SHOW
 static int slideshow;		/* !=0: 播放 movie 的速度 */
 
-static int
-more_slideshow()
+static int 
+more_slideshow (void)
 {
   int ch;
 
@@ -629,8 +627,8 @@ more_slideshow()
 #endif
 
 
-void
-bw_display()
+void 
+bw_display (void)
 {
   int i;
   screenline slt[T_LINES];
@@ -677,10 +675,8 @@ bw_display()
 /* Thor.990204: 傳回值 -1 為無法show出
                         0 為全數show完
                        >0 為未全show，中斷所按的key */
-int
-more(fpath, footer)
-  char *fpath;
-  char *footer;
+int 
+more (char *fpath, char *footer)
 {
   char buf[ANSILINELEN];
   int i;

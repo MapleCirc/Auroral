@@ -21,8 +21,8 @@
 /*-------------------------------------------------------*/
 
 
-int				/* 1: 沒吃食物，放棄  0: 吃了 */
-pip_basic_feed()		/* 餵食 */
+int 
+pip_basic_feed (void)		/* 餵食 */
 {
   int ch;
   int nodone;			/* itoc.010731: 記錄是否有行動 */
@@ -235,8 +235,8 @@ pip_basic_feed()		/* 餵食 */
 }
 
 
-int
-pip_basic_takeshower()		/* 洗澡 */
+int 
+pip_basic_takeshower (void)		/* 洗澡 */
 {
   d.shit -= 20;
   if (d.shit < 0)
@@ -265,8 +265,8 @@ pip_basic_takeshower()		/* 洗澡 */
 }
 
 
-int
-pip_basic_takerest()		/* 休息 */
+int 
+pip_basic_takerest (void)		/* 休息 */
 {
   count_tired(5, 20, 1, 100, 0);	/* 恢復疲勞 */
   d.shit++;
@@ -282,8 +282,8 @@ pip_basic_takerest()		/* 休息 */
 }
 
 
-int
-pip_basic_kiss()		/* 親親 */
+int 
+pip_basic_kiss (void)		/* 親親 */
 {
   if (rand() % 2)
   {
@@ -310,8 +310,8 @@ pip_basic_kiss()		/* 親親 */
 }
 
 
-int
-pip_money()
+int 
+pip_money (void)
 {
   int money;
   char buf[80];

@@ -7,12 +7,13 @@
 
 
 int
-rec_ins(fpath, data, size, pos, num)
-  char *fpath;
-  void *data;
-  int size;
-  int pos;
-  int num;
+rec_ins(
+  char *fpath,
+  void *data,
+  int size,
+  int pos,
+  int num
+)
 {
   int fd;
   off_t off, len;

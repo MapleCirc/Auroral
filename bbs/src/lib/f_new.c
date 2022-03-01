@@ -10,9 +10,7 @@
 
 
 FILE *
-f_new(fold, fnew)
-  char *fold;
-  char *fnew;
+f_new(char *fold, char *fnew)
 {
   int fd, try;
   extern int errno;

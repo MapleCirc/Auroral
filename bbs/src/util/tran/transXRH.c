@@ -1,7 +1,7 @@
 /*-------------------------------------------------------*/
 /* util/transXRH.c	( MapleBBS-itoc-Auroral2 )	 */
 /*-------------------------------------------------------*/
-/* target : BRH & CRH è½‰æ›ç¨‹å¼				 */
+/* target : BRH & CRH Âà´«µ{¦¡				 */
 /* create : 10/10/31					 */
 /* update :   /  /  					 */
 /*-------------------------------------------------------*/
@@ -23,8 +23,8 @@
 
 typedef struct BoardReadingHistory
 {
-  time_t bstamp;		/* å»ºç«‹çœ‹æ¿çš„æ™‚é–“, unique */
-  time_t bvisit;		/* ä¸Šæ¬¡é–±è®€æ™‚é–“ */
+  time_t bstamp;		/* «Ø¥ß¬İªOªº®É¶¡, unique */
+  time_t bvisit;		/* ¤W¦¸¾\Åª®É¶¡ */
   int bcount;
 }BRH;
 
@@ -40,13 +40,13 @@ typedef struct Comment_Reading_History
 {
   time_t chrono;
   time_t stamp;
-} CRH;		/* CRHç´€éŒ„çš„æœ¬é«” */
+} CRH;		/* CRH¬ö¿ıªº¥»Åé */
 
 typedef struct Hearder_of_Comment_Reading_history
 {
   time_t bstamp;
   int cnum;
-} HCR_old;		/* CRHè¡¨é ­ */
+} HCR_old;		/* CRHªíÀY */
 
 typedef struct
 {
@@ -63,17 +63,14 @@ static HCR crh_cache[MAXBOARD];
 
 
 static int
-bstamp_cmp(a, b)
-  const time_t *a;
-  const time_t *b;
+bstamp_cmp(const time_t *a, const time_t *b)
 {
   return *a - *b;
 }
 
 
-static int
-trans_brh(fpath)
-  char *fpath;
+static int 
+trans_brh (char *fpath)
 {
   FILE *fp;
   BRH header;
@@ -187,10 +184,8 @@ trans_crh(char *fpath)
 
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   char c, *str, fpath[64];
   struct dirent *de;

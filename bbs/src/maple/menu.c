@@ -23,8 +23,8 @@ static int konami_counter = 0;
 
 static MCD_info curr_CDmeter;
 
-void
-hm_init()	/* dust.100315: 載入個人倒數計時器 */
+void 
+hm_init (void)	/* dust.100315: 載入個人倒數計時器 */
 {
   FILE *fp;
   char fpath[64];
@@ -65,8 +65,8 @@ typedef struct
 }      Pad;
 
 
-int
-pad_view()
+int 
+pad_view (void)
 {
   int fd, count;
   Pad *pad;
@@ -111,8 +111,8 @@ pad_view()
 }
 
 
-static int
-pad_draw()
+static int 
+pad_draw (void)
 {
   int i, cc, fdr, color;
   FILE *fpw;
@@ -196,8 +196,8 @@ pad_draw()
 }
 
 
-static int
-goodbye()
+static int 
+goodbye (void)
 {
   /* itoc.010803: 秀張離站的圖 */
   clear();
@@ -247,9 +247,8 @@ goodbye()
 /* ----------------------------------------------------- */
 
 
-void
-vs_head(title, mid)
-  char *title, *mid;
+void 
+vs_head (char *title, char *mid)
 {
   static char fcheck[64];
   int mlen, left_space, right_space, spc;
@@ -362,10 +361,11 @@ static char feeter[200];
 
 
 /* dust.100313: 將數字縮寫成###K/###M/###G的形式 */
-static int	/* 回傳字串長度 */
-abbreviation(n, str)
-  int n;
-  char *str;	/* 長度必須>=6，否則有緩衝區溢位的可能 */
+static int 
+abbreviation (
+    int n,
+    char *str	/* 長度必須>=6，否則有緩衝區溢位的可能 */
+)
 {
   char symbol;
 
@@ -400,8 +400,8 @@ abbreviation(n, str)
 
 
 /* dust.100312: Menu footer 樣式大變更 */
-static void
-status_foot()
+static void 
+status_foot (void)
 {
   static time_t uptime = 0;
 
@@ -550,8 +550,8 @@ print_RemainingTime:
 }
 
 
-void
-movie()
+void 
+movie (void)
 {
   /* Thor: it is depend on which state */
   if ((bbsmode <= M_XMENU) && (cuser.ufo & UFO_MOVIE))
@@ -666,8 +666,8 @@ static MENU menu_admin[] =
 /* ----------------------------------------------------- */
 
 
-static int
-XoMbox()
+static int 
+XoMbox (void)
 {
   xover(XZ_MBOX);
   return 0;
@@ -719,8 +719,8 @@ static MENU menu_mail[] =
 /* ----------------------------------------------------- */
 
 
-static int
-XoUlist()
+static int 
+XoUlist (void)
 {
   xover(XZ_ULIST);
   return 0;
@@ -1167,8 +1167,8 @@ static MENU menu_tool[] =
 /* ----------------------------------------------------- */
 
 
-static int
-Gem()
+static int 
+Gem (void)
 {
   /* itoc.001109: 看板總管在 (A)nnounce 下有 GEM_X_BIT，方便開板 */
   XoGem("gem/"FN_DIR, "精華佈告欄", (HAS_PERM(PERM_ALLBOARD) ? (GEM_W_BIT | GEM_X_BIT | GEM_M_BIT) : 0));
@@ -1223,9 +1223,10 @@ static MENU menu_main[] =
 
 
 
-static void             /* floatJ.090607: konami 彩蛋 */
-konami_code(keycode)    /* 呼叫此函式並傳入keycode值 */
-  int keycode;
+static void 
+konami_code (    /* 呼叫此函式並傳入keycode值 */
+    int keycode
+)
 {
   static char code_queue[6] = {38,38,40,40,37,39};
 
@@ -1237,8 +1238,8 @@ konami_code(keycode)    /* 呼叫此函式並傳入keycode值 */
 };
 
 
-void
-menu()
+void 
+menu (void)
 {
   MENU *menu, *mptr, *table[12];
   usint level, mode;

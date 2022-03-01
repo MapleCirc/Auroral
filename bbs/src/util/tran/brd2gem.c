@@ -32,9 +32,7 @@
 
 
 static void
-brd_2_gem(brd, gem)
-  BRD *brd;
-  HDR *gem;
+brd_2_gem(BRD *brd, HDR *gem)
 {
   memset(gem, 0, sizeof(HDR));
   time(&gem->chrono);
@@ -51,9 +49,7 @@ brd_2_gem(brd, gem)
 
 
 static int
-hdr_cmp(a, b)
-  HDR *a;
-  HDR *b;
+hdr_cmp(HDR *a, HDR *b)
 {
   /* itoc.010413: 分類/板名交叉比對 */
   int k = strncmp(a->title + BNLEN + 1, b->title + BNLEN + 1, BCLEN);
@@ -61,10 +57,8 @@ hdr_cmp(a, b)
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   int fd;
   char folder[64];

@@ -13,7 +13,7 @@
 
 
 int 
-main()
+main (void)
 {
   int fd, n;
   SCHEMA *usr;

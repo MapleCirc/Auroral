@@ -7,18 +7,18 @@
 
 
 static int
-is_bottompost(hdr)
-  HDR *hdr;
+is_bottompost(HDR *hdr)
 {
   return (hdr->xmode & POST_BOTTOM);
 }
 
 
-int
-rec_bot(fpath, data, size)	/* amaki.040715: 嵌入式寫檔 */
-  char *fpath;
-  void *data;
-  int size;
+int 
+rec_bot (	/* amaki.040715: 嵌入式寫檔 */
+    char *fpath,
+    void *data,
+    int size
+)
 {
   int fd, fsize, count;
   void *pool, *set;

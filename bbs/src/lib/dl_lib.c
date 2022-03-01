@@ -27,8 +27,9 @@ static int dl_size, dl_head;
 
 
 void *
-DL_get(name)
-  char *name;	/* format: "Xmodule_path:Xname" */
+DL_get (
+    char *name	/* format: "Xmodule_path:Xname" */
+)
 {
   char buf[512], *t;
   DL_list *p, *tail;

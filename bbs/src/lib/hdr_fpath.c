@@ -3,10 +3,11 @@
 
 
 void
-hdr_fpath(fpath, folder, hdr)
-  char *fpath;
-  char *folder;
-  HDR *hdr;
+hdr_fpath(
+  char *fpath,
+  char *folder,
+  HDR *hdr
+)
 {
   char *str;
   int cc, chrono;

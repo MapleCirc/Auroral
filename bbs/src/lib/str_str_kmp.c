@@ -5,8 +5,7 @@
 
 
 void
-str_expand(dst, src)	/* 將 char 轉為 short，並將英文變小寫 */
-  char *dst, *src;
+str_expand(char *dst, char *src)	/* 將 char 轉為 short，並將英文變小寫 */
 {
   int ch;
   int in_chi = 0;	/* 1: 前一碼是中文字 */
@@ -30,10 +29,8 @@ str_expand(dst, src)	/* 將 char 轉為 short，並將英文變小寫 */
 }
 
 
-void
-str_str_kmp_tbl(pat, tbl)
-  const short *pat;
-  int *tbl;
+void 
+str_str_kmp_tbl (const short *pat, int *tbl)
 {
   register short c;
   register int i, j;
@@ -49,11 +46,8 @@ str_str_kmp_tbl(pat, tbl)
 }
 
 
-const int
-str_str_kmp(str, pat, tbl)
-  const short *str;
-  const short *pat;
-  const int *tbl;
+const int 
+str_str_kmp (const short *str, const short *pat, const int *tbl)
 {
   register const short *i;
   register int j;
@@ -83,9 +77,8 @@ str_str_kmp(str, pat, tbl)
 #undef	TEST
 
 #ifdef TEST
-static void
-try_match(str, key)
-  char *str, *key;
+static void 
+try_match (char *str, char *key)
 {
   short a[256], b[256];		/* 假設 256 已足夠 */
   int tbl[256];
@@ -99,8 +92,8 @@ try_match(str, key)
 }
 
 
-int
-main()
+int 
+main (void)
 {
   try_match("好的電影", "犒");
   try_match("好的電影", "N");

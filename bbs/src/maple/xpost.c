@@ -83,12 +83,14 @@ static char HintWord[TTLEN + 1];
 static char HintAuthor[IDLEN + 1];
 
 
-static int
-XoXpost(xo, hdr, on, off, fchk)		/* Thor: eXtended post : call from post_cb */
-  XO *xo;
-  HDR *hdr;		/* 搜尋的條件 */
-  int on, off;		/* 搜尋的範圍 (on~off-1) */
-  int (*fchk) ();	/* 搜尋的函式 */
+static int 
+XoXpost (		/* Thor: eXtended post : call from post_cb */
+    XO *xo,
+    HDR *hdr,		/* 搜尋的條件 */
+    int on,
+    int off,		/* 搜尋的範圍 (on~off-1) */
+    int (*fchk)(HDR *, HDR *)	/* 搜尋的函式 */
+)
 {
   int *list, fsize, max, locus, count, i;
   char *fimage;
@@ -217,10 +219,11 @@ XoXpost(xo, hdr, on, off, fchk)		/* Thor: eXtended post : call from post_cb */
   /* --------------------------------------------------- */
 
 
-static int			/* 0:不滿足條件  !=0:滿足條件 */
-filter_select(head, hdr)
-  HDR *head;	/* 待測物 */
-  HDR *hdr;	/* 條件 */
+static int 
+filter_select (
+    HDR *head,	/* 待測物 */
+    HDR *hdr	/* 條件 */
+)
 {
   char *title;
   usint str4;
@@ -245,9 +248,8 @@ filter_select(head, hdr)
 }
 
 
-int
-XoXselect(xo)
-  XO *xo;
+int 
+XoXselect (XO *xo)
 {
   HDR hdr;
   char *key;
@@ -305,9 +307,8 @@ XoXselect(xo)
   /* --------------------------------------------------- */
 
 
-int
-XoXauthor(xo)
-  XO *xo;
+int 
+XoXauthor (XO *xo)
 {
   HDR hdr;
   char *author;
@@ -341,9 +342,8 @@ XoXauthor(xo)
   /* --------------------------------------------------- */
 
 
-int
-XoXtitle(xo)
-  XO *xo;
+int 
+XoXtitle (XO *xo)
 {
   HDR hdr;
   char *title;
@@ -376,10 +376,11 @@ XoXtitle(xo)
   /* --------------------------------------------------- */
 
 
-static int			/* 0:不滿足條件  !=0:滿足條件 */
-filter_search(head, hdr)
-  HDR *head;	/* 待測物 */
-  HDR *hdr;	/* 條件 */
+static int 
+filter_search (
+    HDR *head,	/* 待測物 */
+    HDR *hdr	/* 條件 */
+)
 {
   char *title, buf[TTLEN + 1];
   usint str4;
@@ -393,9 +394,8 @@ filter_search(head, hdr)
 }
 
 
-int
-XoXsearch(xo)
-  XO *xo;
+int 
+XoXsearch (XO *xo)
 {
   HDR hdr, *mhdr;
   char *title;
@@ -435,10 +435,11 @@ static char *search_folder;
 static int search_fit;		/* >=0:找到幾篇 -1:中斷搜尋 */
 static int search_all;		/* 已搜尋幾篇 */
 
-static int			/* 0:不滿足條件  !=0:滿足條件 */
-filter_full(head, hdr)
-  HDR *head;	/* 待測物 */
-  HDR *hdr;	/* 條件 */
+static int 
+filter_full (
+    HDR *head,	/* 待測物 */
+    HDR *hdr	/* 條件 */
+)
 {
   char buf[80], *fimage;
   int rc, fsize;
@@ -486,9 +487,8 @@ filter_full(head, hdr)
 }
 
 
-int
-XoXfull(xo)
-  XO *xo;
+int 
+XoXfull (XO *xo)
 {
   HDR hdr;
   char *key, ans[8];
@@ -536,18 +536,18 @@ XoXfull(xo)
   /* --------------------------------------------------- */
 
 
-static int			/* 0:不滿足條件  !=0:滿足條件 */
-filter_mark(head, hdr)
-  HDR *head;	/* 待測物 */
-  HDR *hdr;	/* 條件 */
+static int 
+filter_mark (
+    HDR *head,	/* 待測物 */
+    HDR *hdr	/* 條件 */
+)
 {
   return (head->xmode & POST_MARKED);
 }
 
 
-int
-XoXmark(xo)
-  XO *xo;
+int 
+XoXmark (XO *xo)
 {
 #ifdef EVERY_Z
   if (z_status && xz[XZ_XPOST - XO_ZONE].xo)	/* itoc.020308: 不得累積進入二次 */
@@ -570,18 +570,18 @@ XoXmark(xo)
   /* --------------------------------------------------- */
 
 
-static int			/* 0:不滿足條件  !=0:滿足條件 */
-filter_local(head, hdr)
-  HDR *head;	/* 待測物 */
-  HDR *hdr;	/* 條件 */
+static int 
+filter_local (
+    HDR *head,	/* 待測物 */
+    HDR *hdr	/* 條件 */
+)
 {
   return !(head->xmode & POST_INCOME);
 }
 
 
-int
-XoXlocal(xo)
-  XO *xo;
+int 
+XoXlocal (XO *xo)
 {
 #if 0
   if (currbattr & BRD_NOTRAN)
@@ -612,27 +612,28 @@ XoXlocal(xo)
 static usint us_sattr;
 static int us_smode = 0;	/* 1:排除模式 */
 
-static int		/* false:不滿足條件  true:滿足條件 */
-filter_uni(head, hdr)
-  HDR *head;	/* 待測物 */
-  HDR *hdr;	/* 條件 */
+static int 
+filter_uni (
+    HDR *head,	/* 待測物 */
+    HDR *hdr	/* 條件 */
+)
 {
   return (head->xmode & us_sattr? 1 : 0) ^ us_smode;
 }
 
 
-static int
-filter_unittl(head, hdr)
-  HDR *head;	/* 待測物 */
-  HDR *hdr;	/* 條件 */
+static int 
+filter_unittl (
+    HDR *head,	/* 待測物 */
+    HDR *hdr	/* 條件 */
+)
 {
   return (str_ncmp(head->title, hdr->title, 3)? 0 : 1) ^ us_smode;
 }
 
 
-int
-XoXuni(xo)
-  XO *xo;
+int 
+XoXuni (XO *xo)
 {
   int i, y, max, oc, ch, excute, redraw_header;
   static int cc = 0;
@@ -778,9 +779,8 @@ XoXuni(xo)
 /* ----------------------------------------------------- */
 
 
-int
-xpost_head(xo)
-  XO *xo;
+int 
+xpost_head (XO *xo)
 {
   vs_head("主題串列", xo->xyz);
 
@@ -797,9 +797,8 @@ xpost_head(xo)
 }
 
 
-static void
-xpost_pick(xo)
-  XO *xo;
+static void 
+xpost_pick (XO *xo)
 {
   int *list, fsize, pos, max, top, num;
   HDR *fimage, *hdr;
@@ -833,9 +832,8 @@ xpost_pick(xo)
 }
 
 
-int
-xpost_init(xo)
-  XO *xo;
+int 
+xpost_init (XO *xo)
 {
   /* load into pool */
 
@@ -845,9 +843,8 @@ xpost_init(xo)
 }
 
 
-int
-xpost_load(xo)
-  XO *xo;
+int 
+xpost_load (XO *xo)
 {
   /* load into pool */
 
@@ -857,10 +854,11 @@ xpost_load(xo)
 }
 
 
-static void
-xpost_history(xo, fhdr)		/* 將 fhdr 這篇加入 brh */
-  XO *xo;
-  HDR *fhdr;
+static void 
+xpost_history (		/* 將 fhdr 這篇加入 brh */
+    XO *xo,
+    HDR *fhdr
+)
 {
   time_t prev, chrono, next, stamp;
   int pos;
@@ -896,9 +894,8 @@ xpost_history(xo, fhdr)		/* 將 fhdr 這篇加入 brh */
 }
 
 
-int
-xpost_browse(xo)
-  XO *xo;
+int 
+xpost_browse (XO *xo)
 {
   HDR *hdr;
   int key;
@@ -1040,9 +1037,8 @@ fake_continue:
 }
 
 
-int
-xmbox_browse(xo)
-  XO *xo;
+int 
+xmbox_browse (XO *xo)
 {
   HDR *hdr;
   char *dir, fpath[64];
@@ -1174,9 +1170,8 @@ static int *newsIndex;
 extern KeyFunc news_cb[];
 
 
-int
-news_head(xo)
-  XO *xo;
+int 
+news_head (XO *xo)
 {
   vs_head("新聞閱\讀", xo->xyz);
   prints(NECKER_NEWS, d_cols, "");
@@ -1184,9 +1179,8 @@ news_head(xo)
 }
 
 
-static void
-news_pick(xo)
-  XO *xo;
+static void 
+news_pick (XO *xo)
 {
   int *list, fsize, pos, max, top;
   HDR *fimage, *hdr;
@@ -1217,9 +1211,8 @@ news_pick(xo)
 }
 
 
-int
-news_init(xo)
-  XO *xo;
+int 
+news_init (XO *xo)
 {
   /* load into pool */
   news_pick(xo);
@@ -1227,9 +1220,8 @@ news_init(xo)
 }
 
 
-int
-news_load(xo)
-  XO *xo;
+int 
+news_load (XO *xo)
 {
   /* load into pool */
   news_pick(xo);
@@ -1237,9 +1229,10 @@ news_load(xo)
 }
 
 
-int
-XoNews(xo)			/* itoc: News reader : call from post_cb */
-  XO *xo;
+int 
+XoNews (			/* itoc: News reader : call from post_cb */
+    XO *xo
+)
 {
   int returnPos;
   int *list, fsize, max, count, i;

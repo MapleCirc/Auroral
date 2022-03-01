@@ -35,7 +35,7 @@
 static const int timeout = 6;	/* 若 6 秒後連線未完成，則放棄 */
 
 static void 
-pseudo_handler()	/* Thor.991215: for timeout */
+pseudo_handler (void)	/* Thor.991215: for timeout */
 {
   /* connect time out */
 }
@@ -44,13 +44,14 @@ pseudo_handler()	/* Thor.991215: for timeout */
 
 /* Thor.990325: 為了讓反查時能確定查出，來自哪個interface就從那連回，以防反查不到 */
 
-void
-dns_ident(sock, from, rhost, ruser)
-  int sock;  /* Thor.990330: 負數保留給, 用getsock無法抓出正確port的時候.
+void 
+dns_ident (
+    int sock,  /* Thor.990330: 負數保留給, 用getsock無法抓出正確port的時候.
                              代表 Port, 不過不太可能用到 */
-  struct sockaddr_in *from;
-  char *rhost;
-  char *ruser;
+    struct sockaddr_in *from,
+    char *rhost,
+    char *ruser
+)
 {
   struct sockaddr_in rmt_sin;
   struct sockaddr_in our_sin;

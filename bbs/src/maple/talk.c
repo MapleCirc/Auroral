@@ -25,9 +25,7 @@ extern UCACHE *ushm;
 /* ------------------------------------- */
 
 char *
-bmode(up, simple)
-  UTMP *up;
-  int simple;
+bmode (UTMP *up, int simple)
 {
   static char modestr[32];
   int mode;
@@ -80,10 +78,8 @@ bmode(up, simple)
 
 
 
-void
-do_query(acct, utmp)
-  ACCT *acct;
-  UTMP *utmp;
+void 
+do_query (ACCT *acct, UTMP *utmp)
 {
   UTMP *up;
   int userno, rich;
@@ -153,9 +149,8 @@ do_query(acct, utmp)
 }
 
 
-void
-my_query(userid)
-  char *userid;
+void 
+my_query (char *userid)
 {
   ACCT acct;
 
@@ -167,9 +162,8 @@ my_query(userid)
 
 
 #ifdef HAVE_ALOHA
-static int
-chkfrienz(frienz)
-  FRIENZ *frienz;
+static int 
+chkfrienz (FRIENZ *frienz)
 {
   int userno;
 
@@ -178,24 +172,22 @@ chkfrienz(frienz)
 }
 
 
-static int
-frienz_cmp(a, b)
-  FRIENZ *a, *b;
+static int 
+frienz_cmp (FRIENZ *a, FRIENZ *b)
 {
   return a->userno - b->userno;
 }
 
 
-void
-frienz_sync(fpath)
-  char *fpath;
+void 
+frienz_sync (char *fpath)
 {
   rec_sync(fpath, sizeof(FRIENZ), frienz_cmp, chkfrienz);
 }
 
 
-void
-aloha()
+void 
+aloha (void)
 {
   UTMP *up;
   int fd;
@@ -237,8 +229,8 @@ aloha()
 extern LinkList *ll_head;
 
 
-int
-t_loginNotify()
+int 
+t_loginNotify (void)
 {
   LinkList *wp;
   BENZ benz;
@@ -271,8 +263,8 @@ t_loginNotify()
 }
 
 
-void
-loginNotify()
+void 
+loginNotify (void)
 {
   UTMP *up;
   int fd;
@@ -357,8 +349,8 @@ loginNotify()
 /* part of Draw Board Talk		 */
 /* ------------------------------------- */
 
-static void
-tdb_foot(biff, Alice_return, Bob_return)
+static void 
+tdb_foot (int biff, int Alice_return, int Bob_return)
 {
   move(b_lines, 0);
 
@@ -380,12 +372,8 @@ tdb_foot(biff, Alice_return, Bob_return)
 }
 
 
-static int	/* 1: exit talk  0: go back */
-talk_drawboard(sock, itsuid, itsnick, lock_board)
-  int sock;
-  char *itsuid;
-  char *itsnick;
-  int *lock_board;
+static int 
+talk_drawboard (int sock, char *itsuid, char *itsnick, int *lock_board)
 {
   char textline[11][80];
   char matid[IDLEN + 1];
@@ -448,7 +436,7 @@ talk_drawboard(sock, itsuid, itsnick, lock_board)
       if(biff != HAS_STATUS(STATUS_BIFF))
       {
 	biff = HAS_STATUS(STATUS_BIFF);
-	tdb_foot();
+	tdb_foot(0, 0, 0);
       }
       next_check = time(NULL) + 10;
     }
@@ -870,8 +858,8 @@ delete_char:
 /* part of Serial Line Talk		 */
 /* ------------------------------------- */
 
-static void
-talk_save()
+static void 
+talk_save (void)
 {
   char fpath[64];
   char *menu[] = {"m備忘錄", "c清除", NULL};
@@ -887,10 +875,8 @@ talk_save()
 }
 
 
-static void
-draw_seperator(availines, paste_mode)
-  int availines;
-  int paste_mode;
+static void 
+draw_seperator (int availines, int paste_mode)
 {
   move(b_lines - availines - 1, 0);
   outs("───────────────────────── \033[1m");
@@ -898,12 +884,8 @@ draw_seperator(availines, paste_mode)
 }
 
 
-static void
-draw_dialog(biff, availines, textline, paste_mode)
-  int biff;
-  int availines;
-  char **textline;
-  int paste_mode;
+static void 
+draw_dialog (int biff, int availines, char **textline, int paste_mode)
 {
   int i;
   char indent[IDLEN + 1];
@@ -918,10 +900,8 @@ draw_dialog(biff, availines, textline, paste_mode)
 }
 
 
-static void
-tsl_foot(biff, A_ms, B_ms)
-  int biff;
-  int A_ms, B_ms;
+static void 
+tsl_foot (int biff, int A_ms, int B_ms)
 {
   move(b_lines, 0);
 #ifdef EVERY_BIFF
@@ -949,13 +929,14 @@ tsl_foot(biff, A_ms, B_ms)
 }
 
 
-static void
-chat_printline(color, prefix, msg, pCurln, availines)
-  uschar *color;
-  char *prefix;	/* 若msg為NULL，prefix也可以為NULL */
-  char *msg;
-  int *pCurln;
-  int availines;
+static void 
+chat_printline (
+    uschar *color,
+    char *prefix,	/* 若msg為NULL，prefix也可以為NULL */
+    char *msg,
+    int *pCurln,
+    int availines
+)
 {
   if(*pCurln >= b_lines - availines - 2)
   {
@@ -976,11 +957,8 @@ chat_printline(color, prefix, msg, pCurln, availines)
 }
 
 
-static void
-talk_speak(sock, itsuid, itsnick)
-  int sock;
-  char *itsuid;
-  char *itsnick;
+static void 
+talk_speak (int sock, char *itsuid, char *itsnick)
 {
   char buf[80], matid[IDLEN + 1], rec_path[64];
   int msg_curln, start_x, row, col, redraw_point, lock_board, m_lines;
@@ -1506,9 +1484,8 @@ disconnection:
 }
 
 
-static void
-talk_hangup(sock)
-  int sock;
+static void 
+talk_hangup (int sock)
 {
   cutmp->sockport = 0;
   cutmp->talker = -1;
@@ -1528,9 +1505,8 @@ static char *talk_reason[] =
 
 
 /* return 0: 沒有 talk, 1: 有 talk, -1: 其他 */
-int
-talk_page(up)
-  UTMP *up;
+int 
+talk_page (UTMP *up)
 {
   int sock, msgsock;
   struct sockaddr_in sin;
@@ -1683,8 +1659,8 @@ talk_page(up)
 /* ----------------------------------------------------- */
 
 
-int
-t_pager()
+int 
+t_pager (void)
 {
 #if 0	/* itoc.010923: 避免誤按，分清楚一點 */
   ┌────┬─────┬─────┬─────┐
@@ -1735,7 +1711,8 @@ t_pager()
 
 
 /* floatJ: 新增切換廣播天線的函式 */
-int t_rcver()
+int 
+t_rcver (void)
 {
   switch (vans("切換廣播天線為 1)接收 2)拒收 [Q] "))
   {
@@ -1752,8 +1729,8 @@ int t_rcver()
   return XEASY;
 }
 
-int
-t_cloak()
+int 
+t_cloak (void)
 {
 #ifdef HAVE_SUPERCLOAK
   if (HAS_PERM(PERM_ALLADMIN))
@@ -1793,8 +1770,8 @@ t_cloak()
 }
 
 
-int
-t_query()
+int 
+t_query (void)
 {
   ACCT acct;
 
@@ -1810,8 +1787,8 @@ t_query()
 }
 
 
-static int
-talk_choose()
+static int 
+talk_choose (void)
 {
   UTMP *up, *ubase, *uceil;
   int self;
@@ -1843,8 +1820,8 @@ talk_choose()
 }
 
 
-int
-t_talk()
+int 
+t_talk (void)
 {
   int tuid, unum, ucount;
   UTMP *up;
@@ -1904,8 +1881,8 @@ t_talk()
 /* 有人來串門子了，回應呼叫器		 */
 /* ------------------------------------- */
 
-void
-talk_rqst()
+void 
+talk_rqst (void)
 {
   UTMP *up;
   int mode, sock, ans, len, port;

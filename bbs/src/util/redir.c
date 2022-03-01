@@ -32,9 +32,8 @@ static FNAME *n_pool;
 static int n_size, n_head;
 
 
-static int
-pool_add(fname)
-  FNAME fname;
+static int 
+pool_add (FNAME fname)
 {
   char *p;
 
@@ -69,8 +68,7 @@ static int type;		/* 'b':看板 'g':精華區 'm':信箱 */
 
 
 static HDR *
-article_parse(fname)
-  char *fname;
+article_parse (char *fname)
 {
   char buf[ANSILINELEN], *ptr1, *ptr2, *ptr3;
   FILE *fp;
@@ -158,8 +156,8 @@ article_parse(fname)
 static char *allindex = ".DIR.tmp";
 
 
-static void
-allindex_collect()
+static void 
+allindex_collect (void)
 {
   int i;
   char *fname, fpath[64];
@@ -183,9 +181,8 @@ allindex_collect()
 }
 
 
-static int
-allindex_search(fname)
-  char *fname;
+static int 
+allindex_search (char *fname)
 {
   HDR old;
   int fd;
@@ -207,17 +204,15 @@ allindex_search(fname)
 }
 
 
-static int
-fname_cmp(s1, s2)
-  char *s1, *s2;
+static int 
+fname_cmp (char *s1, char *s2)
 {
   return strcmp(s1 + 1, s2 + 1);
 }
 
 
-static void
-usage(argv)
-  char *argv[];
+static void 
+usage (char *argv[])
 {
   char *str = argv[0];
 
@@ -231,10 +226,8 @@ usage(argv)
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   int i;
   char *fname, buf[10];

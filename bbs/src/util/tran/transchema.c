@@ -2,8 +2,8 @@
 
 
 
-int
-main()
+int 
+main (void)
 {
   int fd;
   char fnew[64], fpath[64];

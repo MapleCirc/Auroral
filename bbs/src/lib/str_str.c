@@ -1,10 +1,11 @@
 #include "dao.h"
 
 
-char * 
-str_str(str, tag) 
-  char *str; 
-  char *tag;                  /* non-empty lower case pattern */ 
+char *
+str_str (
+    char *str,
+    char *tag                  /* non-empty lower case pattern */
+) 
 { 
   int cc, c1, c2;
   char *p1, *p2;

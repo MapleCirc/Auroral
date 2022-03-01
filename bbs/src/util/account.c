@@ -39,16 +39,15 @@ static time_t now;			/* 執行程式的時間 */
 static BCACHE *bshm;
 
 
-static int
-boardname_cmp(a, b)
-  BRD *a, *b;
+static int 
+boardname_cmp (BRD *a, BRD *b)
 {
   return str_cmp(a->brdname, b->brdname);
 }
 
 
-static void
-fix_brd()
+static void 
+fix_brd (void)
 {
   BRD allbrd[MAXBOARD], brd;
   FILE *fp;
@@ -84,35 +83,27 @@ fix_brd()
 
 
 #ifdef HAVE_MODERATED_BOARD
-static int
-bpal_attr(ftype, uno)
-  int ftype;
-  int uno;
+static int 
+bpal_attr (int ftype, int uno)
 {
   return (ftype & PAL_BAD) ? -uno : uno;
 }
 
-static int
-blist_attr(ftype, uno)
-  int ftype;
-  int uno;
+static int 
+blist_attr (int ftype, int uno)
 {
   return uno;
 }
 
 
-static int
-int_cmp(a, b)
-  int *a, *b;
+static int 
+int_cmp (int *a, int *b)
 {
   return *a - *b;
 }
 
-static int
-init_pallist(fpath, pal_list, attr)
-  char *fpath;
-  int *pal_list;
-  int (*attr)(int, int);
+static int 
+init_pallist (char *fpath, int *pal_list, int (*attr)(int, int))
 {
   struct stat st;
   PAL *tmp;
@@ -148,8 +139,8 @@ init_pallist(fpath, pal_list, attr)
 #endif
 
 
-static void
-init_allbrd()
+static void 
+init_allbrd (void)
 {
   BRD *bcache = bshm->bcache;
 #ifdef HAVE_MODERATED_BOARD
@@ -177,9 +168,8 @@ init_allbrd()
 }
 
 
-static void
-init_bshm(verbose)
-  int verbose;
+static void 
+init_bshm (int verbose)
 {
   time_t *uptime;
   int n, turn;
@@ -231,9 +221,8 @@ init_bshm(verbose)
 /* ----------------------------------------------------- */
 
 
-static void
-update_btime(brdname)
-  char *brdname;
+static void 
+update_btime (char *brdname)
 {
   BRD *brdp, *bend;
 
@@ -250,12 +239,13 @@ update_btime(brdname)
 }
 
 
-static void
-keeplog(fnlog, board, title, mode)
-  char *fnlog;
-  char *board;
-  char *title;
-  int mode;			/* 0:load  1:rename  2:unlink */
+static void 
+keeplog (
+    char *fnlog,
+    char *board,
+    char *title,
+    int mode			/* 0:load  1:rename  2:unlink */
+)
 {
   HDR hdr;
   char folder[64], fpath[64];
@@ -303,13 +293,14 @@ keeplog(fnlog, board, title, mode)
 }
 
 
-static void
-keeplogV(fnlog, board, title, mode, eb)	/* 投票系統專用的keeplog() */
-  char *fnlog;
-  char *board;
-  char *title;
-  int mode;		/* 0:load  1:rename  2:unlink  (1用不到) */
-  int eb;		/* 0:不加上站簽  1:加上站簽 */
+static void 
+keeplogV (	/* 投票系統專用的keeplog() */
+    char *fnlog,
+    char *board,
+    char *title,
+    int mode,		/* 0:load  1:rename  2:unlink  (1用不到) */
+    int eb		/* 0:不加上站簽  1:加上站簽 */
+)
 {
   HDR hdr;
   char folder[64], fpath[64];
@@ -356,19 +347,19 @@ struct Tchoice
 };
 
 
-static int
-TchoiceCompare(i, j)
-  struct Tchoice *i, *j;
+static int 
+TchoiceCompare (struct Tchoice *i, struct Tchoice *j)
 {
   return j->count - i->count;
 }
 
 
-static int
-draw_vote(brd, fpath, vch)	/* 要和 vote.c 中的 draw_vote() 格式相同 */
-  BRD *brd;                     /* Thor: 傳入 BRD, 可查 battr */
-  char *fpath;
-  VCH *vch;
+static int 
+draw_vote (	/* 要和 vote.c 中的 draw_vote() 格式相同 */
+    BRD *brd,                     /* Thor: 傳入 BRD, 可查 battr */
+    char *fpath,
+    VCH *vch
+)
 {
   struct Tchoice choice[MAX_CHOICES];
   FILE *fp;
@@ -498,9 +489,8 @@ draw_vote(brd, fpath, vch)	/* 要和 vote.c 中的 draw_vote() 格式相同 */
 }
 
 
-static int		/* 0:不需寫回.BRD !=0:需寫回.BRD */
-draw_board(brd)
-  BRD *brd;
+static int 
+draw_board (BRD *brd)
 {
   int fd, fsize, alive;
   int oldbvote, newbvote;
@@ -599,8 +589,8 @@ draw_board(brd)
 }
 
 
-static void
-closepolls()
+static void 
+closepolls (void)
 {
   BRD *bcache, *head, *tail;
   int dirty;
@@ -650,9 +640,8 @@ static int chn;
 static BRD *bhead, *btail;
 
 
-static int
-class_parse(key)
-  char *key;
+static int 
+class_parse (char *key)
 {
   char *str, *ptr, fpath[64];
   ClassHeader *chp;
@@ -765,17 +754,18 @@ class_parse(key)
 }
 
 
-static int
-brdname_cmp(i, j)
-  short *i, *j;
+static int 
+brdname_cmp (short *i, short *j)
 {
   return str_cmp(bhead[*i].brdname, bhead[*j].brdname);
 }
 
 
-static int
-brdtitle_cmp(i, j)		/* itoc.010413: 依看板中文敘述排序 */
-  short *i, *j;
+static int 
+brdtitle_cmp (		/* itoc.010413: 依看板中文敘述排序 */
+    short *i,
+    short *j
+)
 {
   /* return strcmp(bhead[*i].title, bhead[*j].title); */
 
@@ -785,9 +775,8 @@ brdtitle_cmp(i, j)		/* itoc.010413: 依看板中文敘述排序 */
 }
 
 
-static void
-class_sort(cmp)
-  int (*cmp) ();
+static void 
+class_sort (int (*cmp)(void))
 {
   ClassHeader *chp;
   int i, j, max;
@@ -815,8 +804,8 @@ class_sort(cmp)
 }
 
 
-static void
-class_image()
+static void 
+class_image (void)
 {
   int i, times;
   FILE *fp;
@@ -866,9 +855,8 @@ class_image()
 /* ----------------------------------------------------- */
 
 
-static void
-error(fpath)
-  char *fpath;
+static void 
+error (char *fpath)
 {
   printf("can not open [%s]\n", fpath);
   /* exit(1); */	/* itoc.011004: 上站人次統計失敗，無需中斷 account 執行 */
@@ -876,9 +864,7 @@ error(fpath)
 
 
 static void
-ansi_puts(fp, buf, mode)
-  FILE *fp;
-  char *buf, mode;
+ansi_puts(FILE *fp, char *buf, char *mode)
 {
   static char state = '0';
 
@@ -892,9 +878,8 @@ ansi_puts(fp, buf, mode)
 }
 
 
-static void
-draw_usies(ptime)
-  struct tm *ptime;
+static void 
+draw_usies (struct tm *ptime)
 {
   int fact, hour, max, item, total, i, j, over;
   char buf[256];
@@ -1026,9 +1011,8 @@ draw_usies(ptime)
 /* ----------------------------------------------------- */
 
 
-static void
-gzip(source, target, stamp)
-  char *source, *target, *stamp;
+static void 
+gzip (char *source, char *target, char *stamp)
 {
   char buf[128];
 
@@ -1048,9 +1032,8 @@ gzip(source, target, stamp)
 
 
 #ifdef HAVE_SIGNED_MAIL
-static void
-private_key(ymd)
-  char *ymd;
+static void 
+private_key (char *ymd)
 {
   srandom(time(NULL));
 
@@ -1086,10 +1069,8 @@ private_key(ymd)
 /* ----------------------------------------------------- */
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   struct tm ntime, *ptime;
   FILE *fp;

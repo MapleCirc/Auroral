@@ -37,9 +37,7 @@ b_lines     指令列
 
 
 int			/* itoc.010802: 取代 vans("Y/N？[Y] ") 這類問題用的函式 */
-ians(x, y, msg)
-  int x, y;		/* itoc.010803: 一般拿 (b_lines - 2, 0) 來當詢問列 */
-  char *msg;
+ians(int x, int y, char *msg) /* itoc.010803: 一般拿 (b_lines - 2, 0) 來當詢問列 */
 {
   move(x, 0);		/* 清掉整列 */
   clrtoeol();
@@ -61,9 +59,11 @@ ians(x, y, msg)
 /*-------------------------------------------------------*/
 
 
-void
-clrfromto(from, to)	/* 清除 from~to 列，最後游標停留在 (from, 0) */
-  int from, to;
+void 
+clrfromto (	/* 清除 from~to 列，最後游標停留在 (from, 0) */
+    int from,
+    int to
+)
 {
   while (to >= from)
   {
@@ -74,10 +74,12 @@ clrfromto(from, to)	/* 清除 from~to 列，最後游標停留在 (from, 0) */
 }
 
 
-static int			/* 1: 檔案在  0: 檔案不在 */
-show_file(fpath, ln, lines)	/* 從第 ln 列開始印檔案 lines 列 */
-  char *fpath;
-  int ln, lines;
+static int 
+show_file (	/* 從第 ln 列開始印檔案 lines 列 */
+    char *fpath,
+    int ln,
+    int lines
+)
 {
   FILE *fp;
   char buf[ANSILINELEN];
@@ -113,9 +115,8 @@ show_file(fpath, ln, lines)	/* 從第 ln 列開始印檔案 lines 列 */
 /* 一般的圖，在 7~16 列 */
 /* -------------------- */
 
-int
-show_basic_pic(i)
-  int i;
+int 
+show_basic_pic (int i)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "basic/pic%d", i);
@@ -123,9 +124,10 @@ show_basic_pic(i)
 }
 
 
-int
-show_feed_pic(i)		/* 吃東西 */
-  int i;
+int 
+show_feed_pic (		/* 吃東西 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "feed/pic%d", i);
@@ -133,9 +135,10 @@ show_feed_pic(i)		/* 吃東西 */
 }
 
 
-int
-show_usual_pic(i)		/* 平常狀態 */
-  int i;
+int 
+show_usual_pic (		/* 平常狀態 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "usual/pic%d", i);
@@ -143,18 +146,20 @@ show_usual_pic(i)		/* 平常狀態 */
 }
 
 
-int
-show_special_pic(i)		/* 特殊選單 */
-  int i;
+int 
+show_special_pic (		/* 特殊選單 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "special/pic%d", i);
   return show_file(buf, 7, 10);
 }
 
-int
-show_practice_pic(i)		/* 修行用的圖 */
-  int i;
+int 
+show_practice_pic (		/* 修行用的圖 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "practice/pic%d", i);
@@ -162,9 +167,10 @@ show_practice_pic(i)		/* 修行用的圖 */
 }
 
 
-int
-show_job_pic(i)			/* 打工的show圖 */
-  int i;
+int 
+show_job_pic (			/* 打工的show圖 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "job/pic%d", i);
@@ -172,9 +178,10 @@ show_job_pic(i)			/* 打工的show圖 */
 }
 
 
-int
-show_play_pic(i)		/* 休閒的圖 */
-  int i;
+int 
+show_play_pic (		/* 休閒的圖 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "play/pic%d", i);
@@ -182,9 +189,10 @@ show_play_pic(i)		/* 休閒的圖 */
 }
 
 
-int
-show_guess_pic(i)		/* 猜拳用 */
-  int i;
+int 
+show_guess_pic (		/* 猜拳用 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "guess/pic%d", i);
@@ -192,9 +200,10 @@ show_guess_pic(i)		/* 猜拳用 */
 }
 
 
-int
-show_badman_pic(i)		/* 怪物 */
-  int i;
+int 
+show_badman_pic (		/* 怪物 */
+    int i
+)
 {
   char buf[64];
 
@@ -206,9 +215,10 @@ show_badman_pic(i)		/* 怪物 */
 }
 
 
-int
-show_fight_pic(i)		/* 打架 */
-  int i;
+int 
+show_fight_pic (		/* 打架 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "fight/pic%d", i);
@@ -216,9 +226,10 @@ show_fight_pic(i)		/* 打架 */
 }
 
 
-int
-show_resultshow_pic(i)		/* 收穫季 */
-  int i;
+int 
+show_resultshow_pic (		/* 收穫季 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "resultshow/pic%d", i);
@@ -226,9 +237,10 @@ show_resultshow_pic(i)		/* 收穫季 */
 }
 
 
-int
-show_quest_pic(i)		/* 任務 */
-  int i;
+int 
+show_quest_pic (		/* 任務 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "quest/pic%d", i);
@@ -240,9 +252,10 @@ show_quest_pic(i)		/* 任務 */
 /* 一些特殊的圖，秀在 1~10 列 */
 /* -------------------------- */
 
-int
-show_weapon_pic(i)		/* 武器用 */
-  int i;
+int 
+show_weapon_pic (		/* 武器用 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "weapon/pic%d", i);
@@ -250,9 +263,10 @@ show_weapon_pic(i)		/* 武器用 */
 }
 
 
-int
-show_palace_pic(i)		/* 參見王臣用 */
-  int i;
+int 
+show_palace_pic (		/* 參見王臣用 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "palace/pic%d", i);
@@ -264,9 +278,10 @@ show_palace_pic(i)		/* 參見王臣用 */
 /* 一些特殊的圖，秀在 4~19(b_lines-4) 列 */
 /* ------------------------------------- */
 
-int
-show_system_pic(i)		/* 系統 */
-  int i;
+int 
+show_system_pic (		/* 系統 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "system/pic%d", i);
@@ -274,9 +289,10 @@ show_system_pic(i)		/* 系統 */
 }
 
 
-int
-show_ending_pic(i)		/* 結束 */
-  int i;
+int 
+show_ending_pic (		/* 結束 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "ending/pic%d", i);
@@ -288,9 +304,10 @@ show_ending_pic(i)		/* 結束 */
 /* 一些特殊的圖，秀在整個螢幕 */
 /* -------------------------- */
 
-int
-show_die_pic(i)			/* 死亡 */
-  int i;
+int 
+show_die_pic (			/* 死亡 */
+    int i
+)
 {
   char buf[64];
   sprintf(buf, PIP_PICHOME "die/pic%d", i);

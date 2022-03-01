@@ -46,8 +46,8 @@ static int player[3];		/* 三位陪賽選手的號碼，強度是 player[2] > player[1] > pla
 
 /* itoc.030331.遊戲設計: 呼叫 pip_vs_man() 這函式進入戰鬥畫面，打贏多少人來算成績 */
 
-static int			/* 回傳: 贏了幾個人 >=3:冠軍 2:亞軍 1:季軍 <=0:最後一名 */
-pip_race_eventA()
+static int 
+pip_race_eventA (void)
 {
   int i, winorlost;
   char buf[80];
@@ -78,8 +78,8 @@ pip_race_eventA()
 
 /* itoc.030331.遊戲設計: 完全由 d.art 和 d.charm 來決定藝術大展的成績 */
 
-static int			/* 回傳: 贏了幾個人 >=3:冠軍 2:亞軍 1:季軍 <=0:最後一名 */
-pip_race_eventB()
+static int 
+pip_race_eventB (void)
 {
   /* 從 racemanlist 六位中挑出三個陪賽者 */
   player[0] = rand() % 2 + 4;
@@ -98,8 +98,8 @@ pip_race_eventB()
 
 /* itoc.030331.遊戲設計: 完全由 d.art 和 d.charm 來決定皇家舞會的成績 */
 
-static int			/* 回傳: 贏了幾個人 >=3:冠軍 2:亞軍 1:季軍 <=0:最後一名 */
-pip_race_eventC()
+static int 
+pip_race_eventC (void)
 {
   /* 從 racemanlist 六位中挑出三個陪賽者 */
   player[0] = rand() % 2 + 2;
@@ -119,8 +119,8 @@ pip_race_eventC()
 /* itoc.030331.遊戲設計: 原則上是由 d.cook 和 d.affect 來決定烹飪大賽的成績，
    但是如果菜色和目前的狀態吻合的話有加分效果，反之則有扣分效果 */
 
-static int			/* 回傳: 贏了幾個人 >=3:冠軍 2:亞軍 1:季軍 <=0:最後一名 */
-pip_race_eventD()
+static int 
+pip_race_eventD (void)
 {
   int winorlost;
 
@@ -152,10 +152,11 @@ pip_race_eventD()
 /*-------------------------------------------------------*/
 
 
-static void
-pip_race_ending(winorlost, mode)
-  int winorlost;		/* 贏了幾個人 >=3:冠軍 2:亞軍 1:季軍 <=0:最後一名 */
-  int mode;			/* 參加哪一種比賽 */
+static void 
+pip_race_ending (
+    int winorlost,		/* 贏了幾個人 >=3:冠軍 2:亞軍 1:季軍 <=0:最後一名 */
+    int mode			/* 參加哪一種比賽 */
+)
 {
   char *name1, *name2, *name3, *name4;
   char buf[80];
@@ -213,8 +214,8 @@ pip_race_ending(winorlost, mode)
 /*-------------------------------------------------------*/
 
 
-int			/* !=0:參加的項目 0:不參加 */
-pip_race_main()		/* 收穫季 */
+int 
+pip_race_main (void)		/* 收穫季 */
 {
   int ch;
   int winorlost;		/* 贏了幾個人 >=3:冠軍 2:亞軍 1:季軍 <=0:最後一名 */

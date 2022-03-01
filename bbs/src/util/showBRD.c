@@ -13,10 +13,8 @@
 #include "bbs.h"
 
 
-static void
-_bitmsg(msg, str, level)
-  char *msg, *str;
-  int level;
+static void 
+_bitmsg (char *msg, char *str, int level)
 {
   int cc;
 
@@ -31,10 +29,8 @@ _bitmsg(msg, str, level)
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   int show_allbrd;
   BRD brd;

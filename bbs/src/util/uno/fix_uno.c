@@ -35,9 +35,8 @@ typedef struct
 /*-------------------------------------------------------*/
 
 
-static int
-new_acct(userid)
-  char *userid;
+static int 
+new_acct (char *userid)
 {
   static int userno = 1;	/* userno 從 1 開始 */
   static time_t now = 100000;	/* 隨便給一個時間 */
@@ -94,16 +93,15 @@ static int new_num;
 static UNO *new_uno;
 
 
-static int
-uno_cmp_userid(a, b)
-  UNO *a, *b;
+static int 
+uno_cmp_userid (UNO *a, UNO *b)
 {
   return strcmp(a->userid, b->userid);
 }
 
 
-static void
-collect_new_uno()
+static void 
+collect_new_uno (void)
 {
   int fd, num;
   SCHEMA slot;
@@ -130,9 +128,10 @@ collect_new_uno()
 }
 
 
-static int
-acct_uno(userid)	/* 用 ID 找新的 userno */
-  char *userid;
+static int 
+acct_uno (	/* 用 ID 找新的 userno */
+    char *userid
+)
 {
   UNO uno, *find;
 
@@ -147,16 +146,15 @@ static int old_num;
 static UNO *old_uno;
 
 
-static int
-uno_cmp_userno(a, b)
-  UNO *a, *b;
+static int 
+uno_cmp_userno (UNO *a, UNO *b)
 {
   return a->userno - b->userno;
 }
 
 
-static void
-collect_old_uno()
+static void 
+collect_old_uno (void)
 {
   int fsize;
 
@@ -169,9 +167,10 @@ collect_old_uno()
 }
 
 
-static int
-acct_uno2(olduno)	/* 用舊的 userno 找新的 userno */
-  int olduno;
+static int 
+acct_uno2 (	/* 用舊的 userno 找新的 userno */
+    int olduno
+)
 {
   UNO uno, *find;
 
@@ -193,9 +192,8 @@ static int rec_max;
 static char *rec_pool;
 
 
-static int
-new_pal(userid)
-  char *userid;
+static int 
+new_pal (char *userid)
 {
   int fd, num;
   char folder[64];
@@ -223,9 +221,8 @@ new_pal(userid)
 
 
 #ifdef HAVE_LIST
-static int
-new_list(userid)
-  char *userid;
+static int 
+new_list (char *userid)
 {
   int fd, ch, num;
   char folder[64], fname[16];
@@ -258,9 +255,8 @@ new_list(userid)
 
 
 #ifdef HAVE_ALOHA
-static int
-new_aloha(userid)
-  char *userid;
+static int 
+new_aloha (char *userid)
 {
   int fd, num;
   char folder[64];
@@ -302,9 +298,8 @@ new_aloha(userid)
 
 
 #ifdef LOGIN_NOTIFY
-static int
-new_benz(userid)
-  char *userid;
+static int 
+new_benz (char *userid)
 {
   int fd, num;
   char folder[64];
@@ -332,9 +327,8 @@ new_benz(userid)
 #endif
 
 
-static int
-new_bmw(userid)
-  char *userid;
+static int 
+new_bmw (char *userid)
 {
   int fsize;
   char folder[64];
@@ -361,9 +355,8 @@ new_bmw(userid)
 
 
 #ifdef HAVE_MODERATED_BOARD
-static int
-new_bpal(brdname)
-  char *brdname;
+static int 
+new_bpal (char *brdname)
 {
   int fd, num;
   char folder[64];
@@ -396,8 +389,8 @@ new_bpal(brdname)
 /*-------------------------------------------------------*/
 
 
-int
-main()
+int 
+main (void)
 {
   char c;
   char *userid, fpath[64];

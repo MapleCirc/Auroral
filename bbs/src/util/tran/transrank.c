@@ -18,8 +18,8 @@ struct old_rli{		/* 排行榜結構體 */
 } old_ranklist[6][5];
 
 
-static void
-saverank()
+static void 
+saverank (void)
 {
   FILE *fp;
 
@@ -33,8 +33,8 @@ saverank()
 }
 
 
-static void
-loadrank()
+static void 
+loadrank (void)
 {
   FILE *fp;
 
@@ -52,7 +52,8 @@ loadrank()
 
 
 
-int main()
+int 
+main (void)
 {
   int i, j;
 

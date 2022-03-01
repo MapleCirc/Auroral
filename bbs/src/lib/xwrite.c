@@ -1,8 +1,5 @@
-int
-xwrite(fd, data, size)
-  int fd;
-  char *data;
-  int size;
+int 
+xwrite (int fd, char *data, int size)
 {
   int cc;
 

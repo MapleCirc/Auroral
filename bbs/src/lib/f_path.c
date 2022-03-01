@@ -5,10 +5,7 @@
 #include <string.h>
 
 static void
-mak_fpath(str, key, name)
-  char *str;
-  char *key;
-  char *name;
+mak_fpath(char *str, char *key, char *name)
 {
   int cc;
 
@@ -30,11 +27,8 @@ mak_fpath(str, key, name)
 }
 
 
-void
-brd_fpath(fpath, board, fname)
-  char *fpath;
-  char *board;
-  char *fname;
+void 
+brd_fpath (char *fpath, char *board, char *fname)
 {
   *fpath++ = 'b';
   *fpath++ = 'r';
@@ -43,11 +37,8 @@ brd_fpath(fpath, board, fname)
 }
 
 
-void
-gem_fpath(fpath, board, fname)
-  char *fpath;
-  char *board;
-  char *fname;
+void 
+gem_fpath (char *fpath, char *board, char *fname)
 {
   *fpath++ = 'g';
   *fpath++ = 'e';
@@ -60,11 +51,8 @@ gem_fpath(fpath, board, fname)
 }
 
 
-void
-usr_fpath(fpath, user, fname)
-  char *fpath;
-  char *user;
-  char *fname;
+void 
+usr_fpath (char *fpath, char *user, char *fname)
 {
 #define IDLEN    12 	/* Length of user id, copy from struct.h */
 

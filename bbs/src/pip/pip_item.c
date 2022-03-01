@@ -56,11 +56,8 @@ struct itemset pipotherlist[] =
 /* ------------------------------------------------------- */
 
 
-int
-pip_buy_item(mode, p, oldnum)
-  int mode;
-  int oldnum[];
-  struct itemset *p;
+int 
+pip_buy_item (int mode, struct itemset *p, int oldnum[])
 {
   char *shopname[4] = {"店名", "便利商店", "長春藥鋪", "夜裡書局"};
   char buf[128], genbuf[20];
@@ -203,8 +200,8 @@ pip_buy_item(mode, p, oldnum)
 /* 函式庫                      				 */
 /*-------------------------------------------------------*/
 
-int
-pip_store_food()
+int 
+pip_store_food (void)
 {
   int num[3];
   num[0] = 2;
@@ -217,8 +214,8 @@ pip_store_food()
 }
 
 
-int
-pip_store_medicine()
+int 
+pip_store_medicine (void)
 {
   int num[7];
   num[0] = 6;
@@ -239,8 +236,8 @@ pip_store_medicine()
 }
 
 
-int
-pip_store_other()
+int 
+pip_store_other (void)
 {
   int num[4];
   num[0] = 3;

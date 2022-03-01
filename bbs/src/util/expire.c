@@ -61,9 +61,8 @@ typedef struct
   int exist;
 } Life;
 
-static int
-Life_cmp(a, b)
-  Life *a, *b;
+static int 
+Life_cmp (Life *a, Life *b)
 {
   return str_cmp(a->bname, b->bname);
 }
@@ -81,9 +80,8 @@ typedef struct
 } SyncData;
 
 
-static int
-SyncData_cmp(a, b)
-  SyncData *a, *b;
+static int 
+SyncData_cmp (SyncData *a, SyncData *b)
 {
   return a->chrono - b->chrono;
 }
@@ -106,9 +104,8 @@ static time_t startime, synctime;
   然後在 expire() 檢查該檔案是否在 .DIR 中，若在 .DIR 中就把 exotic 設回 0
   最後在 sync_check() 中把 sync_pool[] 裡 exotic 還是 1 的檔案都刪除 */
 
-static int	/* -1: init失敗，取消sync */
-sync_init(fname)
-  char *fname;
+static int 
+sync_init (char *fname)
 {
   int ch, prefix;
   time_t chrono;
@@ -192,9 +189,7 @@ sync_init(fname)
 
 
 static void
-sync_check(flog, fname)
-  FILE *flog;
-  char *fname;
+sync_check(FILE *flog, char *fname)
 {
   char *str, fpath[80];
   SyncData *xpool, *xtail;
@@ -226,11 +221,8 @@ sync_check(flog, fname)
 }
 
 
-static void
-expire(life, battr, sync)
-  Life *life;
-  usint battr;
-  int sync;
+static void 
+expire (Life *life, usint battr, int sync)
 {
   HDR hdr;
   struct stat st;
@@ -414,9 +406,8 @@ expire(life, battr, sync)
 
 
 
-static void
-expire_board_usies(bname)
-  char *bname;
+static void 
+expire_board_usies (char *bname)
 {
   char fpath[64], fnew[64], buf[256];
   struct stat st;
@@ -468,10 +459,11 @@ expire_board_usies(bname)
 }
 
 
-static void
-dummy_config(conf_ptr, conf_end)	/* 檢查是否有不存在的設定 */
-  Life *conf_ptr;
-  Life *conf_end;
+static void 
+dummy_config (	/* 檢查是否有不存在的設定 */
+    Life *conf_ptr,
+    Life *conf_end
+)
 {
   int n = 0;
 
@@ -489,10 +481,8 @@ dummy_config(conf_ptr, conf_end)	/* 檢查是否有不存在的設定 */
 
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   int ch, bno, sync_counter, conf_size = 0;
   Life *key, db = {"", DEF_DAYS, DEF_MAXP, DEF_MINP};

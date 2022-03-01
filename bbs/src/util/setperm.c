@@ -26,9 +26,8 @@
 #include "bbs.h"
 
 
-static void
-usage(msg)
-  char *msg;
+static void 
+usage (char *msg)
 {
   printf("Usage: %s Perm32 UserID1 [UserID2] ...\n", msg);
   exit(1);
@@ -36,9 +35,7 @@ usage(msg)
 
 
 int 
-main(argc, argv)
-  int argc;
-  char *argv[];
+main (int argc, char *argv[])
 {
   int i;
   usint userlevel;

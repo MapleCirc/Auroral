@@ -14,8 +14,7 @@
 /* Thor.990811: find out A record */
 
 unsigned long
-dns_a(host)
-  char *host;
+dns_a(char *host)
 {
   querybuf ans;
   int n, ancount, qdcount;
@@ -67,10 +66,8 @@ dns_a(host)
   return INADDR_NONE;
 }
 
-int
-dns_open(host, port)
-  char *host;
-  int port;
+int 
+dns_open (char *host, int port)
 {
   struct sockaddr_in sin;
   ip_addr addr;

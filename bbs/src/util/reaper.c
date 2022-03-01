@@ -56,8 +56,8 @@ static int spcperm_sum[SPECIAL_PERM_NUM];
 
 
 
-static void
-unexcepted_abort()
+static void 
+unexcepted_abort (void)
 {
   const char *pattern_message = "===== unexcepted abort =====\n";
 
@@ -69,8 +69,8 @@ unexcepted_abort()
 }
 
 
-static int	/* 0: SHM尚未設定好 */
-init_bshm()
+static int 
+init_bshm (void)
 {
   bshm = shm_new(BRDSHM_KEY, sizeof(BCACHE));
 
@@ -78,42 +78,46 @@ init_bshm()
 }
 
 
-static int
-uid_cmp(a, b)
-  char *a, *b;
+static int 
+uid_cmp (char *a, char *b)
 {
   return str_cmp(a, b);
 }
 
 
-static int
-explst_uno_cmp(a, b)	/* 依userno由小到大排序 */
-  SCHEMA *a, *b;
+static int 
+explst_uno_cmp (	/* 依userno由小到大排序 */
+    SCHEMA *a,
+    SCHEMA *b
+)
 {
   return a->userno - b->userno;
 }
 
 
-static int
-explst_uid_cmp(a, b)	/* 依userid排序 */
-  SCHEMA *a, *b;
+static int 
+explst_uid_cmp (	/* 依userid排序 */
+    SCHEMA *a,
+    SCHEMA *b
+)
 {
   return str_ncmp(a->userid, b->userid, sizeof(b->userid));
 }
 
 
-static int
-explst_uid_find(a, b)	/* 依userid排序(搜尋用) */
-  char *a;
-  SCHEMA *b;
+static int 
+explst_uid_find (	/* 依userid排序(搜尋用) */
+    char *a,
+    SCHEMA *b
+)
 {
   return str_ncmp(a, b->userid, sizeof(b->userid));
 }
 
 
 
-static void
-collect_allBM()
+static void 
+collect_allBM (void)
 {
   BRD *head, *tail;
   char *bm, buf[BMLEN + 1];
@@ -137,17 +141,15 @@ collect_allBM()
 
 
 
-static char *		/* 1: 在全站板主名單內 */
-check_allBM(userid)
-  const char *userid;
+static char *
+check_allBM (const char *userid)
 {
   return bsearch(userid, BMpool, BMpool_sz, IDLEN + 1, uid_cmp);
 }
 
 
-static void
-enum_special_perm(ulevel)
-  usint ulevel;
+static void 
+enum_special_perm (usint ulevel)
 {
   int i;
 
@@ -164,10 +166,8 @@ enum_special_perm(ulevel)
 }
 
 
-static void
-push_expired_usr(userno, userid)
-  int userno;
-  char *userid;
+static void 
+push_expired_usr (int userno, char *userid)
 {
   if(expusr_size >= expired_users_allocnum)
   {
@@ -188,10 +188,11 @@ push_expired_usr(userno, userid)
 }
 
 
-static void
-reaper(fpath, lower_id)
-  char *fpath;
-  char *lower_id;	/* 使用者ID在硬碟中的資料夾名，全小寫 */
+static void 
+reaper (
+    char *fpath,
+    char *lower_id	/* 使用者ID在硬碟中的資料夾名，全小寫 */
+)
 {
   FILE *fp;
   ACCT acct;
@@ -309,9 +310,10 @@ reaper(fpath, lower_id)
 }
 
 
-static void
-traverse(fpath)	/* visit secondary user hierarchy */
-  char *fpath;
+static void 
+traverse (	/* visit secondary user hierarchy */
+    char *fpath
+)
 {
   DIR *dirp;
   struct dirent *de;
@@ -340,8 +342,8 @@ traverse(fpath)	/* visit secondary user hierarchy */
 
 
 
-static void
-schema_cleaner()	/* 移除.USR中這次被清掉的帳號與空白欄位 */
+static void 
+schema_cleaner (void)	/* 移除.USR中這次被清掉的帳號與空白欄位 */
 {
   SCHEMA schema;
   int i = 0, last_uno = 1, max_uno = 0;
@@ -398,16 +400,15 @@ schema_cleaner()	/* 移除.USR中這次被清掉的帳號與空白欄位 */
 
 
 
-static int
-in_expired(userid)
-  const char *userid;
+static int 
+in_expired (const char *userid)
 {
   return bsearch(userid, expired_users, expusr_size, sizeof(SCHEMA), explst_uid_find) != NULL;
 }
 
 
-static void
-remove_expiredBM()	/* 拔掉被清掉的板主 */
+static void 
+remove_expiredBM (void)	/* 拔掉被清掉的板主 */
 {
   BRD *brd;
   int bno, i, modified;
@@ -474,8 +475,8 @@ remove_expiredBM()	/* 拔掉被清掉的板主 */
 
 
 
-int
-main()
+int 
+main (void)
 {
   char fpath[64], prefix;
   time_t phase2_end;

@@ -45,8 +45,10 @@ static XO ulist_xo;
 
 #if 0
 static char *
-pal_ship(ftype, userno)	/* itoc.020811: 傳回朋友敘述 */
-  int ftype, userno;
+pal_ship (	/* itoc.020811: 傳回朋友敘述 */
+    int ftype,
+    int userno
+)
 {
   int fd;
   PAL *pal;
@@ -85,8 +87,10 @@ typedef struct
 
         
 static char *
-pal_ship(ftype, userno)	/* itoc.020811: 傳回朋友敘述 */
-  int ftype, userno;
+pal_ship (	/* itoc.020811: 傳回朋友敘述 */
+    int ftype,
+    int userno
+)
 {
   static PALSHIP palship[PAL_MAX] = {0};
   PALSHIP *pp;
@@ -134,12 +138,13 @@ pal_ship(ftype, userno)	/* itoc.020811: 傳回朋友敘述 */
 
 
 static void
-ulist_item(num, up, slot, now, sysop)
-  int num;
-  UTMP *up;
-  int slot;
-  time_t now;
-  int sysop;
+ulist_item(
+  int num,
+  UTMP *up,
+  int slot,
+  time_t now,
+  int sysop
+)
 {
   time_t diff, ftype;
   int userno, hide_from = 1;
@@ -277,9 +282,8 @@ process_idletime:
 }
 
 
-static int
-ulist_body(xo)
-  XO *xo;
+static int 
+ulist_body (XO *xo)
 {
   pickup *pp;
   UTMP *up;
@@ -344,18 +348,16 @@ ulist_body(xo)
 }
 
 
-static int
-ulist_cmp_userid(i, j)
-  UTMP **i, **j;
+static int 
+ulist_cmp_userid (UTMP **i, UTMP **j)
 {
   int k = ulist_ftype[(*i) - ushm->uslot] - ulist_ftype[(*j) - ushm->uslot];
   return k ? k : str_cmp((*i)->userid, (*j)->userid);
 }
 
 
-static int
-ulist_cmp_host(i, j)
-  UTMP **i, **j;
+static int 
+ulist_cmp_host (UTMP **i, UTMP **j)
 {
   int k = ulist_ftype[(*i) - ushm->uslot] - ulist_ftype[(*j) - ushm->uslot];
   /* return k ? k : (*i)->in_addr - (*j)->in_addr; */
@@ -364,9 +366,8 @@ ulist_cmp_host(i, j)
 }
 
 
-static int
-ulist_cmp_mode(i, j)
-  UTMP **i, **j;
+static int 
+ulist_cmp_mode (UTMP **i, UTMP **j)
 {
   int k = ulist_ftype[(*i) - ushm->uslot] - ulist_ftype[(*j) - ushm->uslot];
   return k ? k : (*i)->mode - (*j)->mode;
@@ -374,9 +375,8 @@ ulist_cmp_mode(i, j)
 
 
 #ifdef HAVE_BRDMATE
-static int
-ulist_cmp_brdmate(i, j)
-  UTMP **i, **j;
+static int 
+ulist_cmp_brdmate (UTMP **i, UTMP **j)
 {
 #ifdef HAVE_ANONYMOUS
   if (!(currbattr & BRD_ANONYMOUS) || HAS_PERM(PERM_SYSOP))	/* 閱讀匿名板則不列入 */
@@ -429,9 +429,10 @@ static char *msg_pickup_way[PICKUP_WAYS] =
 };
 
 
-static int
-ulist_paltype(up)		/* 朋友種類 */
-  UTMP *up;
+static int 
+ulist_paltype (		/* 朋友種類 */
+    UTMP *up
+)
 {
   const int userno = up->userno;
 
@@ -471,8 +472,7 @@ ulist_paltype(up)		/* 朋友種類 */
 
 
 static int
-ulist_init(xo)
-  XO *xo;
+ulist_init(XO *xo)
 {
   UTMP *up, *uceil;
   pickup *pp;
@@ -536,9 +536,8 @@ ulist_init(xo)
 }
 
 
-static int
-ulist_neck(xo)
-  XO *xo;
+static int 
+ulist_neck (XO *xo)
 {
   move(1, 0);
 
@@ -557,18 +556,16 @@ ulist_neck(xo)
 }
 
 
-static int
-ulist_head(xo)
-  XO *xo;
+static int 
+ulist_head (XO *xo)
 {
   vs_head("網友列表", str_site);
   return ulist_neck(xo);
 }
 
 
-static int
-ulist_toggle(xo)
-  XO *xo;
+static int 
+ulist_toggle (XO *xo)
 {
   int ans, max;
 
@@ -593,9 +590,8 @@ ulist_toggle(xo)
 }
 
 
-static int
-ulist_pal(xo)
-  XO *xo;
+static int 
+ulist_pal (XO *xo)
 {
   cuser.ufo ^= UFO_PAL;
   cutmp->ufo = cuser.ufo;
@@ -603,10 +599,8 @@ ulist_pal(xo)
 }
 
 
-static int
-ulist_search(xo, step)
-  XO *xo;
-  int step;
+static int 
+ulist_search (XO *xo, int step)
 {
   int num, pos, max;
   pickup *pp;
@@ -641,25 +635,22 @@ ulist_search(xo, step)
 }
 
 
-static int
-ulist_search_forward(xo)
-  XO *xo;
+static int 
+ulist_search_forward (XO *xo)
 {
   return ulist_search(xo, 1); /* step = +1 */
 }
 
 
-static int
-ulist_search_backward(xo)
-  XO *xo;
+static int 
+ulist_search_backward (XO *xo)
 {
   return ulist_search(xo, -1); /* step = -1 */
 }
 
 
-static int
-ulist_addpal(xo)
-  XO *xo;
+static int 
+ulist_addpal (XO *xo)
 {
   if (cuser.userlevel)
   {
@@ -698,18 +689,16 @@ ulist_addpal(xo)
 }
 
 
-static int
-cmppal(pal)
-  PAL *pal;
+static int 
+cmppal (PAL *pal)
 {
   return pal->userno == currchrono;
 }
 
 
 
-static int
-ulist_delpal(xo)
-  XO *xo;
+static int 
+ulist_delpal (XO *xo)
 {
   if (cuser.userlevel)
   {
@@ -740,9 +729,8 @@ ulist_delpal(xo)
 }
 
 
-static int
-ulist_mail(xo)
-  XO *xo;
+static int 
+ulist_mail (XO *xo)
 {
   char userid[IDLEN + 1];
 
@@ -759,9 +747,8 @@ ulist_mail(xo)
 }
 
 
-static int
-ulist_query(xo)
-  XO *xo;
+static int 
+ulist_query (XO *xo)
 {
   ACCT acct;
   UTMP *up = ulist_pool[xo->pos];
@@ -784,9 +771,8 @@ ulist_query(xo)
 }
 
 
-static int
-ulist_broadcast(xo)
-  XO *xo;
+static int 
+ulist_broadcast (XO *xo)
 {
   int num, sysop;
   pickup *pp;
@@ -843,9 +829,8 @@ ulist_broadcast(xo)
 }
 
 
-static int
-ulist_talk(xo)
-  XO *xo;
+static int 
+ulist_talk (XO *xo)
 {
   if (HAS_PERM(PERM_PAGE))
   {
@@ -859,9 +844,8 @@ ulist_talk(xo)
 }
 
 
-static int
-ulist_write(xo)
-  XO *xo;
+static int 
+ulist_write (XO *xo)
 {
   UTMP *up;
 
@@ -873,9 +857,10 @@ ulist_write(xo)
   return XO_NONE;
 }
 
-static int
-ulist_edit(xo)			/* Thor: 可線上查看及修改使用者 */
-  XO *xo;
+static int 
+ulist_edit (			/* Thor: 可線上查看及修改使用者 */
+    XO *xo
+)
 {
   ACCT acct;
 
@@ -888,9 +873,8 @@ ulist_edit(xo)			/* Thor: 可線上查看及修改使用者 */
 }
 
 
-static int
-ulist_kick(xo)
-  XO *xo;
+static int 
+ulist_kick (XO *xo)
 {
   if (HAS_PERM(PERM_ALLACCT))
   {
@@ -921,9 +905,8 @@ ulist_kick(xo)
 
 
 #ifdef HAVE_CHANGE_NICK
-static int
-ulist_nickchange(xo)
-  XO *xo;
+static int 
+ulist_nickchange (XO *xo)
 {
   char *str, buf[UNLEN + 1];
 
@@ -946,9 +929,8 @@ ulist_nickchange(xo)
 
 
 #ifdef HAVE_CHANGE_FROM
-static int
-ulist_fromchange(xo)
-  XO *xo;
+static int 
+ulist_fromchange (XO *xo)
 {
   char *str, buf[34];
   
@@ -974,9 +956,8 @@ ulist_fromchange(xo)
 
 /* itoc.010717.註解: 這功能提供站長可以在使用者名單暫時改自己的 ID，
    但是由於 ulist 大部分是用 userno 來判斷，所以只有好看而已 */
-static int
-ulist_idchange(xo)
-  XO *xo;
+static int 
+ulist_idchange (XO *xo)
 {
   char buf[IDLEN + 1];
   int i;
@@ -1009,9 +990,10 @@ ulist_idchange(xo)
 #endif
 
 
-static int  
-ulist_cloak(xo)			/* itoc.010908: 快速隱身 */
-  XO *xo;
+static int 
+ulist_cloak (			/* itoc.010908: 快速隱身 */
+    XO *xo
+)
 {
   /* 通過認證者即可隱身 */
   if (HAS_PERM(PERM_VALID))
@@ -1027,9 +1009,10 @@ ulist_cloak(xo)			/* itoc.010908: 快速隱身 */
 
 
 #ifdef HAVE_SUPERCLOAK
-static int
-ulist_supercloak(xo)		/* itoc.010908: 快速紫隱 */
-  XO *xo;
+static int 
+ulist_supercloak (		/* itoc.010908: 快速紫隱 */
+    XO *xo
+)
 {
   if (cuser.ufo & UFO_SUPERCLOAK)	/* 取消紫隱，不必管權限 */
   {
@@ -1049,26 +1032,23 @@ ulist_supercloak(xo)		/* itoc.010908: 快速紫隱 */
 #endif
 
 
-static int
-ulist_ship(xo)
-  XO *xo;
+static int 
+ulist_ship (XO *xo)
 {
   pickup_ship = ~pickup_ship;
   return ulist_neck(xo);
 }
 
 
-static int	/* qazq.030719: 使用者選單可以直接閒置 */
-ulist_lock(xo)
-  XO *xo;
+static int 
+ulist_lock (XO *xo)
 {
   u_lock();
   return ulist_init(xo);
 }
 
-static int
-ulist_readmail(xo)
-  XO *xo;
+static int 
+ulist_readmail (XO *xo)
 {
   if (!cuser.userlevel)
     return XO_NONE;
@@ -1078,25 +1058,22 @@ ulist_readmail(xo)
 }
 
 
-static int
-ulist_pager(xo)
-  XO *xo;
+static int 
+ulist_pager (XO *xo)
 {
   t_pager();
   return ulist_body(xo);	/* 同步更新自己的呼叫器狀態 */
 }
 
-static int
-ulist_rcver(xo)
-  XO *xo;
+static int 
+ulist_rcver (XO *xo)
 {
   t_rcver();
   return ulist_body(xo);
 }
 
-static int
-ulist_recall(xo)
-  XO *xo;
+static int 
+ulist_recall (XO *xo)
 {
   if (cuser.userlevel)
   {
@@ -1107,9 +1084,8 @@ ulist_recall(xo)
 }
 
 
-static int
-ulist_display(xo)
-  XO *xo;
+static int 
+ulist_display (XO *xo)
 {
   if (cuser.userlevel)
   {
@@ -1121,18 +1097,16 @@ ulist_display(xo)
 
 
 /* dust: 切換顯示的函數 */
-static int
-ulist_idle(xo)
-  XO* xo;
+static int 
+ulist_idle (XO *xo)
 {
   cuser.ufo ^= UFO_IDLEONLY;
   return ulist_init(xo);
 }
 
 
-static int
-ulist_help(xo)
-  XO *xo;
+static int 
+ulist_help (XO *xo)
 {
   xo_help("ulist");
   return ulist_head(xo);
@@ -1200,8 +1174,8 @@ static KeyFunc ulist_cb[] =
 };
 
 
-void
-talk_main()
+void 
+talk_main (void)
 {
   char fpath[64];
 

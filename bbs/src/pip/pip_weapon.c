@@ -26,9 +26,10 @@ static weapon p[9];		/* 記錄武器 */
 
 
 /* itoc.021031: 為了增加遊戲的多樣性，寫一支武器產生器 */
-static void
-weapon_generate(type)
-  int type;			/* 哪一部分裝備 */
+static void 
+weapon_generate (
+    int type			/* 哪一部分裝備 */
+)
 {
   int i, num;
 
@@ -69,10 +70,11 @@ weapon_generate(type)
 }
 
 
-void
-pip_weapon_wear(type, variance)	/* 裝備武器，計算能力的改變 */
-  int type;			/* 哪一部分裝備 */
-  int variance;			/* 新舊武器的品質差異 */
+void 
+pip_weapon_wear (	/* 裝備武器，計算能力的改變 */
+    int type,			/* 哪一部分裝備 */
+    int variance			/* 新舊武器的品質差異 */
+)
 {
   /* 依裝備部位不同來改變指數 */
   if (type == 0)	/* 頭部武器 */
@@ -103,11 +105,12 @@ pip_weapon_wear(type, variance)	/* 裝備武器，計算能力的改變 */
 }
 
 
-static int
-pip_weapon_doing_menu(quality, type, name)	/* 武器購買畫面 */
-  int quality;			/* 傳入目前配戴 */
-  int type;			/* 哪一部分裝備 */
-  char *name;
+static int 
+pip_weapon_doing_menu (	/* 武器購買畫面 */
+    int quality,			/* 傳入目前配戴 */
+    int type,			/* 哪一部分裝備 */
+    char *name
+)
 {
   char menutitle[5][11] = {"頭部裝備區", "手部裝備區", "盾牌裝備區", "身體裝備區", "腳部裝備區"};
   char buf[80];
@@ -200,40 +203,40 @@ pip_weapon_doing_menu(quality, type, name)	/* 武器購買畫面 */
 /*-------------------------------------------------------*/
 
 
-int
-pip_store_weapon_head()		/* 頭部武器 */
+int 
+pip_store_weapon_head (void)		/* 頭部武器 */
 {
   d.weaponhead = pip_weapon_doing_menu(d.weaponhead, 0, d.equiphead);
   return 0;
 }
 
 
-int
-pip_store_weapon_hand()		/* 手部武器 */
+int 
+pip_store_weapon_hand (void)		/* 手部武器 */
 {
   d.weaponhand = pip_weapon_doing_menu(d.weaponhand, 1, d.equiphand);
   return 0;
 }
 
 
-int
-pip_store_weapon_shield()	/* 盾牌武器 */
+int 
+pip_store_weapon_shield (void)	/* 盾牌武器 */
 {
   d.weaponshield = pip_weapon_doing_menu(d.weaponshield, 2, d.equipshield);
   return 0;
 }
 
 
-int
-pip_store_weapon_body()		/* 身體武器 */
+int 
+pip_store_weapon_body (void)		/* 身體武器 */
 {
   d.weaponbody = pip_weapon_doing_menu(d.weaponbody, 3, d.equipbody);
   return 0;
 }
 
 
-int
-pip_store_weapon_foot()		/* 腳部武器 */
+int 
+pip_store_weapon_foot (void)		/* 腳部武器 */
 {
   d.weaponfoot = pip_weapon_doing_menu(d.weaponfoot, 4, d.equipfoot);
   return 0;

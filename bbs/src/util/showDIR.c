@@ -12,9 +12,7 @@
 
 
 static char *
-_bitmsg(str, level)
-  char *str;
-  int level;
+_bitmsg (char *str, int level)
 {
   int cc;
   int num;
@@ -34,9 +32,8 @@ _bitmsg(str, level)
 }
 
 
-static inline void
-showHDR(hdr)
-  HDR *hdr;
+static inline void 
+showHDR (HDR *hdr)
 {
   char msg1[40], msg2[40];
 
@@ -48,10 +45,8 @@ showHDR(hdr)
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   int pos;
   char *fname;

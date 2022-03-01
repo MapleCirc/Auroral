@@ -20,10 +20,8 @@
 /* 選項繪製						 */
 /* ----------------------------------------------------- */
 
-static void
-draw_item(desc, is_cur)
-  char *desc;
-  int is_cur;
+static void 
+draw_item (char *desc, int is_cur)
 {
   if(is_cur)
     prints(COLOR4 "> [%c]%-25s  \033[m", *desc, desc + 1);
@@ -37,10 +35,12 @@ draw_item(desc, is_cur)
 /* 找選項						 */
 /* ----------------------------------------------------- */
 
-static int			/* -1:找不到 >=0:第幾個選項 */
-find_cur(ch, max, desc)		/* 找 ch 這個按鍵是第幾個選項 */
-  int ch, max;
-  char *desc[];
+static int 
+find_cur (		/* 找 ch 這個按鍵是第幾個選項 */
+    int ch,
+    int max,
+    char *desc[]
+)
 {
   int i, cc;
 
@@ -76,11 +76,8 @@ find_cur(ch, max, desc)		/* 找 ch 這個按鍵是第幾個選項 */
 /* desc[]長度不能超過26, title不能超過28，否則排版會亂掉 */
 /*------------------------------------------------------ */
 
-int
-pans(y, x, title, desc)
-  int y, x;
-  char *title;
-  char *desc[];
+int 
+pans (int y, int x, char *title, char *desc[])
 {
   int cur = 0, old_cur, max = y, ch, i;
   char buf[128];
@@ -182,10 +179,8 @@ pans(y, x, title, desc)
 
 #ifdef POPUP_MESSAGE
 
-static void
-draw_line(y, x, str)
-  int y, x;
-  uschar *str;
+static void 
+draw_line (int y, int x, uschar *str)
 {
   move(y, x);
   outstr(str);
@@ -195,9 +190,10 @@ draw_line(y, x, str)
 /* 蹦出式視窗訊息，可用來取代 vmsg()			 */
 /*------------------------------------------------------ */
 
-int
-pmsg(msg)
-  char *msg;		/* 不可為 NULL */
+int 
+pmsg (
+    char *msg		/* 不可為 NULL */
+)
 {
   int len, y, x, i;
   char buf[80];

@@ -3,10 +3,12 @@
 
 
 int
-rec_get(fpath, data, size, pos)
-  char *fpath;
-  void *data;
-  int size, pos;
+rec_get(
+  char *fpath,
+  void *data,
+  int size,
+  int pos
+)
 {
   int fd;
   int ret;

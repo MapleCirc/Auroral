@@ -20,10 +20,8 @@ extern BCACHE *bshm;
 /* ----------------------------------------------------- */
 
 
-int
-acct_load(acct, userid)
-  ACCT *acct;
-  char *userid;
+int 
+acct_load (ACCT *acct, char *userid)
 {
   int fd;
 
@@ -40,9 +38,8 @@ acct_load(acct, userid)
 
 
 /* static */	/* itoc.010408: 給其他程式用 */
-void
-acct_save(acct)
-  ACCT *acct;
+void 
+acct_save (ACCT *acct)
 {
   int fd;
   char fpath[64];
@@ -61,9 +58,8 @@ acct_save(acct)
 }
 
 
-int
-acct_userno(userid)
-  char *userid;
+int 
+acct_userno (char *userid)
 {
   int fd;
   int userno;
@@ -91,10 +87,8 @@ acct_userno(userid)
 /* ----------------------------------------------------- */
 
 
-int
-acct_get(msg, acct)
-  char *msg;
-  ACCT *acct;
+int 
+acct_get (char *msg, ACCT *acct)
 {
   outz("★ 輸入首字母後，可以按空白鍵自動搜尋");
   
@@ -117,10 +111,8 @@ acct_get(msg, acct)
 #define BIT_ON		"ˇ"
 #define BIT_OFF		"　"
 
-static void
-print_bits(str, level)
-  char *str;
-  usint level;
+static void 
+print_bits (char *str, usint level)
 {
   while(*str)
   {
@@ -131,10 +123,8 @@ print_bits(str, level)
 }
 
 
-static void
-bitmsg(msg, str, level)
-  char *msg, *str;
-  int level;
+static void 
+bitmsg (char *msg, char *str, int level)
 {
   outs(msg);
   print_bits(str, level);
@@ -142,13 +132,14 @@ bitmsg(msg, str, level)
 }
 
 
-usint
-bitset(pbits, count, maxon, msg, perms)
-  usint pbits;
-  int count;			/* 共有幾個選項 */
-  int maxon;			/* 最多可以 enable 幾項 */
-  char *msg;
-  char *perms[];
+usint 
+bitset (
+    usint pbits,
+    int count,			/* 共有幾個選項 */
+    int maxon,			/* 最多可以 enable 幾項 */
+    char *msg,
+    char *perms[]
+)
 {
   int i, j, on;
 
@@ -201,9 +192,8 @@ bitset(pbits, count, maxon, msg, perms)
 }
 
 
-static usint
-setperm(level)
-  usint level;
+static usint 
+setperm (usint level)
 {
   if (HAS_PERM(PERM_SYSOP))
     return bitset(level, NUMPERMS, NUMPERMS, MSG_USERPERM, perm_tbl);
@@ -222,9 +212,10 @@ setperm(level)
 /* ----------------------------------------------------- */
 
 
-static void
-bm_list(userid)		/* 顯示 userid 是哪些板的板主 */
-  char *userid;
+static void 
+bm_list (		/* 顯示 userid 是哪些板的板主 */
+    char *userid
+)
 {
   int i, num, uidlen, x, y, sp;
   BRD *bcache;
@@ -257,9 +248,8 @@ bm_list(userid)		/* 顯示 userid 是哪些板的板主 */
 }
 
 
-static void
-adm_log(old, new)
-  ACCT *old, *new;
+static void 
+adm_log (ACCT *old, ACCT *new)
 {
   int i;
   usint bit, oldl, newl;
@@ -291,10 +281,8 @@ adm_log(old, new)
 }
 
 
-static void
-acct_ADMINshow(u, type)
-  ACCT *u;
-  int type;
+static void 
+acct_ADMINshow (ACCT *u, int type)
 {
   int diff;
   usint ulevel = u->userlevel;
@@ -362,10 +350,11 @@ acct_ADMINshow(u, type)
 }
 
 
-void
-acct_show(u, adm)
-  ACCT *u;
-  int adm;		/* 0: user info  1: admin  2: reg-form */
+void 
+acct_show (
+    ACCT *u,
+    int adm		/* 0: user info  1: admin  2: reg-form */
+)
 {
   char buf[128], fpath[64], address[80] = "\033[30m(none)\n", phone[80] = "\033[30m(none)\n";
   time_t diff;
@@ -460,10 +449,8 @@ acct_show(u, adm)
 }
 
 
-static int
-belong(flist, key)
-  char *flist;
-  char *key;
+static int 
+belong (char *flist, char *key)
 {
   int fd, rc;
 
@@ -488,10 +475,8 @@ belong(flist, key)
 }
 
 
-int
-acct_editlabel(acct, is_adm)
-  ACCT *acct;
-  int is_adm;
+int 
+acct_editlabel (ACCT *acct, int is_adm)
 {
   char label[LBLEN + 1], c;
   uschar label_attr;
@@ -551,10 +536,8 @@ acct_editlabel(acct, is_adm)
 }
 
 
-void
-acct_setup(u, adm)
-  ACCT *u;
-  int adm;
+void 
+acct_setup (ACCT *u, int adm)
 {
   ACCT x;
   int i, num;
@@ -824,10 +807,11 @@ update_acct:
 #endif
 
 void
-acct_setperm(u, levelup, leveldown)	/* itoc.000219: 加/減權限程式 */
-  ACCT *u;
-  usint levelup;		/* 加權限 */
-  usint leveldown;		/* 減權限 */
+acct_setperm(	/* itoc.000219: 加/減權限程式 */
+  ACCT *u,
+  usint levelup,		/* 加權限 */
+  usint leveldown		/* 減權限 */
+)
 {
   u->userlevel |= levelup;
   u->userlevel &= ~leveldown;
@@ -841,9 +825,8 @@ acct_setperm(u, levelup, leveldown)	/* itoc.000219: 加/減權限程式 */
 /* ----------------------------------------------------- */
 
 
-void
-addmoney(addend)
-  int addend;
+void 
+addmoney (int addend)
 {
   if (addend < (INT_MAX - cuser.money))	/* 避免溢位 */
     cuser.money += addend;
@@ -852,9 +835,8 @@ addmoney(addend)
 }
 
 
-void
-addgold(addend)
-  int addend;
+void 
+addgold (int addend)
 {
   if (addend < (INT_MAX - cuser.gold))	/* 避免溢位 */
     cuser.gold += addend;
@@ -871,9 +853,8 @@ addgold(addend)
 #ifndef HAVE_COSIGN
 static
 #endif
-int			/* 1:合法的板名 */
-valid_brdname(brd)
-  char *brd;
+int 
+valid_brdname (char *brd)
 {
   int ch;
 
@@ -889,10 +870,8 @@ valid_brdname(brd)
 }
 
 
-static int
-brd_set(brd, row)
-  BRD *brd;
-  int row;
+static int 
+brd_set (BRD *brd, int row)
 {
   int i, BMlen, len;
   char *brdname, buf[80], userid[IDLEN + 2];
@@ -1058,8 +1037,7 @@ brd_set(brd, row)
 
 
 int			/* 0:開板成功 -1:開板失敗 */
-brd_new(brd)
-  BRD *brd;
+brd_new(BRD *brd)
 {
   int bno;
   char fpath[64];
@@ -1156,10 +1134,11 @@ brd_new(brd)
 
 
 void
-brd_classchange(folder, oldname, newbrd)	/* itoc.020117: 異動 @Class 中的看板 */
-  char *folder;
-  char *oldname;
-  BRD *newbrd;		/* 若為 NULL，表示要刪除看板 */
+brd_classchange(	/* itoc.020117: 異動 @Class 中的看板 */
+  char *folder,
+  char *oldname,
+  BRD *newbrd		/* 若為 NULL，表示要刪除看板 */
+)
 {
   int pos, xmode;
   char fpath[64];
@@ -1197,9 +1176,7 @@ brd_classchange(folder, oldname, newbrd)	/* itoc.020117: 異動 @Class 中的看板 */
 
 
 static inline void
-strcat_brdreadlevel(buf, rlevel)
-  char *buf;
-  usint rlevel;
+strcat_brdreadlevel(char *buf, usint rlevel)
 {
   switch(rlevel)
   {
@@ -1218,8 +1195,7 @@ strcat_brdreadlevel(buf, rlevel)
 }
 
 static void
-adm_brdlog(old, new)
-  BRD *old, *new;
+adm_brdlog(BRD *old, BRD *new)
 {
   int i;
   usint bit, oldl, newl;
@@ -1265,8 +1241,7 @@ adm_brdlog(old, new)
 
 
 void
-brd_edit(bno)
-  int bno;
+brd_edit(int bno)
 {
   BRD *bhdr, newbh;
   char *bname, src[64], dst[64];;
@@ -1361,8 +1336,7 @@ brd_edit(bno)
 
 
 void
-brd_title(bno)		/* itoc.000312: 板主修改中文敘述 */
-  int bno;
+brd_title(int bno)		/* itoc.000312: 板主修改中文敘述 */
 {
   BRD *bhdr, newbh;
   char *blist;

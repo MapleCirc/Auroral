@@ -16,7 +16,8 @@
 #define FN_RUN_RFORM_LOG_OLD "run/rform.log"
 
 
-int main()
+int 
+main (void)
 {
   RFORM rform;
   FILE *fp;

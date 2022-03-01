@@ -17,9 +17,10 @@
 
 
 int
-dns_name(addr, name)
-  unsigned char *addr;
-  char *name;
+dns_name(
+  unsigned char *addr,
+  char *name
+)
 {
   querybuf ans;
   char qbuf[MAXDNAME];

@@ -1,10 +1,11 @@
 #include <string.h>
 
 void
-str_folder(fpath, folder, fname)
-  char *fpath;
-  char *folder;
-  char *fname;
+str_folder(
+  char *fpath,
+  char *folder,
+  char *fname
+)
 {
   int ch;
   char *token;

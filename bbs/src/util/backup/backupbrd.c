@@ -15,8 +15,8 @@
 //#define BAKPATH BBSHOME"/bak"
 
 
-int
-main()
+int 
+main (void)
 {
   struct dirent *de;
   DIR *dirp;

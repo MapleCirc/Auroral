@@ -2,9 +2,10 @@
 
 
 void
-archiv32(chrono, fname)
-  time_t chrono;	/* 32 bits */
-  char *fname;		/* 7 chars */
+archiv32(
+  time_t chrono,	/* 32 bits */
+  char *fname		/* 7 chars */
+)
 {
   char *str;
 
@@ -22,9 +23,10 @@ archiv32(chrono, fname)
 
 #if 0
 void
-archiv32m(chrono, fname)
-  time_t chrono;	/* 32 bits */
-  char *fname;		/* 7 chars */
+archiv32m(
+  time_t chrono,	/* 32 bits */
+  char *fname		/* 7 chars */
+)
 {
   char *str;
 

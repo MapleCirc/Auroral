@@ -1,6 +1,5 @@
-int
-hash32(str)
-  unsigned char *str;
+int 
+hash32 (unsigned char *str)
 {
   int xo, cc;
 

@@ -4,9 +4,11 @@
 
 
 int
-f_cp(src, dst, mode)
-  char *src, *dst;
-  int mode;			/* O_EXCL / O_APPEND / O_TRUNC */
+f_cp(
+  char *src,
+  char *dst,
+  int mode			/* O_EXCL / O_APPEND / O_TRUNC */
+)
 {
   int fsrc, fdst, ret;
 

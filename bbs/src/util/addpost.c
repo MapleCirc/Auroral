@@ -19,14 +19,15 @@ extern BCACHE *bshm;
 
 /*copied from post.c*/
 
-void
-add_post(brdname, fpath, title, authurid, authurnick, xmode)  /* 發文到看板 */
-  char *brdname;        /* 欲 post 的看板 */
-  char *fpath;          /* 檔案路徑 */
-  char *title;          /* 文章標題 */
-  char *authurid;       /* 作者帳號 */
-  char *authurnick;     /* 作者暱稱 */
-  int xmode;
+void 
+add_post (  /* 發文到看板 */
+    char *brdname,        /* 欲 post 的看板 */
+    char *fpath,          /* 檔案路徑 */
+    char *title,          /* 文章標題 */
+    char *authurid,       /* 作者帳號 */
+    char *authurnick,     /* 作者暱稱 */
+    int xmode
+)
 {
   HDR hdr;
   char folder[64];

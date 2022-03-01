@@ -32,8 +32,8 @@ typedef struct
 #define break_record(new, old)	(new > old + old / 20)	/* 當新紀錄超過舊紀錄 5% 以上時，就改寫紀錄 */
 
 
-int
-main()
+int 
+main (void)
 {
   UCACHE *ushm;
   COUNTER counter;

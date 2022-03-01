@@ -7,11 +7,12 @@
 
 
 int
-rec_del(fpath, size, pos, fchk)
-  char *fpath;
-  int size;
-  int pos;
-  int (*fchk) ();
+rec_del(
+  char *fpath,
+  int size,
+  int pos,
+  int (*fchk) ()
+)
 {
   int fd;
   off_t off, len;

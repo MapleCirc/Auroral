@@ -18,9 +18,8 @@ typedef struct
 }    COLLECTION;
 
 
-static void
-collect_uno(userid)
-  char *userid;
+static void 
+collect_uno (char *userid)
 {
   int fd;
   char fpath[64];
@@ -41,10 +40,8 @@ collect_uno(userid)
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   char c;
   char *userid, fpath[64];

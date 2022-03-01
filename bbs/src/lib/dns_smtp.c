@@ -10,10 +10,8 @@
 #include "dns.h"
 
 
-/* static inline */ void /* Thor. 990811: for bmtad use to check from */
-dns_mx(domain, mxlist)
-  char *domain;
-  char *mxlist;
+/* static inline */ void 
+dns_mx (char *domain, char *mxlist)
 {
   querybuf ans;
   int n, ancount, qdcount;
@@ -78,9 +76,8 @@ dns_mx(domain, mxlist)
 }
 
 
-int
-dns_smtp(host)
-  char *host;
+int 
+dns_smtp (char *host)
 {
   int sock;
   char *str, *ptr, mxlist[MAX_MXLIST];

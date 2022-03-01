@@ -7,11 +7,12 @@
 
 
 int
-rec_sync(fpath, size, fsync, fchk)
-  char *fpath;
-  int size;
-  int (*fsync) ();
-  int (*fchk) ();
+rec_sync(
+  char *fpath,
+  int size,
+  int (*fsync) (),
+  int (*fchk) ()
+)
 {
   int fd, fsize;
   struct stat st;

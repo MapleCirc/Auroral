@@ -1,8 +1,5 @@
-void
-str_cat(dst, s1, s2)
-  char *dst;
-  char *s1;
-  char *s2;
+void 
+str_cat (char *dst, char *s1, char *s2)
 {
   while (*dst = *s1)
   {

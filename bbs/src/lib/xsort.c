@@ -27,9 +27,7 @@
 
 
 static inline void
-swapfunc(a, b, n, swaptype)
-  char *a, *b;
-  int n, swaptype;
+swapfunc(char *a, char *b, int n, int swaptype)
 {
   if (swaptype <= 1)
     swapcode(long, a, b, n)
@@ -51,9 +49,7 @@ swapfunc(a, b, n, swaptype)
 
 
 static inline char *
-med3(a, b, c, cmp)
-  char *a, *b, *c;
-  int (*cmp) ();
+med3 (char *a, char *b, char *c, int (*cmp)(char *, char *))
 {
   return cmp(a, b) < 0 ?
     (cmp(b, c) < 0 ? b : (cmp(a, c) < 0 ? c : a))
@@ -62,10 +58,7 @@ med3(a, b, c, cmp)
 
 
 void
-xsort(a, n, es, cmp)
-  void *a;
-  size_t n, es;
-  int (*cmp) ();
+xsort(void *a, size_t n, size_t es, int (*cmp)(char *, char *))
 {
   char *pa, *pb, *pc, *pd, *pl, *pm, *pn;
   int d, r, swaptype, swap_cnt;
@@ -166,16 +159,15 @@ loop:
 
 #define	MMM	(0x40000)
 
-static int
-int_cmp(a, b)
-  int *a;
-  int *b;
+static int 
+int_cmp (int *a, int *b)
 {
   return *a - *b;
 }
 
 
-main()
+int 
+main (void)
 {
   int *x, *y, *z, n;
 

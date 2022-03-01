@@ -54,7 +54,7 @@ cygwin:
 
 
 pip.so: $(OBJ)
-	ld -s -G $(OBJ) -o pip.so -L../lib -ldao
+	ld -s -G $(OBJ) -o pip.so -L../lib -ldao -lc
 
 
 install: $(SO)

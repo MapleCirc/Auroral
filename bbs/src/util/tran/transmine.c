@@ -37,10 +37,8 @@ struct old_psr{		/* 個人紀錄結構體 */
 /* ----------------------------------------------------- */
 
 
-static void
-trans_profile(old, new)
-  struct old_psr *old;
-  struct new_psr *new;
+static void 
+trans_profile (struct old_psr *old, struct new_psr *new)
 {
   int i;
 
@@ -71,10 +69,8 @@ trans_profile(old, new)
 
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   struct new_psr new;
   char c;

@@ -846,7 +846,7 @@ mf_attach(const char *fn)
 }
 
 MFPROTO void 
-mf_detach()
+mf_detach (void)
 {
     mf_freeHeaders();
     if(mf.start) {
@@ -859,7 +859,7 @@ mf_detach()
  * lineno calculation, and moving
  */
 MFFPROTO void 
-mf_sync_lineno()
+mf_sync_lineno (void)
 {
     unsigned char *p;
 
@@ -989,7 +989,7 @@ mf_forward(int lines)
 }
 
 MFFPROTO int 
-mf_goTop()
+mf_goTop (void)
 {
     if(mf.disps == mf.start && mf.xpos > 0)
         mf.xpos = 0;
@@ -999,7 +999,7 @@ mf_goTop()
 }
 
 MFFPROTO int 
-mf_goBottom()
+mf_goBottom (void)
 {
     mf.disps = mf.maxdisps;
     mf_sync_lineno();
@@ -1016,13 +1016,13 @@ mf_goto(int lineno)
 }
 
 MFFPROTO int 
-mf_viewedNone()
+mf_viewedNone (void)
 {
     return (mf.disps <= mf.start);
 }
 
 MFFPROTO int 
-mf_viewedAll()
+mf_viewedAll (void)
 {
     return (mf.dispe >= mf.end);
 }
@@ -1151,7 +1151,7 @@ pmore_str_chomp(unsigned char *p)
  */
 
 MFPROTO void 
-mf_freeHeaders()
+mf_freeHeaders (void)
 {
     if(fh.lines > 0)
     {
@@ -1166,7 +1166,7 @@ mf_freeHeaders()
 }
 
 MFPROTO void 
-mf_parseHeaders()
+mf_parseHeaders (void)
 {
     /* file format:
      * AUTHOR: author BOARD: blah <- headers[0], floats[0], floats[1]
@@ -1279,8 +1279,8 @@ mf_parseHeaders()
 /*
  * mf_display utility macros
  */
-MFFPROTO void
-MFDISP_SKIPCURLINE()
+MFFPROTO void 
+MFDISP_SKIPCURLINE (void)
 { 
     while (mf.dispe < mf.end && *mf.dispe != '\n')
         mf.dispe++;
@@ -1336,7 +1336,7 @@ static char *override_attr = NULL;
  */
 
 MFPROTO void 
-mf_display()
+mf_display (void)
 {
     int lines = 0, col = 0, currline = 0, wrapping = 0;
     int startline, endline;
@@ -2205,8 +2205,8 @@ MFPROTO void pmore_Help(void *ctx, int (*help_handler)(int y, void *ctx));
 /*
  * pmore utility macros
  */
-MFFPROTO void
-PMORE_UINAV_FORWARDPAGE()
+MFFPROTO void 
+PMORE_UINAV_FORWARDPAGE (void)
 {
     /* Usually, a forward is just mf_forward(MFNAV_PAGE);
      * but because of wrapped lines...
@@ -2225,8 +2225,8 @@ PMORE_UINAV_FORWARDPAGE()
     mf_forward(i);
 }
 
-MFFPROTO void
-PMORE_UINAV_FORWARDLINE()
+MFFPROTO void 
+PMORE_UINAV_FORWARDLINE (void)
 {
     if(mf_viewedAll())
         return;
@@ -3015,8 +3015,8 @@ pmore_PromptBar(const char *caption, int shadow)
     }
 }
 
-MFPROTO void
-pmore_QuickRawModePref()
+MFPROTO void 
+pmore_QuickRawModePref (void)
 {
     int ystart = b_lines -2;
 
@@ -3090,8 +3090,8 @@ pmore_saveBP(void)	//dust.091212: Save Browsing Preference to HD
     }
 }
 
-MFPROTO void
-pmore_Preference()
+MFPROTO void 
+pmore_Preference (void)
 {
     int ystart = b_lines - 9;
     // TODO even better pref navigation, like arrow keys
@@ -3698,8 +3698,8 @@ mf_movieGotoFrame(int fno, int relative)
 }
 
 // warning: getting current frame number is SLOW.
-MFPROTO int
-mf_movieCurrentFrameNo()
+MFPROTO int 
+mf_movieCurrentFrameNo (void)
 {
     int no = 0;
     unsigned char *p = mf.disps;
@@ -4114,7 +4114,7 @@ mf_movieOptionHandler(unsigned char *opt, unsigned char *end)
  * If no (user breaks), return 0
  */
 MFPROTO int 
-mf_movieSyncFrame()
+mf_movieSyncFrame (void)
 {
     if (mfmovie.pause)
     {
@@ -4363,7 +4363,7 @@ mf_movieProcessCommand(unsigned char *p, unsigned char *end)
 }
 
 MFPROTO int 
-mf_movieNextFrame()
+mf_movieNextFrame (void)
 {
     while (1) 
     {

@@ -1,10 +1,8 @@
 #include <sys/stat.h>
 
 
-int
-rec_num(fpath, size)
-  char *fpath;
-  int size;
+int 
+rec_num (char *fpath, int size)
 {
   struct stat st;
 

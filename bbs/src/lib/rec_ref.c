@@ -6,12 +6,14 @@
 
 
 int
-rec_ref(fpath, data, size, pos, fchk, fref)
-  char *fpath;
-  void *data;
-  int size, pos;
-  int (*fchk)();
-  void (*fref)();
+rec_ref(
+  char *fpath,
+  void *data,
+  int size,
+  int pos,
+  int (*fchk)(),
+  void (*fref)()
+)
 {
   int fd;
   off_t off, len;

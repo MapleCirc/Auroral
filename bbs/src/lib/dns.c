@@ -10,8 +10,8 @@
 #include "dns.h"
 
 
-void
-dns_init()
+void 
+dns_init (void)
 {
   res_init();
   /* _res.retrans = 5; */		/* DNS query timeout */
@@ -21,11 +21,11 @@ dns_init()
 
 
 int
-dns_query(name, qtype, ans)
-  char *name;			/* domain name */
-  int qtype;			/* type of query */
-  querybuf *ans;		/* buffer to put answer */
-{
+dns_query(
+  char *name,			/* domain name */
+  int qtype,			/* type of query */
+  querybuf *ans		/* buffer to put answer */
+  ){
   querybuf buf;
 
   qtype = res_mkquery(QUERY, name, C_IN, qtype, (char *) NULL, 0, NULL,

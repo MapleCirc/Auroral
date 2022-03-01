@@ -1,6 +1,5 @@
-void
-str_lower(dst, src)
-  char *dst, *src;
+void 
+str_lower (char *dst, char *src)
 {
   int ch;
 

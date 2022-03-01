@@ -19,12 +19,8 @@
 static char pool[4096];
 
 
-static int
-webc(file, host, path, port)
-  char *file;
-  char *host;
-  char *path;
-  int port;
+static int 
+webc (char *file, char *host, char *path, int port)
 {
   int cc, sock, tlen;
   FILE *fp;
@@ -115,10 +111,8 @@ webc(file, host, path, port)
 /* ----------------------------------------------------- */
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   if (argc < 4 || argc > 5)
   {

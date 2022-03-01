@@ -46,10 +46,8 @@ typedef struct
 static DATA toplogins[TOPNUM], topposts[TOPNUM], topmoney[TOPNUM], topgold[TOPNUM];
 
 
-static int
-sort_compare(p1, p2)
-  const void *p1;
-  const void *p2;
+static int 
+sort_compare (const void *p1, const void *p2)
 {
   int k;
   DATA *a1, *a2;
@@ -63,8 +61,7 @@ sort_compare(p1, p2)
 
 
 static DATA *
-findmin(src)
-  DATA *src;
+findmin (DATA *src)
 {
   int i;
   DATA *p;
@@ -79,9 +76,10 @@ findmin(src)
 }
 
 
-static void
-sort_rank(data)		/* 給定名次 */
-  DATA *data;		/* 已依 data->num 排序 */
+static void 
+sort_rank (		/* 給定名次 */
+    DATA *data		/* 已依 data->num 排序 */
+)
 {
   int i, rank;
 
@@ -95,11 +93,8 @@ sort_rank(data)		/* 給定名次 */
 }
 
 
-static void
-merge_id_nick(dst, userid, nick)
-  char *dst;
-  char *userid;
-  char *nick;
+static void 
+merge_id_nick (char *dst, char *userid, char *nick)
 {
   if (*userid)
   {
@@ -113,11 +108,8 @@ merge_id_nick(dst, userid, nick)
 }
 
 
-static void
-write_data(fpath, title, data)
-  char *fpath;
-  char *title;
-  DATA *data;
+static void 
+write_data (char *fpath, char *title, DATA *data)
 {
   FILE *fp;
   char buf[256];
@@ -173,9 +165,8 @@ write_data(fpath, title, data)
 }
 
 
-static inline void
-topusr(acct)
-  ACCT *acct;
+static inline void 
+topusr (ACCT *acct)
 {
   DATA *p;
 
@@ -220,10 +211,8 @@ topusr(acct)
 static int act_age[25];		/* 24種年齡、總合 */
 
 
-static inline void
-count_age(acct, year)
-  ACCT *acct;
-  int year;
+static inline void 
+count_age (ACCT *acct, int year)
 {
   int age;
 
@@ -239,9 +228,7 @@ count_age(acct, year)
 
 
 static void
-fouts(fp, buf, mode)
-  FILE *fp;
-  char buf[], mode;
+fouts(FILE *fp, char buf[], char mode)
 {
   static char state = '0';
 
@@ -255,10 +242,8 @@ fouts(fp, buf, mode)
 }
 
 
-static inline void
-write_age(fpath, year, month, day)
-  char *fpath;
-  int year, month, day;
+static inline void 
+write_age (char *fpath, int year, int month, int day)
 {
   char buf[256];
   FILE *fp;
@@ -310,7 +295,7 @@ write_age(fpath, year, month, day)
     fprintf(fp, "\n");
   }
 
-  fprintf(fp, "  \033[1;35m╒═══════════════════════════════════╕ \n"
+  fprintf(fp, "  \033[1;35m╒═══════════════════════════════════╕ \n"
     "   \033[1;32m10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33\n"
     "                      \033[36m有效統計人次：\033[37m%-9d\033[36m平均年齡：\033[37m%d\033[m\n",
     act_age[24], (int) totalage / (act_age[24] ? act_age[24] : 1));
@@ -328,9 +313,8 @@ write_age(fpath, year, month, day)
 static int act_star[13];	/* 十二星座、其他 */
 
 
-static inline void
-count_star(acct)
-  ACCT *acct;
+static inline void 
+count_star (ACCT *acct)
 {
   switch (acct->month)
   {
@@ -412,10 +396,8 @@ count_star(acct)
 }
 
 
-static inline void
-write_star(fpath, year, month, day)
-  char *fpath;
-  int year, month, day;
+static inline void 
+write_star (char *fpath, int year, int month, int day)
 {
   FILE *fp;
   int i, j;
@@ -491,9 +473,8 @@ write_star(fpath, year, month, day)
 static int act_sex[3];		/* 中性、男性、女性 */
 
 
-static inline void
-count_sex(acct)
-  ACCT *acct;
+static inline void 
+count_sex (ACCT *acct)
 {
   switch (acct->sex)
   {
@@ -507,10 +488,8 @@ count_sex(acct)
 }
 
 
-static inline void
-write_sex(fpath, year, month, day)
-  char *fpath;
-  int year, month, day;
+static inline void 
+write_sex (char *fpath, int year, int month, int day)
 {
   FILE *fp;
   int i, j;
@@ -572,10 +551,8 @@ write_sex(fpath, year, month, day)
 /*-------------------------------------------------------*/
 
 
-static inline void
-write_birthday(fpath, year, month, day)
-  char *fpath;
-  int year, month, day;
+static inline void 
+write_birthday (char *fpath, int year, int month, int day)
 {
   FILE *fp;
 
@@ -589,10 +566,8 @@ write_birthday(fpath, year, month, day)
 }
 
 
-static inline void
-write_birthmon(fpath, year, month, day)
-  char *fpath;
-  int year, month, day;
+static inline void 
+write_birthmon (char *fpath, int year, int month, int day)
 {
   FILE *fp;
 
@@ -613,11 +588,14 @@ write_birthmon(fpath, year, month, day)
 }
 
 
-static inline void
-check_birth(fpath, acct, year, month, day)
-  char *fpath;
-  ACCT *acct;
-  int year, month, day;		/* 今天是幾年幾月幾日 */
+static inline void 
+check_birth (
+    char *fpath,
+    ACCT *acct,
+    int year,
+    int month,
+    int day		/* 今天是幾年幾月幾日 */
+)
 {
   static int birthday_num = 0;	/* 有幾個人今天生日 */
   static int birthmon_num = 0;	/* 有幾個人本月生日 */
@@ -662,8 +640,8 @@ check_birth(fpath, acct, year, month, day)
 /*-------------------------------------------------------*/
 
 
-int
-main()
+int 
+main (void)
 {
   char c;
   int year, month, day;

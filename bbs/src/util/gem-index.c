@@ -38,11 +38,7 @@ static FILE *flog;
 
 
 static void
-gindex(level, toc, fpath, fndx)
-  int level;
-  char *toc;
-  char *fpath;
-  FILE *fndx;
+gindex(int level, char *toc, char *fpath, FILE *fndx)
 {
   int count, xmode;
   char *fname, *ptr, buf[128];
@@ -192,10 +188,8 @@ gindex(level, toc, fpath, fndx)
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   DIR *dirp;
   struct dirent *de;

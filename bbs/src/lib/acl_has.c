@@ -27,10 +27,11 @@
 
 
 int
-acl_has(acl, user, host)
-  char *acl;			/* file name of access control list */
-  char *user;			/* lower-case string */
-  char *host;			/* lower-case string */
+acl_has(
+  char *acl,			/* file name of access control list */
+  char *user,			/* lower-case string */
+  char *host			/* lower-case string */
+)
 {
   int i, cc, luser, lhost;
   FILE *fp;

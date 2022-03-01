@@ -1,7 +1,5 @@
-int
-str_hash(str, seed)
-  char *str;
-  int seed;
+int 
+str_hash (char *str, int seed)
 {
   int cc;
 

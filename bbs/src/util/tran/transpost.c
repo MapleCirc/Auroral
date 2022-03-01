@@ -2,9 +2,7 @@
 
 
 static void
-transformation(old, new)
-  HDR *old;
-  HDR *new;
+transformation(HDR *old, HDR *new)
 {
   memcpy(new, old, sizeof(HDR));
 
@@ -15,9 +13,8 @@ transformation(old, new)
 
 #define FN_HT_TMP ".postdir.tmp"		/* º»¶s¿…∏ÙÆ| */
 
-static void
-transDIR(fpath)
-  char *fpath;
+static void 
+transDIR (char *fpath)
 {
   FILE *fpr, *fpw;
   HDR new;
@@ -57,7 +54,8 @@ transDIR(fpath)
 
 
 
-int main()
+int 
+main (void)
 {
   char fpath[64], *str;
   struct dirent *de;

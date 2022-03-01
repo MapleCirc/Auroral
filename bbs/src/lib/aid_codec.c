@@ -36,11 +36,12 @@ static const char decode_matrix[4][4] = {
 
 #if 0
 /* davy.130601: 是誰寫出這麼腦抽的矩陣乘法的... */
-static void
-matrix_mul(C, A, B)	/* C = A*B */
-  char C[][2];		/* dst[4][2] */
-  const char A[][4];	/* XXcode_matrix[4][4] */
-  const char B[][2];	/* src[4][2] */
+static void 
+matrix_mul (	/* C = A*B */
+    char C[][2],		/* dst[4][2] */
+    const char A[][4],	/* XXcode_matrix[4][4] */
+    const char B[][2]	/* src[4][2] */
+)
 {
   int i, j, k;
 
@@ -59,11 +60,12 @@ matrix_mul(C, A, B)	/* C = A*B */
 #endif
 
 /* davy.130601: 這才是正確的吧....? */
-static void
-matrix_mul(C, A, B)	/* C = A*B */
-  char C[][2];		/* dst[4][2] */
-  const char A[][4];	/* XXcode_matrix[4][4] */
-  const char B[][2];	/* src[4][2] */
+static void 
+matrix_mul (	/* C = A*B */
+    char C[][2],		/* dst[4][2] */
+    const char A[][4],	/* XXcode_matrix[4][4] */
+    const char B[][2]	/* src[4][2] */
+)
 {
   int i, j, k;
 
@@ -81,9 +83,10 @@ matrix_mul(C, A, B)	/* C = A*B */
 }
 
 char *
-aid_encode(chrono, aid)		/* 將 chrono 轉成固定8碼的 AID */
-  time_t chrono;
-  char *aid;
+aid_encode(		/* 將 chrono 轉成固定8碼的 AID */
+  time_t chrono,
+  char *aid
+)
 {
   char src[4][2], dst[4][2];
   int i, a;
@@ -118,8 +121,7 @@ aid_encode(chrono, aid)		/* 將 chrono 轉成固定8碼的 AID */
 
 
 time_t
-aid_decode(aid)		/* 將 AID 解回 chrono */
-  char *aid;
+aid_decode(char *aid)		/* 將 AID 解回 chrono */
 {
   char src[4][2], dst[4][2], c;
   time_t chrono;

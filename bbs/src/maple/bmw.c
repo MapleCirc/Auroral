@@ -32,9 +32,8 @@ static BMW bmw_lword[BMW_LOCAL_MAX];	/* 保留送出的水球 */
 
 
 
-int			/* 1:可以傳水球給對方/與對方Talk  0:不能傳水球給對方/與對方Talk */
-can_override(up)
-  UTMP *up;
+int 
+can_override (UTMP *up)
 {
   int ufo;
 
@@ -88,10 +87,8 @@ can_override(up)
 }
 
 
-int			/* 1:可看見 0:不可看見 */
-can_see(my, up)
-  UTMP *my;
-  UTMP *up;
+int 
+can_see (UTMP *my, UTMP *up)
 {
   usint mylevel, myufo, urufo;
 
@@ -146,10 +143,8 @@ can_see(my, up)
 }
 
 
-int
-bmw_send(callee, bmw)
-  UTMP *callee;
-  BMW *bmw;
+int 
+bmw_send (UTMP *callee, BMW *bmw)
 {
   BMW *mpool, *mhead, *mtail;
   int i;
@@ -210,9 +205,10 @@ bmw_send(callee, bmw)
 
 
 #ifdef BMW_DISPLAY		
-static void
-bmw_display(max)	/* itoc.010313: display 以前的水球 */
-  int max;
+static void 
+bmw_display (	/* itoc.010313: display 以前的水球 */
+    int max
+)
 {
   int i;
   BMW *bmw;
@@ -245,11 +241,12 @@ static int bmw_request;	/* 1: 有新的水球進來 */
 
 
 
-void
-bmw_edit(up, hint, bmw)
-  UTMP *up;		/* 送的對象，若是 NULL 表示廣播 */
-  char *hint;
-  BMW *bmw;
+void 
+bmw_edit (
+    UTMP *up,		/* 送的對象，若是 NULL 表示廣播 */
+    char *hint,
+    BMW *bmw
+)
 {
   int i, recver;
   screen_backup_t old_screen;
@@ -379,8 +376,8 @@ re_bmw:
 }
 
 
-static void
-bmw_outz()
+static void 
+bmw_outz (void)
 {
   int i;
   BMW *bmw, *benz;
@@ -406,9 +403,7 @@ bmw_outz()
 
 
 static UTMP *
-can_reply(uhead, pos)
-  UTMP *uhead;
-  int pos;
+can_reply (UTMP *uhead, int pos)
 {
   int userno;
   BMW *bmw;
@@ -438,8 +433,9 @@ can_reply(uhead, pos)
 
 
 static UTMP *
-bmw_lastslot(pos)	/* 找出最近一個可以回水球的對象 */
-  int pos;
+bmw_lastslot (	/* 找出最近一個可以回水球的對象 */
+    int pos
+)
 {
   int max, times;
   UTMP *up, *uhead;
@@ -464,8 +460,9 @@ bmw_lastslot(pos)	/* 找出最近一個可以回水球的對象 */
 
 
 static UTMP *
-bmw_firstslot(pos)	/* 找出最遠一個可以回水球的對象 */
-  int pos;
+bmw_firstslot (	/* 找出最遠一個可以回水球的對象 */
+    int pos
+)
 {
   int max, times;
   UTMP *up, *uhead;
@@ -489,9 +486,8 @@ bmw_firstslot(pos)	/* 找出最遠一個可以回水球的對象 */
 }
 
 
-int
-bmw_reply_CtrlRT(key)
-  int key;
+int 
+bmw_reply_CtrlRT (int key)
 {
   int max, pos;
 
@@ -529,8 +525,8 @@ bmw_reply_CtrlRT(key)
 
 
 
-void
-bmw_reply()
+void 
+bmw_reply (void)
 {
   int max, display, tmpmode;
   char buf[128];
@@ -578,8 +574,8 @@ bmw_reply()
 
 
 
-void
-bmw_rqst()
+void 
+bmw_rqst (void)
 {
   int i, j, userno, locus;
   BMW bmw[BMW_PER_USER], *mptr;
@@ -679,9 +675,8 @@ bmw_rqst()
 }
 
 
-void
-do_write(up)
-  UTMP *up;
+void 
+do_write (UTMP *up)
 {
   if (can_override(up))
   {
@@ -699,10 +694,8 @@ do_write(up)
 /* ----------------------------------------------------- */
 
 
-static void
-bmw_item(num, bmw)
-  int num;
-  BMW *bmw;
+static void 
+bmw_item (int num, BMW *bmw)
 {
   struct tm *ptime;
   int len;
@@ -733,9 +726,8 @@ bmw_item(num, bmw)
 }
 
 
-static int
-bmw_body(xo)
-  XO *xo;
+static int 
+bmw_body (XO *xo)
 {
   BMW *bmw;
   int num, max, tail;
@@ -765,9 +757,8 @@ bmw_body(xo)
 }
 
 
-static int
-bmw_head(xo)
-  XO *xo;
+static int 
+bmw_head (XO *xo)
 {
   vs_head("察看水球", str_site);
   prints(NECKER_BMW, d_cols, "");
@@ -775,27 +766,24 @@ bmw_head(xo)
 }
 
 
-static int
-bmw_load(xo)
-  XO *xo;
+static int 
+bmw_load (XO *xo)
 {
   xo_load(xo, sizeof(BMW));
   return bmw_body(xo);
 }
 
 
-static int
-bmw_init(xo)
-  XO *xo;
+static int 
+bmw_init (XO *xo)
 {
   xo_load(xo, sizeof(BMW));
   return bmw_head(xo);
 }
 
 
-static int
-bmw_browse(xo)
-  XO *xo;
+static int 
+bmw_browse (XO *xo)
 {
   screen_backup_t old_screen;
   BMW *bmw;
@@ -826,9 +814,8 @@ bmw_browse(xo)
 }
 
 
-static int
-bmw_delete(xo)
-  XO *xo;
+static int 
+bmw_delete (XO *xo)
 {
   if (vans(msg_del_ny) == 'y')
   {
@@ -840,34 +827,31 @@ bmw_delete(xo)
 }
 
 
-static int
-bmw_rangedel(xo)	/* itoc.001126: 新增水球區段刪除 */
-  XO *xo;
+static int 
+bmw_rangedel (	/* itoc.001126: 新增水球區段刪除 */
+    XO *xo
+)
 {
   return xo_rangedel(xo, sizeof(BMW), NULL, NULL);
 }
 
 
-static int
-vfybmw(bmw, pos)
-  BMW *bmw;
-  int pos;
+static int 
+vfybmw (BMW *bmw, int pos)
 {
   return Tagger(bmw->btime, pos, TAG_NIN);
 }
 
 
-static int
-bmw_prune(xo)
-  XO *xo;
+static int 
+bmw_prune (XO *xo)
 {
   return xo_prune(xo, sizeof(BMW), vfybmw, NULL);
 }
 
 
-static int
-bmw_mail(xo)
-  XO *xo;
+static int 
+bmw_mail (XO *xo)
 {
   BMW *bmw;
   char *str, userid[IDLEN + 1];
@@ -880,9 +864,8 @@ bmw_mail(xo)
 }
 
 
-static int
-bmw_query(xo)
-  XO *xo;
+static int 
+bmw_query (XO *xo)
 {
   BMW *bmw;
   char *str, userid[IDLEN + 1];
@@ -898,9 +881,8 @@ bmw_query(xo)
 }
 
 
-static int
-bmw_write(xo)
-  XO *xo;
+static int 
+bmw_write (XO *xo)
 {
   if (HAS_PERM(PERM_PAGE))
   {
@@ -926,9 +908,8 @@ bmw_write(xo)
 }
 
 
-static void
-bmw_store(fpath)
-  char *fpath;
+static void 
+bmw_store (char *fpath)
 {
   int fd;
   FILE *fp;
@@ -965,9 +946,8 @@ bmw_store(fpath)
 }
 
 
-static int
-bmw_save(xo)
-  XO *xo;
+static int 
+bmw_save (XO *xo)
 {
   if (vans("您確定要把水球存到信箱裡嗎(Y/N)？[N] ") == 'y')
   {
@@ -984,9 +964,8 @@ bmw_save(xo)
 }
 
 
-static int
-bmw_save_user(xo)
-  XO *xo;
+static int 
+bmw_save_user (XO *xo)
 {
   int fd;
   FILE *fp;
@@ -1030,9 +1009,8 @@ bmw_save_user(xo)
 }
 
 
-static int
-bmw_clear(xo)
-  XO *xo;
+static int 
+bmw_clear (XO *xo)
 {
   if (vans("是否刪除所有水球紀錄(Y/N)？[N] ") == 'y')
   {
@@ -1049,9 +1027,8 @@ bmw_clear(xo)
 }
 
 
-static int
-bmw_tag(xo)
-  XO *xo;
+static int 
+bmw_tag (XO *xo)
 {
   BMW *bmw;
   int tag, pos, cur;
@@ -1071,9 +1048,8 @@ bmw_tag(xo)
 }
 
 
-static int
-bmw_help(xo)
-  XO *xo;
+static int 
+bmw_help (XO *xo)
 {
   xo_help("bmw");
   return bmw_head(xo);
@@ -1104,8 +1080,8 @@ KeyFunc bmw_cb[] =
 };
 
 
-int
-t_bmw()
+int 
+t_bmw (void)
 {
 #if 0	/* itoc.010715: 由於 every_Z 要用，搬去 talk_main 常駐 */
   XO *xo;
@@ -1122,8 +1098,8 @@ t_bmw()
 }
 
 
-int
-t_display()		/* itoc.020126: display FN_AMW */
+int 
+t_display (void)		/* itoc.020126: display FN_AMW */
 {
   char fpath[64];
   int mo;
@@ -1141,9 +1117,8 @@ t_display()		/* itoc.020126: display FN_AMW */
 
 
 #ifdef RETAIN_BMW
-static void
-bmw_retain(fpath)
-  char *fpath;
+static void 
+bmw_retain (char *fpath)
 {
   char folder[64];
   HDR fhdr;
@@ -1159,8 +1134,8 @@ bmw_retain(fpath)
 
 
 #ifdef LOG_BMW
-void
-bmw_log()
+void 
+bmw_log (void)
 {
   int op;
   char fpath[64], buf[64];

@@ -11,8 +11,8 @@
 #include "bbs.h"
 
 
-int
-main()
+int 
+main (void)
 {
   struct dirent *de;
   DIR *dirp;

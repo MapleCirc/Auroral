@@ -25,8 +25,8 @@
 
 #define ALIVE   (9/10)          /* 復活以後的能力是原來的 90% */
 
-static void
-pip_live_again()
+static void 
+pip_live_again (void)
 {
   vs_head("小雞復活手術中", str_site);
 
@@ -66,8 +66,8 @@ pip_live_again()
 }
 
 
-static int			/* 1:申請成功 0:失敗 */
-pip_apply()			/* 新小雞申請 */
+static int 
+pip_apply (void)			/* 新小雞申請 */
 {
   time_t now;
   struct tm *ptime;
@@ -148,8 +148,8 @@ pip_apply()			/* 新小雞申請 */
 }
 
 
-static int
-pip_reborn()			/* 小雞重生 */
+static int 
+pip_reborn (void)			/* 小雞重生 */
 {
   vs_head(BBSNAME PIPNAME, str_site);
   move(4, 0);
@@ -172,8 +172,8 @@ pip_reborn()			/* 小雞重生 */
 
 
 /* 遊戲主程式 */
-int
-main_pip()
+int 
+main_pip (void)
 {
   int ch;
   char fpath[64];

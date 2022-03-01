@@ -16,9 +16,8 @@
 
 /* Thor.990811: §ì¥Xip addr */
 
-unsigned long
-dns_aton(name)
-  char *name;
+unsigned long 
+dns_aton (char *name)
 {
   ip_addr addr; 
   u_char *cp; 
@@ -70,9 +69,8 @@ dns_aton(name)
 /* ----------------------------------------------------- */
 
 
-unsigned long
-dns_addr(name)
-  char *name;
+unsigned long 
+dns_addr (char *name)
 {
   ip_addr addr;
   u_char *cp, *eom;

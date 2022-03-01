@@ -60,9 +60,10 @@ extern time_t mode_lastchange;
 /* ----------------------------------------------------- */
 
 
-char*
-SysopLoginID_query(id)	/* 記錄或查詢sysop的登入者 */
-  char *id;		/* NULL:回傳ID , 非NULL:設定ID */
+char *
+SysopLoginID_query (	/* 記錄或查詢sysop的登入者 */
+    char *id		/* NULL:回傳ID , 非NULL:設定ID */
+)
 {
   static char loginID[IDLEN + 1];
   if(id)
@@ -71,9 +72,11 @@ SysopLoginID_query(id)	/* 記錄或查詢sysop的登入者 */
 }
 
 
-void
-circlog(mode, msg)         /* circ god 行為紀錄 */
-  char *mode, *msg;
+void 
+circlog (         /* circ god 行為紀錄 */
+    char *mode,
+    char *msg
+)
 {
   char buf[512];
 
@@ -87,9 +90,11 @@ circlog(mode, msg)         /* circ god 行為紀錄 */
 }
 
 
-void
-slog(mode, msg)		/* sysop 行為紀錄 */
-  char *mode, *msg;
+void 
+slog (		/* sysop 行為紀錄 */
+    char *mode,
+    char *msg
+)
 {
   char buf[512];
 
@@ -98,9 +103,11 @@ slog(mode, msg)		/* sysop 行為紀錄 */
 }
 
 
-void
-alog(mode, msg)		/* Admin 行為記錄 */
-  char *mode, *msg;
+void 
+alog (		/* Admin 行為記錄 */
+    char *mode,
+    char *msg
+)
 {
   char buf[512];
 
@@ -114,9 +121,11 @@ alog(mode, msg)		/* Admin 行為記錄 */
 }
 
 
-void
-blog(mode, msg)		/* BBS 一般記錄 */
-  char *mode, *msg;
+void 
+blog (		/* BBS 一般記錄 */
+    char *mode,
+    char *msg
+)
 {
   char buf[512];
 
@@ -127,8 +136,8 @@ blog(mode, msg)		/* BBS 一般記錄 */
 
 
 #ifdef MODE_STAT
-void
-log_modes()
+void 
+log_modes (void)
 {
   time(&modelog.logtime);
   rec_add(FN_RUN_MODE_CUR, &modelog, sizeof(UMODELOG));
@@ -136,9 +145,8 @@ log_modes()
 #endif
 
 
-void
-u_exit(mode)
-  char *mode;
+void 
+u_exit (char *mode)
 {
   int fd, diff;
   char fpath[80];
@@ -209,8 +217,8 @@ u_exit(mode)
 }
 
 
-void
-abort_bbs()
+void 
+abort_bbs (void)
 {
   if (bbstate)
     u_exit("AXXED");
@@ -218,9 +226,8 @@ abort_bbs()
 }
 
 
-static void
-login_abort(msg)
-  char *msg;
+static void 
+login_abort (char *msg)
 {
   outs(msg);
   refresh();
@@ -237,10 +244,8 @@ login_abort(msg)
 /* ----------------------------------------------------- */
 
 
-static int
-belong(flist, key)
-  char *flist;
-  char *key;
+static int 
+belong (char *flist, char *key)
 {
   int fd, rc;
 
@@ -265,9 +270,8 @@ belong(flist, key)
 }
 
 
-static int
-is_badid(userid)
-  char *userid;
+static int 
+is_badid (char *userid)
 {
   int ch;
   char *str;
@@ -291,9 +295,10 @@ is_badid(userid)
 }
 
 
-static int
-uniq_userno(fd)		/* dust.121014 remake: 不再重複使用userno */
-  int fd;
+static int 
+uniq_userno (		/* dust.121014 remake: 不再重複使用userno */
+    int fd
+)
 {
   struct stat st;
   int applied_user;
@@ -322,8 +327,8 @@ uniq_userno(fd)		/* dust.121014 remake: 不再重複使用userno */
 }
 
 
-static void
-acct_apply()
+static void 
+acct_apply (void)
 {
   SCHEMA slot;
   char buf[80];
@@ -599,10 +604,11 @@ acct_apply()
 #define	FN_BADLOGIN	"logins.bad"
 
 
-static void
-logattempt(type, content)
-  int type;			/* '-' login failure   ' ' success */
-  char *content;
+static void 
+logattempt (
+    int type,			/* '-' login failure   ' ' success */
+    char *content
+)
 {
   char buf[128], fpath[64];
 
@@ -632,10 +638,8 @@ extern void bmw_rqst();
 
 
 #ifdef HAVE_WHERE
-int	/* 1:在list中  0:不在list中 */
-belong_list(filelist, key, dst, szdst)
-  char *filelist, *key, *dst;
-  int szdst;
+int 
+belong_list (char *filelist, char *key, char *dst, int szdst)
 {
   FILE *fp;
   char buf[80], *str;
@@ -669,10 +673,8 @@ belong_list(filelist, key, dst, szdst)
 }
 
 
-static void
-find_fromwhere(from, szfrom)
-  char *from;
-  int szfrom;
+static void 
+find_fromwhere (char *from, int szfrom)
 {
   /* dust.101005: 執行這個函數時外頭已經有Mutex了，不需要再鎖 */
   char name[48];
@@ -700,9 +702,8 @@ find_fromwhere(from, szfrom)
 #endif
 
 
-static void
-utmp_setup(mode)
-  int mode;
+static void 
+utmp_setup (int mode)
 {
   UTMP utmp;
   uschar *addr;
@@ -780,10 +781,11 @@ utmp_setup(mode)
 /* ----------------------------------------------------- */
 
 
-static int		/* 回傳 multi */
-login_user(content, luser)
-  char *content;
-  ACCT *luser;		/* 給sysop登入用 */
+static int 
+login_user (
+    char *content,
+    ACCT *luser		/* 給sysop登入用 */
+)
 {
   int attempts;		/* 嘗試幾次錯誤 */
   int multi;
@@ -1043,8 +1045,8 @@ Passwd:
 
 
 
-static void
-login_level()
+static void 
+login_level (void)
 {
   int fd;
   usint level;
@@ -1112,9 +1114,8 @@ login_level()
 }
 
 
-static void
-login_status(multi)
-  int multi;
+static void 
+login_status (int multi)
 {
   usint status;
   char fpath[64];
@@ -1167,8 +1168,8 @@ login_status(multi)
 }
 
 
-static void
-login_other()
+static void 
+login_other (void)
 {
   usint status;
   char fpath[64];
@@ -1210,8 +1211,8 @@ login_other()
 }
 
 
-static void
-tn_login()
+static void 
+tn_login (void)
 {
   int multi;
   char buf[128];
@@ -1291,8 +1292,8 @@ tn_login()
 }
 
 
-static void
-tn_motd()
+static void 
+tn_motd (void)
 {
   usint ufo;
 
@@ -1327,8 +1328,8 @@ tn_motd()
 /* ----------------------------------------------------- */
 
 
-static void
-tn_signals()
+static void 
+tn_signals (void)
 {
   struct sigaction act;
 
@@ -1358,8 +1359,8 @@ tn_signals()
 }
 
 
-static inline void
-tn_main()
+static inline void 
+tn_main (void)
 {
   int i;
 
@@ -1415,8 +1416,8 @@ tn_main()
 /* ----------------------------------------------------- */
 
 
-static void
-telnet_init()
+static void 
+telnet_init (void)
 {
   static char svr[] = 
   {
@@ -1459,8 +1460,8 @@ telnet_init()
 /* ----------------------------------------------------- */
 
 
-static void
-term_init()
+static void 
+term_init (void)
 {
 #if 0   /* fuse.030518: 註解 */
   server問：你會改變行列數嗎？(TN_NAWS, Negotiate About Window Size)
@@ -1547,9 +1548,10 @@ term_init()
 /* ----------------------------------------------------- */
 
 
-static void
-start_daemon(port)
-  int port; /* Thor.981206: 取 0 代表 *沒有參數* , -1 代表 -i (inetd) */
+static void 
+start_daemon (
+    int port /* Thor.981206: 取 0 代表 *沒有參數* , -1 代表 -i (inetd) */
+)
 {
   int n;
   struct linger ld;
@@ -1612,8 +1614,8 @@ start_daemon(port)
   /* The integer file descriptors associated with the streams
      stdin, stdout, and stderr are 0,1, and 2, respectively. */
 
-  close(1);
-  close(2);
+  // close(1);
+  // close(2);
 
   if (port == -1) /* Thor.981206: inetd -i */
   {
@@ -1633,7 +1635,7 @@ start_daemon(port)
   }
 
   close(0);
-
+/*
   if (fork())
     exit(0);
 
@@ -1641,7 +1643,7 @@ start_daemon(port)
 
   if (fork())
     exit(0);
-
+*/
   /* --------------------------------------------------- */
   /* fork daemon process				 */
   /* --------------------------------------------------- */
@@ -1694,16 +1696,16 @@ start_daemon(port)
 /* ----------------------------------------------------- */
 
 
-static inline void
-reaper()
+static inline void 
+reaper (void)
 {
   while (waitpid(-1, NULL, WNOHANG | WUNTRACED) > 0);
 }
 
 
 #ifdef	SERVER_USAGE
-static void
-servo_usage()
+static void 
+servo_usage (void)
 {
   struct rusage ru;
   FILE *fp;
@@ -1750,8 +1752,8 @@ servo_usage()
 #endif
 
 
-static void
-main_term()
+static void 
+main_term (void)
 {
 #ifdef	SERVER_USAGE
   servo_usage();
@@ -1760,8 +1762,8 @@ main_term()
 }
 
 
-static inline void
-main_signals()
+static inline void 
+main_signals (void)
 {
   struct sigaction act;
 
@@ -1784,9 +1786,8 @@ main_signals()
 }
 
 
-static void*
-thread_QueryDNS(addr)
-  void *addr;
+static void *
+thread_QueryDNS (void *addr)
 {
   char from_buf[48];
 
@@ -1814,10 +1815,8 @@ thread_QueryDNS(addr)
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   int csock;			/* socket for Master and Child */
   int value;
@@ -1872,7 +1871,7 @@ main(argc, argv)
 
     ap_start++;
     argc = *totaluser;
-    if (argc >= MAXACTIVE - 5 /* || *avgload > THRESHOLD */ )
+    if (argc >= MAXACTIVE - 5 /* || *avgload > THRESHOLD */)
     {
       /* 借用 currtitle */
       sprintf(currtitle, "目前線上人數 [%d] 人，系統飽和，請稍後再來\n", argc);

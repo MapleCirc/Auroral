@@ -6,11 +6,13 @@
 
 
 int
-rec_put(fpath, data, size, pos, fchk)
-  char *fpath;
-  void *data;
-  int size, pos;
-  int (*fchk)();
+rec_put(
+  char *fpath,
+  void *data,
+  int size,
+  int pos,
+  int (*fchk)()
+)
 {
   int fd;
   off_t off, len;

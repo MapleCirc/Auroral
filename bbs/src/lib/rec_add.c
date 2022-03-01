@@ -2,10 +2,11 @@
 
 
 int
-rec_add(fpath, data, size)
-  char *fpath;
-  void *data;
-  int size;
+rec_add(
+  char *fpath,
+  void *data,
+  int size
+)
 {
   int fd;
 

@@ -13,8 +13,8 @@
 
 #define FN_BRD_TMP	".BRD.tmp"
 
-int
-main()
+int 
+main (void)
 {
   boardheader bh;
   BRD brd;

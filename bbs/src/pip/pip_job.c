@@ -23,12 +23,13 @@
 
 /* itoc.010815: 寫一隻公用的 function */
 
-static int		/* 傳回: -1:放棄  0~100:成功狀況 */
-pip_job_function(classgrade, tired_prob, tired_base, pic)
-  int classgrade;	/* 身心狀況: 0% ~ 100 % */
-  int tired_prob;	/* 計算疲勞的機率 */
-  int tired_base;	/* 計算疲勞的底數 */
-  int pic;		/* 要秀的圖 */
+static int 
+pip_job_function (
+    int classgrade,	/* 身心狀況: 0% ~ 100 % */
+    int tired_prob,	/* 計算疲勞的機率 */
+    int tired_base,	/* 計算疲勞的底數 */
+    int pic		/* 要秀的圖 */
+)
 {
   int grade;
 
@@ -64,8 +65,8 @@ pip_job_function(classgrade, tired_prob, tired_base, pic)
 /*-------------------------------------------------------*/
 
 
-int
-pip_job_workA()
+int 
+pip_job_workA (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │家庭管理│+ 待人接物 掃地洗衣 烹飪 親子關係 家事評價  │ */
@@ -118,8 +119,8 @@ pip_job_workA()
 }
 
 
-int
-pip_job_workB()
+int 
+pip_job_workB (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │育幼院  │+ 待人接物 愛心 感受                        │ */
@@ -174,8 +175,8 @@ pip_job_workB()
 }
 
 
-int
-pip_job_workC()
+int 
+pip_job_workC (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │旅館    │+ 掃地洗衣 烹飪 家事評價                    │ */
@@ -222,8 +223,8 @@ pip_job_workC()
 }
 
 
-int
-pip_job_workD()
+int 
+pip_job_workD (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │農場    │+ 無                                        │ */
@@ -266,8 +267,8 @@ pip_job_workD()
 }
 
 
-int
-pip_job_workE()
+int 
+pip_job_workE (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │餐廳    │+ 掃地洗衣 烹飪                             │ */
@@ -313,8 +314,8 @@ pip_job_workE()
 }
 
 
-int
-pip_job_workF()
+int 
+pip_job_workF (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │教堂    │+ 愛心 道德 信仰                            │ */
@@ -365,8 +366,8 @@ pip_job_workF()
 }
 
 
-int
-pip_job_workG()
+int 
+pip_job_workG (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │地攤    │+ 待人接物 魅力 談吐 速度                   │ */
@@ -392,8 +393,8 @@ pip_job_workG()
 }
 
 
-int
-pip_job_workH()
+int 
+pip_job_workH (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │伐木場  │+ 攻擊力                                    │ */
@@ -448,8 +449,8 @@ pip_job_workH()
 }
 
 
-int
-pip_job_workI()
+int 
+pip_job_workI (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │美容院  │+ 藝術 感受                                 │ */
@@ -501,8 +502,8 @@ pip_job_workI()
 }
 
 
-int
-pip_job_workJ()
+int 
+pip_job_workJ (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │狩獵區  │+ 攻擊力 速度                               │ */
@@ -561,8 +562,8 @@ pip_job_workJ()
 }
 
 
-int
-pip_job_workK()
+int 
+pip_job_workK (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │工地    │+ 防禦力                                    │ */
@@ -617,8 +618,8 @@ pip_job_workK()
 }
 
 
-int
-pip_job_workL()
+int 
+pip_job_workL (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │墓園    │+ 勇敢 抗魔能力 感受                        │ */
@@ -675,8 +676,8 @@ pip_job_workL()
 }
 
 
-int
-pip_job_workM()
+int 
+pip_job_workM (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │家庭教師│+ 智力 談吐                                 │ */
@@ -706,8 +707,8 @@ pip_job_workM()
 }
 
 
-int
-pip_job_workN()
+int 
+pip_job_workN (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │酒店    │+ 魅力 談吐 烹飪                            │ */
@@ -767,8 +768,8 @@ pip_job_workN()
 }
 
 
-int
-pip_job_workO()
+int 
+pip_job_workO (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │酒家    │+ 魅力 罪孽                                 │ */
@@ -836,8 +837,8 @@ pip_job_workO()
 }
 
 
-int
-pip_job_workP()
+int 
+pip_job_workP (void)
 {
   /* ├────┼──────────────────────┤ */
   /* │夜總會  │+ 魅力 談吐 罪孽                            │ */

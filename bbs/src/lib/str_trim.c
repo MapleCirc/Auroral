@@ -1,6 +1,7 @@
-void
-str_trim(buf)			/* remove trailing space */
-  char *buf;
+void 
+str_trim (			/* remove trailing space */
+    char *buf
+)
 {
   char *p = buf;
 

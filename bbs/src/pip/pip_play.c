@@ -21,8 +21,8 @@
 /*-------------------------------------------------------*/
 
 
-int
-pip_play_stroll()		/* 散步 */
+int 
+pip_play_stroll (void)		/* 散步 */
 {
   /* 預設改變值，若有偶發事件，另外加成於下 */
   count_tired(3, 3, 1, 100, 0);	/* 增加疲勞 */
@@ -119,8 +119,8 @@ pip_play_stroll()		/* 散步 */
 }
 
 
-int
-pip_play_sport()		/* 運動 */
+int 
+pip_play_sport (void)		/* 運動 */
 {
   count_tired(3, 8, 1, 100, 1);
   d.speed += 2 + rand() % 3;
@@ -138,8 +138,8 @@ pip_play_sport()		/* 運動 */
 }
 
 
-int
-pip_play_date()			/* 約會 */
+int 
+pip_play_date (void)			/* 約會 */
 {
   if (d.money < 150)
   {
@@ -167,8 +167,8 @@ pip_play_date()			/* 約會 */
 }
 
 
-int
-pip_play_outing()		/* 郊遊 */
+int 
+pip_play_outing (void)		/* 郊遊 */
 {
   if (d.money < 250)
   {
@@ -224,8 +224,8 @@ pip_play_outing()		/* 郊遊 */
 }
 
 
-int
-pip_play_kite()			/* 風箏 */
+int 
+pip_play_kite (void)			/* 風箏 */
 {
   count_tired(4, 4, 1, 100, 0);
   d.weight += (rand() % 2 + 2);
@@ -246,8 +246,8 @@ pip_play_kite()			/* 風箏 */
 }
 
 
-int
-pip_play_KTV()			/* KTV */
+int 
+pip_play_KTV (void)			/* KTV */
 {
   if (d.money < 250)
   {
@@ -275,8 +275,8 @@ pip_play_KTV()			/* KTV */
 }
 
 
-static void
-guess_pip_lose()
+static void 
+guess_pip_lose (void)
 {
   d.winn++;
   d.shit += rand() % 3 + 2;
@@ -288,8 +288,8 @@ guess_pip_lose()
 }
 
 
-static void
-guess_pip_tie()
+static void 
+guess_pip_tie (void)
 {
   d.tiee++;
   count_tired(2, 2, 1, 100, 1);
@@ -302,8 +302,8 @@ guess_pip_tie()
 }
 
 
-static void
-guess_pip_win()
+static void 
+guess_pip_win (void)
 {
   d.losee++;
   count_tired(2, 2, 1, 100, 1);
@@ -316,8 +316,8 @@ guess_pip_win()
 }
 
 
-int
-pip_play_guess()		/* 猜拳程式 */
+int 
+pip_play_guess (void)		/* 猜拳程式 */
 {
   int mankey;		/* 我出的手 */
   int pipkey;		/* 小雞出的手 */

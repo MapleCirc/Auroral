@@ -45,10 +45,11 @@ static int number = 0;	/* 目前已 mirror 幾篇了 */
 static int total = 0;	/* 目前已 mirror 幾 byte 了 */
 
 
-static int		/* 1:成功 0:已超過篇數或容量 */
-mirror(fpath, line)
-  char *fpath;
-  int line;		/* 0:系統文件，不限制列數  !=0:動態看板，line 列 */
+static int 
+mirror (
+    char *fpath,
+    int line		/* 0:系統文件，不限制列數  !=0:動態看板，line 列 */
+)
 {
   static char film_buf[FILM_SIZ];
   int size;
@@ -130,9 +131,10 @@ mirror(fpath, line)
 }
 
 
-static void
-do_gem(folder)		/* itoc.011105: 把看板/精華區的文章收進 movie */
-  char *folder;		/* index 路徑 */
+static void 
+do_gem (		/* itoc.011105: 把看板/精華區的文章收進 movie */
+    char *folder		/* index 路徑 */
+)
 {
   char fpath[64];
   FILE *fp;
@@ -163,10 +165,7 @@ do_gem(folder)		/* itoc.011105: 把看板/精華區的文章收進 movie */
 
 
 static void
-lunar_calendar(key, now, ptime)	/* itoc.050528: 由陽曆算農曆日期 */
-  char *key;
-  time_t *now;
-  struct tm *ptime;
+lunar_calendar(char *key, time_t *now, struct tm *ptime)	/* itoc.050528: 由陽曆算農曆日期 */
 {
 #if 0	/* Table 的意義 */
 
@@ -254,8 +253,8 @@ lunar_calendar(key, now, ptime)	/* itoc.050528: 由陽曆算農曆日期 */
 
 static char feast[OPENING_MAX][64];
 
-static void
-do_today()
+static void 
+do_today (void)
 {
   FILE *fp;
   char buf[256], *str1, *str2, *str3, *today;
@@ -321,8 +320,8 @@ do_today()
 }
 
 
-static void
-set_countdown()
+static void 
+set_countdown (void)
 {
   FILE *fp;
   MCD_info meter;
@@ -337,10 +336,8 @@ set_countdown()
 }
 
 
-int
-main(argc, argv)
-  int argc;
-  char *argv[];
+int 
+main (int argc, char *argv[])
 {
   int i;
   char *fname, fpath[64];
